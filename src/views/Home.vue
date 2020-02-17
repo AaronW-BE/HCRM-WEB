@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <Button v-permission="permission">Create</Button>
-    <Button type="danger">Button</Button>
     <img alt="Vue logo" src="../assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
