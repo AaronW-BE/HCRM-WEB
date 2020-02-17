@@ -6,7 +6,9 @@ module.exports = {
                 const {value} = binding;
                 let exists = false;
 
-                const allowPermission = ['create'];
+                let permissionStr = sessionStorage.getItem("hcm_permission") || '';
+                const allowPermission = permissionStr.split(",");
+
                 if (typeof value === "string") {
                     if (allowPermission.indexOf(value) !== -1) {
                         exists = true
