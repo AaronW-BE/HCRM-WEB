@@ -2,14 +2,11 @@
   <div class="home">
     <Button v-permission="permission">Delete Permission</Button>
     <Button type="danger" v-permission="permission2">Create, Delete Permission</Button>
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 import {Button} from 'ant-design-vue'
 
@@ -22,7 +19,7 @@ export default {
     }
   },
   components: {
-    HelloWorld, Button
+    Button
   }
 }
 </script>
