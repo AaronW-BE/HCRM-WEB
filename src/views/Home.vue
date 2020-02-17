@@ -10,6 +10,9 @@
 
 import {Button} from 'ant-design-vue'
 
+import {request} from '../api/index';
+import {Login} from "../api/template";
+
 export default {
   name: 'Home',
   data() {
@@ -20,6 +23,11 @@ export default {
   },
   components: {
     Button
+  },
+  created() {
+    request(Login, {
+      username: '123'
+    })
   }
 }
 </script>
