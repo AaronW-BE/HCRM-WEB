@@ -1,6 +1,6 @@
 module.exports = {
+    // eslint-disable-next-line no-unused-vars
     install: function (Vue, options) {
-        console.log(options);
         Vue.directive('permission', {
             inserted: function (el, binding) {
                 const {value} = binding;
