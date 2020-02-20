@@ -41,7 +41,7 @@
 </template>
 
 <script>
-    import {API, request} from "../api";
+    import {API} from "../api";
     import {Login} from "../api/template";
 
     export default {
