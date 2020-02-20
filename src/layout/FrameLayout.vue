@@ -1,15 +1,18 @@
 <template>
     <a-layout class="page-layout" id="components-layout-demo-custom-trigger">
         <a-layout-sider :trigger="null" collapsible v-model="collapsed">
-            <div class="logo"/>
+            <div class="logo-wrap">
+                <div class="logo-img">
+                    <img src="../assets/logo.png" />
+                </div>
+                <div class="logo-text">
+                    客户关系管理
+                </div>
+            </div>
             <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
-                <a-menu-item key="main" @click="handleClick">
-                    <a-icon type="user"/>
-                    <span>主页</span>
-                </a-menu-item>
-                <a-menu-item key="about" @click="handleClick">
-                    <a-icon type="video-camera"/>
-                    <span>关于</span>
+                <a-menu-item @click="handleClick" v-for="(item,index) in menu_list" :key="index">
+                    <a-icon :type="item.type"/>
+                    <span>{{item.label}}</span>
                 </a-menu-item>
             </a-menu>
         </a-layout-sider>
@@ -35,7 +38,21 @@
         name: "collapsed",
         data() {
             return {
-                collapsed: false
+                collapsed: false,
+                menu_list:[
+                    {
+                        label:'首页',
+                        type:'user'
+                    },
+                    {
+                        label:'详情页',
+                        type: 'dingding'
+                    },
+                    {
+                        label:'订单',
+                        type: 'wechat'
+                    }
+                ]
             }
         },
         methods: {
@@ -65,10 +82,24 @@
     .page-layout .trigger:hover {
         color: #1890ff;
     }
+    .logo-wrap {
+        height:64px;
+       display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding:10px 25px;
+    }
+    .logo-img {
 
-    .page-layout .logo {
-        height: 32px;
-        background: rgba(255, 255, 255, 0.2);
-        margin: 16px;
+    }
+    .logo-img img{
+        width: 40px;
+    }
+    .logo-text{
+        color:#ccc;
+        font-size: 1rem;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
     }
 </style>
