@@ -11,7 +11,7 @@
 import {Button} from 'ant-design-vue'
 
 import {request} from '../api/index';
-import {Login} from "../api/template";
+import {Test} from "../api/template";
 
 export default {
   name: 'Home',
@@ -25,9 +25,11 @@ export default {
     Button
   },
   created() {
-    request(Login, {
-      username: '123'
-    })
+    request(Test, {
+      pathParams: {
+        id: 1232133
+      }
+    } )
   }
 }
 </script>
