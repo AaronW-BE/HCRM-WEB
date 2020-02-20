@@ -1,26 +1,22 @@
-// import axios from 'axios';
-// Todo 定义 base url
+import {DELETE, GET, POST, PUT, UploadFile} from "../utils/request";
+import {parsePathParams} from "../utils/pathUtil";
 
-function GET(path, data) {
-    console.log("get %s, data is %s", path, data);
-}
-
-function POST(path, data) {
-    console.log("post %s, data is %s", path, data);
-}
-
-/**
- * 用于上传文件
- */
-// eslint-disable-next-line no-unused-vars
-function UPLOAD() {
-
-}
-
-export function request(api, data) {
-    if (api.method.toLowerCase() === 'get') {
-        return GET(api.path, data);
-    } else {
-        return POST(api.path, data);
+export function request(api,options = {}) {
+    const method = api.method.toLowerCase();
+    if (options.pathParams) {
+        parsePathParams(api, options.pathParams);
+    }
+    const data = options.data;
+    switch (method) {
+        case 'get':
+            return GET(api.path, data);
+        case 'post':
+            return POST(api.path, data);
+        case 'put':
+            return PUT(api.path, data);
+        case 'delete':
+            return DELETE(api.path, data);
+        case 'file':
+            return UploadFile(api.path, api.name, api.file);
     }
 }
