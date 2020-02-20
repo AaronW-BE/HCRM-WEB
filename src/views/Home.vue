@@ -10,7 +10,7 @@
 
 import {Button} from 'ant-design-vue'
 
-import {request} from '../api/index';
+import {API} from '../api/index';
 import {Test} from "../api/template";
 
 export default {
@@ -25,7 +25,8 @@ export default {
     Button
   },
   created() {
-    request(Test, {
+    // 还有这种 有 url param的
+    API(Test, {
       pathParams: {
         id: 1232133
       }

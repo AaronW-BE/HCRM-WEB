@@ -1,7 +1,7 @@
 import {DELETE, GET, POST, PUT, UploadFile} from "../utils/request";
 import {parsePathParams} from "../utils/pathUtil";
 
-export function request(api,options = {}) {
+export function API(api,options = {}) {
     const method = api.method.toLowerCase();
     if (options.pathParams) {
         parsePathParams(api, options.pathParams);

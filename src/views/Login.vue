@@ -41,6 +41,9 @@
 </template>
 
 <script>
+    import {API, request} from "../api";
+    import {Login} from "../api/template";
+
     export default {
         name: "Login",
         data() {
@@ -58,6 +61,12 @@
                 this.form.validateFields((err, values) => {
                     if (!err) {
                         console.log('Received values of form: ', values);
+                        // 现在这样请求
+                        API(Login, {
+                            data: values
+                        }).then(res => {
+                            console.log(res);
+                        });
                     }
                 });
             },
