@@ -54,6 +54,11 @@
                         label:'详情页',
                         key: 'about',
                         type: 'dingding'
+                    },
+                    {
+                        label: '客户管理',
+                        key: 'customerList',
+                        type: 'contacts'
                     }
                 ]
             }

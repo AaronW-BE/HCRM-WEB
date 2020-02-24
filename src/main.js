@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 
-import {Layout, Menu, Icon,Button,Form,Input,Checkbox, Dropdown, Avatar, Badge} from "ant-design-vue";
+import {Layout, Menu, Icon,Button,Form,Input,Checkbox, Dropdown, Avatar, Badge, Table} from "ant-design-vue";
 
 Vue.use(Layout);
 Vue.use(Menu);
@@ -14,6 +14,7 @@ Vue.use(Checkbox);
 Vue.use(Dropdown);
 Vue.use(Avatar);
 Vue.use(Badge);
+Vue.use(Table);
 
 import PermissionPlugin from './dicrectives/permission';
 

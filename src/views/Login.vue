@@ -65,7 +65,8 @@
                             data: values
                         }).then(res => {
                             const token = res.data.token;
-                            setToken(token);
+                            const expire = res.data.expire;
+                            setToken(token, expire);
                             this.$router.replace({name: "main"});
                         })
                     }
