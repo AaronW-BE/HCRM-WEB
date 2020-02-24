@@ -23,10 +23,13 @@
                 </div>
             </a-layout-header>
             <a-layout-content
-                    :style="{ margin: '24px 16px', minHeight: '280px' }"
+                    :style="{ margin: '15px 16px', minHeight: '280px' }"
             >
                 <router-view/>
             </a-layout-content>
+            <a-layout-footer>
+                Copyright &copy; {{ new Date().getFullYear() }}  Heymom .Inc. CRM. ❤
+            </a-layout-footer>
         </a-layout>
     </a-layout>
 </template>
