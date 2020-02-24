@@ -35,7 +35,7 @@
             </span>
                 <span slot="action" slot-scope="scope">
                 <a-button type="primary" size="small" @click="() => console.log(scope.id)">查看详情</a-button>
-                <a-button type="dashed" size="small">转交用户</a-button>
+                <a-button type="dashed" size="small">转交客户</a-button>
             </span>
             </a-table>
         </a-card>

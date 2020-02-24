@@ -3,18 +3,13 @@
         <a-layout-sider :trigger="null" collapsible v-model="collapsed">
             <div class="logo-wrap" @click="() => $router.replace({name: 'home'}).catch(e => e)">
                 <div class="logo-img">
-                    <img src="../assets/logo.png" />
+                    <img src="../assets/logo/CRM.png" />
                 </div>
                 <div class="logo-text">
                     HCRM
                 </div>
             </div>
-            <a-menu :selectedKeys="selectedKeys" theme="dark" mode="inline" :defaultSelectedKeys="['1']">
-                <a-menu-item @click="handleClick" v-for="item in menu_list" :key="item.key">
-                    <a-icon :type="item.type"/>
-                    <span>{{item.label}}</span>
-                </a-menu-item>
-            </a-menu>
+            <side-menu />
         </a-layout-sider>
         <a-layout>
             <a-layout-header style="background: #fff; padding: 0; box-shadow: 0 2px 1px 2px #e6e6e6">
@@ -38,9 +33,10 @@
 
 <script>
     import NavBar from "../components/NavBar";
+    import SideMenu from "../components/SideMenu";
     export default {
         name: "collapsed",
-        components: {NavBar},
+        components: {SideMenu, NavBar},
         data() {
             return {
                 collapsed: false,
@@ -96,11 +92,10 @@
         color: #1890ff;
     }
     .logo-wrap {
-        height:64px;
+        height: 64px;
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
-        padding:10px 25px;
         background-color: #002140;
         cursor: pointer;
     }
@@ -111,10 +106,11 @@
         width: 32px;
     }
     .logo-text{
-        color:#ccc;
-        font-size: 1rem;
+        color:#ffffff;
+        font-size: 1.2rem;
         font-weight: bold;
         white-space: nowrap;
         overflow: hidden;
+        margin-left: 1rem;
     }
 </style>

@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import FrameLayout from "../layout/FrameLayout";
 import {getToken} from "../utils/tokenUtils";
 import {message} from "ant-design-vue";
+import BlackLayout from "../layout/BlackLayout";
 
 Vue.use(VueRouter);
 
@@ -23,11 +24,19 @@ const routes = [
       {
         path: 'main',
         name: 'main',
+        meta: {
+          title: '概览',
+          icon: 'contacts'
+        },
         component: () => import('../views/Home')
       },
       {
         path: 'about',
         name: 'about',
+        meta: {
+          title: '关于',
+          icon: 'contacts'
+        },
         component: () => import('../views/About')
       },
       {
@@ -35,9 +44,31 @@ const routes = [
         name: 'customerList',
         meta: {
           title: '客户查询',
+          icon: 'contacts'
         },
-        title: '客户查询',
         component: () => import('../views/Customer/CustomerList')
+      },
+      {
+        path: 'system-settings',
+        name: 'systemSetting',
+        meta: {
+          title: '系统设置',
+          icon: 'setting',
+          permission: ['system:manage']
+        },
+        component: BlackLayout,
+        redirect: {
+          name: 'systemSettingOverview',
+        },
+        children: [{
+          path: 'overview',
+          name: 'systemSettingOverview',
+          meta: {
+            title: '客户查询',
+            icon: 'contacts'
+          },
+          component: () => import('../views/System/SystemMain.vue'),
+        }]
       }
     ]
   }
