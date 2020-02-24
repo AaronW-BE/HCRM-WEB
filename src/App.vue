@@ -12,4 +12,7 @@
   color: #2c3e50;
   height: 100vh;
 }
+  .form-container {
+    padding-bottom: 1rem;
+  }
 </style>
