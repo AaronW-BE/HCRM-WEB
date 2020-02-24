@@ -1,7 +1,7 @@
 <template>
     <a-layout class="page-layout" id="components-layout-demo-custom-trigger">
         <a-layout-sider :trigger="null" collapsible v-model="collapsed">
-            <div class="logo-wrap">
+            <div class="logo-wrap" @click="() => $router.replace({name: 'home'})">
                 <div class="logo-img">
                     <img src="../assets/logo.png" />
                 </div>
@@ -102,6 +102,7 @@
         align-items: center;
         padding:10px 25px;
         background-color: #002140;
+        cursor: pointer;
     }
     .logo-img {
 

@@ -14,7 +14,7 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: FrameLayout,
     redirect: {
       name: 'main'
