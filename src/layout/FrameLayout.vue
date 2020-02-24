@@ -1,7 +1,7 @@
 <template>
     <a-layout class="page-layout" id="components-layout-demo-custom-trigger">
         <a-layout-sider :trigger="null" collapsible v-model="collapsed">
-            <div class="logo-wrap" @click="() => $router.replace({name: 'home'})">
+            <div class="logo-wrap" @click="() => $router.replace({name: 'home'}).catch(e => e)">
                 <div class="logo-img">
                     <img src="../assets/logo.png" />
                 </div>
