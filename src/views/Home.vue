@@ -10,9 +10,6 @@
 
 import {Button} from 'ant-design-vue'
 
-import {API} from '../api/index';
-import {Test} from "../api/template";
-
 export default {
   name: 'Home',
   data() {
@@ -25,12 +22,6 @@ export default {
     Button
   },
   created() {
-    // 还有这种 有 url param的
-    API(Test, {
-      pathParams: {
-        id: 1232133
-      }
-    } )
   }
 }
 </script>

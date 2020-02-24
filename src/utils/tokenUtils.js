@@ -1,5 +1,5 @@
 const TOKEN_PREFIX = process.env.VUE_APP_TOKEN_PREFIX || '';
-const TOKEN_NAME = process.env.VUE_APP_TOKEN_KEY || 'token';
+const TOKEN_NAME = process.env.VUE_APP_TOKEN_KEY || 'hcrm_token';
 
 
 const TokenKey = TOKEN_PREFIX + TOKEN_NAME;

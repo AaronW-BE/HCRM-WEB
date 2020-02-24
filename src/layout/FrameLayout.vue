@@ -6,23 +6,26 @@
                     <img src="../assets/logo.png" />
                 </div>
                 <div class="logo-text">
-                    客户关系管理
+                    HCRM
                 </div>
             </div>
-            <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
-                <a-menu-item @click="handleClick" v-for="(item,index) in menu_list" :key="index">
+            <a-menu :selectedKeys="selectedKeys" theme="dark" mode="inline" :defaultSelectedKeys="['1']">
+                <a-menu-item @click="handleClick" v-for="item in menu_list" :key="item.key">
                     <a-icon :type="item.type"/>
                     <span>{{item.label}}</span>
                 </a-menu-item>
             </a-menu>
         </a-layout-sider>
         <a-layout>
-            <a-layout-header style="background: #fff; padding: 0">
-                <a-icon
-                        class="trigger"
-                        :type="collapsed ? 'menu-unfold' : 'menu-fold'"
-                        @click="()=> collapsed = !collapsed"
-                />
+            <a-layout-header style="background: #fff; padding: 0; box-shadow: 0 2px 1px 2px #e6e6e6">
+                <div style="display: flex; justify-content: space-between">
+                    <a-icon
+                            class="trigger"
+                            :type="collapsed ? 'menu-unfold' : 'menu-fold'"
+                            @click="()=> collapsed = !collapsed"
+                    />
+                    <nav-bar />
+                </div>
             </a-layout-header>
             <a-layout-content
                     :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
@@ -34,25 +37,30 @@
 </template>
 
 <script>
+    import NavBar from "../components/NavBar";
     export default {
         name: "collapsed",
+        components: {NavBar},
         data() {
             return {
                 collapsed: false,
                 menu_list:[
                     {
-                        label:'首页',
+                        label: '首页',
+                        key: 'main',
                         type:'user'
                     },
                     {
                         label:'详情页',
+                        key: 'about',
                         type: 'dingding'
-                    },
-                    {
-                        label:'订单',
-                        type: 'wechat'
                     }
                 ]
+            }
+        },
+        computed: {
+            selectedKeys() {
+                return [this.$route.name];
             }
         },
         methods: {
@@ -84,16 +92,17 @@
     }
     .logo-wrap {
         height:64px;
-       display: flex;
+        display: flex;
         justify-content: space-around;
         align-items: center;
         padding:10px 25px;
+        background-color: #002140;
     }
     .logo-img {
 
     }
     .logo-img img{
-        width: 40px;
+        width: 32px;
     }
     .logo-text{
         color:#ccc;

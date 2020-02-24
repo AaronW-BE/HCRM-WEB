@@ -1,7 +1,8 @@
 import Axios from 'axios'
 import {getToken, removeToken} from "./tokenUtils";
+import {message} from "ant-design-vue";
 
-Axios.defaults.baseURL = '';
+Axios.defaults.baseURL = '/';
 
 // Axios全局配置
 Axios.interceptors.request.use(config => {
@@ -19,13 +20,29 @@ Axios.interceptors.request.use(config => {
 });
 
 Axios.interceptors.response.use(response => {
-    if (response.status === 401) {
-        alert("未登录");
-        removeToken()
+    /**
+     * 401 未授权
+     * 400 请求错误，参数错误
+     * 403 无权限
+     */
+
+    if (response.status >= 200 && response.status < 300) {
+        return response.data;
     }
-    return response;
 }, function(error){
-    return Promise.reject(error);
+    if (error.response) {
+        if (error.response.status === 401) {
+            message.warning(error.response.data.msg || "登录过期，请重新登录").then(r => console.log(r))
+            removeToken()
+        }
+        if (error.response.data.msg) {
+            message.error(error.response.data.msg).then(r => console.log(r));
+        }
+    }
+    return Promise.reject({
+        error,
+        data: error.response.data || null
+    });
 });
 
 /**
@@ -46,19 +63,6 @@ export const GET = (url, data = {}, headers = {}) => {
 export const POST = (url, data, headers = {}) => {
     if (process.env.VUE_APP_DEBUG) {
         console.log(url, 'post', data, headers);
-    }
-
-    headers = {
-        ...headers,
-        'Content-Type': 'application/json'
-    };
-
-    let keys = Object.keys(data);
-    let _data = {};
-    for (let i = 0; i < keys.length; i++) {
-        let key = keys[i];
-        let value = typeof data[key] !== "number" ? data[key] : String(data[key]);
-        _data[key] = value;
     }
     return Axios.post(url, data, {
         headers,

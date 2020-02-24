@@ -4,7 +4,7 @@
                 <h2 style="text-align: center">客户关系管理</h2>
                 <a-form-item>
                     <a-input
-                            v-decorator="['userName',
+                            v-decorator="['username',
           { rules: [{ required: true, message: 'Please input your username!' }] }
         ]" placeholder="Username">
                         <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
@@ -16,7 +16,7 @@
           'password',
           { rules: [{ required: true, message: 'Please input your Password!' }] }
         ]"
-                            type="password" placeholder="Password">
+                            type="password" placeholder="请输入密码">
                         <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
                     </a-input>
                 </a-form-item>
@@ -33,7 +33,7 @@
                         Remember me
                     </a-checkbox>
                     <a-button type="primary" html-type="submit" class="login-form-button">
-                        Log in
+                        登录
                     </a-button>
                 </a-form-item>
             </a-form>
@@ -43,6 +43,7 @@
 <script>
     import {API} from "../api";
     import {Login} from "../api/template";
+    import {setToken} from "../utils/tokenUtils";
 
     export default {
         name: "Login",
@@ -60,18 +61,17 @@
                 e.preventDefault();
                 this.form.validateFields((err, values) => {
                     if (!err) {
-                        console.log('Received values of form: ', values);
-                        // 现在这样请求
                         API(Login, {
                             data: values
                         }).then(res => {
-                            console.log(res);
-                        });
+                            const token = res.data.token;
+                            setToken(token);
+                            this.$router.replace({name: "main"});
+                        })
                     }
                 });
             },
         },
-        // components: {Button},
     }
 </script>
 
