@@ -3,8 +3,8 @@ import {parsePathParams} from "../utils/pathUtil";
 
 export function API(api,options = {}) {
     const method = api.method.toLowerCase();
-    if (options.pathParams) {
-        parsePathParams(api, options.pathParams);
+    if (options.params) {
+        parsePathParams(api, options.params);
     }
     const data = options.data;
     switch (method) {
@@ -17,6 +17,12 @@ export function API(api,options = {}) {
         case 'delete':
             return DELETE(api.path, data);
         case 'file':
-            return UploadFile(api.path, api.name, api.file);
+            if (!options.name) {
+                throw new Error("file input field name invalid");
+            }
+            if (!options.file) {
+                throw new Error("file invalid");
+            }
+            return UploadFile(api.path, options.name, options.file);
     }
 }
