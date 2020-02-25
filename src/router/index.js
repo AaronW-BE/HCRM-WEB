@@ -64,11 +64,21 @@ const routes = [
           path: 'overview',
           name: 'systemSettingOverview',
           meta: {
-            title: '客户查询',
+            title: '系统概览',
             icon: 'contacts'
           },
           component: () => import('../views/System/SystemMain.vue'),
-        }]
+        },
+          {
+            path: 'account',
+            name: 'userAccountList',
+            meta: {
+              title: '系统账户',
+              icon: 'user'
+            },
+            component: () => import('../views/System/user/UserList'),
+          }
+        ]
       }
     ]
   }

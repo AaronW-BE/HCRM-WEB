@@ -25,3 +25,10 @@ export const CustomerList = {
     method: M.GET,
     path: '/customer/query'
 };
+
+// ********************************************************** //
+// 后台用户api
+export const UserList = {
+    method: M.GET,
+    path: '/user/query'
+};

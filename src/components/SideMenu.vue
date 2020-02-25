@@ -2,19 +2,25 @@
     <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
 <!--        暂不递归生成-->
         <template v-for="route in routes" >
-            <a-menu-item :key="route.name" v-if="!route.children" @click="handleClick">
-                <a-icon :type="route.meta.icon" />
-                <span>{{route.meta.title}}</span>
-            </a-menu-item>
-            <a-sub-menu :key="route.name" v-else>
-                <span slot="title"><a-icon :type="route.meta.icon" /><span>{{route.meta.title}}</span></span>
-                <template  v-for="r in route.children" >
-                    <a-menu-item :key="r.name" v-if="!r.children" @click="handleClick">
-                        <a-icon :type="r.meta.icon" />
-                        <span>{{route.meta.title}}</span>
-                    </a-menu-item>
-                </template>
-            </a-sub-menu>
+            <template v-if="!route.children">
+                <a-menu-item :key="route.name" v-permission="route.meta.permission || []" @click="handleClick">
+                    <a-icon :type="route.meta.icon" />
+                    <span>{{route.meta.title}}</span>
+                </a-menu-item>
+            </template>
+
+            <template v-else>
+                <a-sub-menu :key="route.name" v-permission="route.meta.permission || []">
+                    <span slot="title"><a-icon :type="route.meta.icon" /><span>{{route.meta.title}}</span></span>
+                    <template  v-for="r in route.children" >
+                        <a-menu-item :key="r.name" v-permission="route.meta.permission || []" @click="handleClick">
+                            <a-icon :type="r.meta.icon" />
+                            <span>{{r.meta.title}}</span>
+                        </a-menu-item>
+                    </template>
+                </a-sub-menu>
+            </template>
+
         </template>
     </a-menu>
 </template>

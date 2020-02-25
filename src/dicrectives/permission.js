@@ -10,10 +10,16 @@ module.exports = {
                 const allowPermission = permissionStr.split(",");
 
                 if (typeof value === "string") {
+                    if (value === "") {
+                        return;
+                    }
                     if (allowPermission.indexOf(value) !== -1) {
-                        exists = true
+                        exists = true;
                     }
                 }else if (Array.isArray(value)) {
+                    if (value.length === 0) {
+                        return;
+                    }
                     for (let v of value) {
                         if (allowPermission.indexOf(v) !== -1) {
                             exists = true;
@@ -21,7 +27,6 @@ module.exports = {
                         }
                     }
                 }
-                console.log(exists, value);
                 if (!exists) {
                     el.parentNode.removeChild(el);
                 }
