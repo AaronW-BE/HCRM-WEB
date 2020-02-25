@@ -42,7 +42,7 @@
 
 <script>
     import {API} from "../api";
-    import {Login} from "../api/template";
+    import {Login, LoginInfo} from "../api/template";
     import {setToken} from "../utils/tokenUtils";
 
     export default {
@@ -67,7 +67,12 @@
                             const token = res.data.token;
                             const expire = res.data.expire;
                             setToken(token, expire);
-                            this.$router.replace({name: "main"});
+
+                            API(LoginInfo).then(res2 => {
+                                sessionStorage.setItem('hcm_permission', res2.data.permissions.join(','))
+                                this.$router.replace({name: "main"});
+                            });
+
                         })
                     }
                 });

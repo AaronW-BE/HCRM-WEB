@@ -36,7 +36,9 @@
         },
         mounted() {
             API(LoginInfo).then(res => {
-                this.loginInfo = res.data
+                this.loginInfo = res.data;
+                const permissions = res.data.permissions;
+                sessionStorage.setItem('hcm_permission', permissions.join(','))
             });
         },
         methods: {}
