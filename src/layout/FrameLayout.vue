@@ -5,7 +5,7 @@
                 <div class="logo-img">
                     <img src="../assets/logo/CRM.png" />
                 </div>
-                <div class="logo-text">
+                <div class="logo-text" v-if="!collapsed">
                     HCRM
                 </div>
             </div>
