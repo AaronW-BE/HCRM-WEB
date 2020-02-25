@@ -1,7 +1,7 @@
 <template>
     <div class="action-container">
         <div class="notice-icon">
-            <a-badge count="0">
+            <a-badge :count=count>
                 <a-icon type="bell" style="font-size: 20px;"/>
             </a-badge>
         </div>
@@ -31,6 +31,7 @@
         name: "NavBar",
         data() {
             return {
+                count: 0,
                 loginInfo: {}
             };
         },

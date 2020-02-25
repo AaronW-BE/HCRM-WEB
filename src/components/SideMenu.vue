@@ -34,6 +34,7 @@
             };
         },
         mounted() {
+            console.log(this.$router)
             this.routes = this.$router.options.routes.find(route => route.name === 'home').children;
         },
         methods: {

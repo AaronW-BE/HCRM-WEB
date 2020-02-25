@@ -43,29 +43,10 @@
         data() {
             return {
                 collapsed: false,
-                menu_list:[
-                    {
-                        label: '首页',
-                        key: 'main',
-                        type:'user'
-                    },
-                    {
-                        label:'详情页',
-                        key: 'about',
-                        type: 'dingding'
-                    },
-                    {
-                        label: '客户管理',
-                        key: 'customerList',
-                        type: 'contacts'
-                    }
-                ]
             }
         },
         computed: {
-            selectedKeys() {
-                return [this.$route.name];
-            }
+
         },
         methods: {
             handleClick(e) {

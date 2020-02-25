@@ -11,7 +11,7 @@
                                 placeholder="请输入用户名" />
                     </a-form-item>
                     <a-form-item>
-                        <a-button type="primary" html-type="submit" >查询</a-button>
+                        <a-button type="primary" html-type="submit" style="margin-right: 10px">查询</a-button>
                         <a-button @click="resetSearch" >重置</a-button>
                     </a-form-item>
                 </a-form>
@@ -47,6 +47,7 @@
     import {API} from "../../../api";
     import {BlockUser, UnblockUser, UserList} from "../../../api/template";
     import {notification} from "ant-design-vue";
+    import {toTime} from "../../../utils/timeConversion";
 
 
     export default {
@@ -104,6 +105,9 @@
                         size: this.pagination.pageSize
                     }
                 }).then(res => {
+                    res.data.results.map(item => {
+                        item.lastLogin = toTime(item.lastLogin);
+                    })
                     this.userList = res.data.results;
                 });
             },
