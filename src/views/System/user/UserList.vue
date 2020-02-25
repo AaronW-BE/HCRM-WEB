@@ -3,7 +3,7 @@
         <a-card>
             <div class="form-container">
                 <a-form layout="inline" :form="searchForm" @submit="handleSearch">
-                    <a-form-item label="客户姓名">
+                    <a-form-item label="用户名">
                         <a-input
                                 v-decorator="['username', {
                                     initialValue: ''
@@ -22,12 +22,21 @@
                      :pagination="pagination"
                      @change="onTableChange"
             >
-            <span slot="gender" slot-scope="gender">
-                <a-icon type="man" v-if="gender" style="color: #1890ff" />
-                <a-icon type="woman" v-else style="color: deeppink" />
+            <span slot="status" slot-scope="status">
+                <span v-if="status === 0">
+                    正常 <a-icon type="check-circle" style="color: #5ed4a5" />
+                </span>
+                <span v-else>
+                 <a-icon type="close-circle"  style="color: #be1a00" />已封禁
+                </span>
             </span>
-            <span slot="action" slot-scope="scope">
-                <a-button type="primary" size="small" @click="() => console.log(scope.id)">查看详情</a-button>
+            <span slot="action" slot-scope="user">
+                <a-button type="primary" size="small" @click="() => console.log(user.id)">查看详情</a-button>
+
+                <a-popconfirm title="确定封禁/解封此用户?" okText="确定" cancelText="取消" @confirm="handleBlockUser(user)">
+                    <a-button v-if="user.blocked === 0" type="danger" size="small">封禁该用户</a-button>
+                    <a-button v-else type="dashed" size="small">封禁该用户</a-button>
+                </a-popconfirm>
             </span>
             </a-table>
         </a-card>
@@ -36,7 +45,9 @@
 
 <script>
     import {API} from "../../../api";
-    import {UserList} from "../../../api/template";
+    import {BlockUser, UnblockUser, UserList} from "../../../api/template";
+    import {notification} from "ant-design-vue";
+
 
     export default {
         name: "UserList",
@@ -53,17 +64,22 @@
                     sorter: true,
                 },
                 {
+                    title: '账户状态',
+                    dataIndex: 'blocked',
+                    scopedSlots: {customRender: 'status'},
+                },
+                {
                     title: '最后登录',
                     dataIndex: 'lastLogin'
                 },
                 {
-                    title: '创建',
+                    title: '创建时间',
                     dataIndex: 'createdAt'
                 },
                 {
                     title: '操作',
                     width: 250,
-                    scopedSlots: { customRender: 'action' },
+                    scopedSlots: {customRender: 'action'},
                 }
             ];
             return {
@@ -80,13 +96,21 @@
             this.queryUser();
         },
         methods: {
-            queryUser() {
-                API(UserList, {}).then(res => {
+            queryUser(data = {}) {
+                API(UserList, {
+                    data: {
+                        ...data,
+                        page: this.pagination.current,
+                        size: this.pagination.pageSize
+                    }
+                }).then(res => {
                     this.userList = res.data.results;
                 });
             },
             handleSearch(e) {
                 e.preventDefault();
+                const searchData = this.searchForm.getFieldsValue();
+                this.queryUser(searchData);
             },
             resetSearch() {
                 this.searchForm.resetFields();
@@ -95,6 +119,28 @@
             onTableChange(pagination) {
                 this.pagination = pagination;
                 this.queryUser();
+            },
+            handleBlockUser(user) {
+                console.log(this);
+                // 未封禁，执行封禁
+                const action = user.blocked === 1 ? UnblockUser : BlockUser;
+
+                API(action, {
+                    params: {
+                        id: user.id
+                    }
+                }).then(res => {
+                    console.log(res);
+                    notification.success({
+                        message: "操作成功"
+                    });
+                    this.queryUser();
+                }).catch(err => {
+                    console.log(err);
+                    notification.error({
+                        message: "操作失败"
+                    });
+                });
             }
         }
     }

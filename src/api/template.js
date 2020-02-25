@@ -32,3 +32,13 @@ export const UserList = {
     method: M.GET,
     path: '/user/query'
 };
+
+export const BlockUser = {
+    method: M.POST,
+    path: '/user/:id/block'
+};
+
+export const UnblockUser = {
+    method: M.POST,
+    path: '/user/:id/unblock'
+};
