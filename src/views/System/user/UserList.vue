@@ -10,9 +10,24 @@
                                 }]"
                                 placeholder="请输入用户名" />
                     </a-form-item>
+                    <a-form-item label="姓名">
+                        <a-input
+                                v-decorator="['name', {
+                                    initialValue: ''
+                                }]"
+                                placeholder="请输入用户姓名" />
+                    </a-form-item>
                     <a-form-item>
                         <a-button type="primary" html-type="submit" style="margin-right: 10px">查询</a-button>
                         <a-button @click="resetSearch" >重置</a-button>
+                    </a-form-item>
+                </a-form>
+                <a-form layout="inline">
+                    <a-form-item>
+                        <a-button size="small" type="primary">新建</a-button>
+                    </a-form-item>
+                    <a-form-item>
+                        <a-button size="small" type="default">其他操作</a-button>
                     </a-form-item>
                 </a-form>
             </div>
@@ -109,6 +124,11 @@
                         item.lastLogin = toTime(item.lastLogin);
                     })
                     this.userList = res.data.results;
+                    this.pagination = {
+                        current: res.data.metadata.page,
+                        total: res.data.metadata.count,
+                        pageSize: res.data.metadata.size,
+                    };
                 });
             },
             handleSearch(e) {
