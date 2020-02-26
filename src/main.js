@@ -1,12 +1,18 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-
 import {Layout, Menu, Icon,Button,Form,Input,Checkbox, Dropdown, Avatar, Badge, Table,
 
-  Card, Popconfirm,Radio,DatePicker,TimePicker,Select,Divider,Cascader, List, Modal
+  Card, Popconfirm,Radio,DatePicker,TimePicker,Select,Divider,Cascader, List, Modal,
+
+    Row,Col,message
 
 } from "ant-design-vue";
+
+Vue.prototype.$message = message;
+message.config({
+  duration: 1,
+});
 
 Vue.use(Layout);
 Vue.use(Menu);
@@ -29,6 +35,8 @@ Vue.use(Divider);
 Vue.use(Cascader);
 Vue.use(List);
 Vue.use(Modal);
+Vue.use(Row);
+Vue.use(Col);
 
 
 import PermissionPlugin from './dicrectives/permission';
