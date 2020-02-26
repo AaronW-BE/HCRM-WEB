@@ -25,6 +25,10 @@ export const CustomerList = {
     method: M.GET,
     path: '/customer/query'
 };
+export const AddCustomer = {
+    method: M.POST,
+    path: '/customer/create'
+}
 
 // ********************************************************** //
 // 后台用户api

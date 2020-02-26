@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 
 import {Layout, Menu, Icon,Button,Form,Input,Checkbox, Dropdown, Avatar, Badge, Table,
-  Card, Popconfirm
+  Card, Popconfirm,Radio,DatePicker,TimePicker,Select,Divider,Cascader
 } from "ant-design-vue";
 
 Vue.use(Layout);
@@ -19,6 +19,12 @@ Vue.use(Badge);
 Vue.use(Table);
 Vue.use(Card);
 Vue.use(Popconfirm);
+Vue.use(Radio);
+Vue.use(DatePicker);
+Vue.use(TimePicker);
+Vue.use(Select);
+Vue.use(Divider);
+Vue.use(Cascader);
 
 import PermissionPlugin from './dicrectives/permission';
 

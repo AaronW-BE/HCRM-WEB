@@ -26,7 +26,7 @@ const routes = [
         name: 'main',
         meta: {
           title: '概览',
-          icon: 'contacts'
+          icon: 'contacts',
         },
         component: () => import('../views/Home')
       },
@@ -41,12 +41,36 @@ const routes = [
       },
       {
         path: 'customer',
-        name: 'customerList',
+        name: 'customer',
         meta: {
-          title: '客户查询',
-          icon: 'contacts'
+          title: '客户管理',
+          icon: 'contacts',
         },
-        component: () => import('../views/Customer/CustomerList')
+        component: BlackLayout,
+        redirect:{
+          name: 'customerList'
+        },
+        children:[
+          {
+            path: 'customerList',
+            name: 'customerList',
+            meta: {
+              title: '客户列表',
+              icon: 'user'
+            },
+            component: () => import('../views/Customer/CustomerList')
+          },
+          {
+            path: 'customerInformation',
+            name: 'customerInformation',
+            meta:{
+              title: '添加客户',
+              icon: 'user-add',
+              unShow: true
+            },
+            component: () => import('../views/Customer/CustomerInformation')
+          }
+        ]
       },
       {
         path: 'system-settings',

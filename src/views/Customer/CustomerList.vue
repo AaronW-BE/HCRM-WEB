@@ -22,6 +22,11 @@
                         <a-button @click="resetSearch" >重置</a-button>
                     </a-form-item>
                 </a-form>
+                <a-form layout="inline">
+                    <a-form-item>
+                        <a-button size="small" type="primary" @click="addCustomer">新建</a-button>
+                    </a-form-item>
+                </a-form>
             </div>
             <a-table :columns="columns" :dataSource="list"
                      :rowKey="record => record.id"
@@ -38,6 +43,7 @@
                 <a-button type="dashed" size="small">转交客户</a-button>
             </span>
             </a-table>
+
         </a-card>
     </div>
 </template>
@@ -153,6 +159,11 @@
             },
             viewDetails(e){
                 console.log(e)
+            },
+            addCustomer() {
+                this.$router.push({
+                    name: 'customerInformation'
+                })
             }
         }
     }

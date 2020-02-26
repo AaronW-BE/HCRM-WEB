@@ -3,20 +3,24 @@
 <!--        暂不递归生成-->
         <template v-for="route in routes" >
             <template v-if="!route.children">
-                <a-menu-item :key="route.name" v-permission="route.meta.permission || []" @click="handleClick">
-                    <a-icon :type="route.meta.icon" />
-                    <span>{{route.meta.title}}</span>
-                </a-menu-item>
+                <template v-if="!route.meta.unShow">
+                    <a-menu-item :key="route.name" v-permission="route.meta.permission || []" @click="handleClick">
+                        <a-icon :type="route.meta.icon" />
+                        <span>{{route.meta.title}}</span>
+                    </a-menu-item>
+                </template>
             </template>
 
             <template v-else>
                 <a-sub-menu :key="route.name" v-permission="route.meta.permission || []">
                     <span slot="title"><a-icon :type="route.meta.icon" /><span>{{route.meta.title}}</span></span>
                     <template  v-for="r in route.children" >
-                        <a-menu-item :key="r.name" v-permission="route.meta.permission || []" @click="handleClick">
-                            <a-icon :type="r.meta.icon" />
-                            <span>{{r.meta.title}}</span>
-                        </a-menu-item>
+                        <template v-if="!r.meta.unShow">
+                            <a-menu-item :key="r.name" v-permission="route.meta.permission || []" @click="handleClick">
+                                <a-icon :type="r.meta.icon" />
+                                <span>{{r.meta.title}}</span>
+                            </a-menu-item>
+                        </template>
                     </template>
                 </a-sub-menu>
             </template>
@@ -34,7 +38,6 @@
             };
         },
         mounted() {
-            console.log(this.$router)
             this.routes = this.$router.options.routes.find(route => route.name === 'home').children;
         },
         methods: {
