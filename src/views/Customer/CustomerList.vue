@@ -18,7 +18,7 @@
                                 placeholder=查询微信号 />
                     </a-form-item>
                     <a-form-item>
-                        <a-button type="primary" html-type="submit" >查询</a-button>
+                        <a-button type="primary" html-type="submit" style="margin-right: 10px">查询</a-button>
                         <a-button @click="resetSearch" >重置</a-button>
                     </a-form-item>
                 </a-form>
@@ -34,7 +34,7 @@
                 <a-icon type="woman" v-else style="color: deeppink" />
             </span>
                 <span slot="action" slot-scope="scope">
-                <a-button type="primary" size="small" @click="() => console.log(scope.id)">查看详情</a-button>
+                <a-button type="primary" size="small" @click="viewDetails(scope.id)">查看详情</a-button>
                 <a-button type="dashed" size="small">转交客户</a-button>
             </span>
             </a-table>
@@ -58,6 +58,11 @@
                 {
                     title: '微信号',
                     dataIndex: 'wechat',
+                    sorter: true
+                },
+                {
+                    title: '手机号',
+                    dataIndex: 'phone',
                     sorter: true
                 },
                 {
@@ -145,6 +150,9 @@
             onTableChange(pagination) {
                 this.pagination = pagination;
                 this.queryCustomer();
+            },
+            viewDetails(e){
+                console.log(e)
             }
         }
     }
