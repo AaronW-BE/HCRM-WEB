@@ -31,13 +31,24 @@ const routes = [
         component: () => import('../views/Home')
       },
       {
-        path: 'about',
-        name: 'about',
+        path: 'order',
+        name: 'orderManage',
         meta: {
-          title: '关于',
-          icon: 'contacts'
+          title: '订单管理',
+          icon: 'shop'
         },
-        component: () => import('../views/About')
+        component: () => import('../layout/BlackLayout'),
+        children: [
+          {
+            path: 'list',
+            name: 'orderList',
+            meta: {
+              title: '订单列表',
+              icon: 'profile'
+            },
+            component: () => import('../views/Order/OrderList'),
+          }
+        ]
       },
       {
         path: 'customer',
