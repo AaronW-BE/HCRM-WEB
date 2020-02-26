@@ -1,13 +1,13 @@
 <template>
     <div class="action-container">
         <div class="notice-icon">
-            <a-badge count="0">
-                <a-icon type="bell" style="font-size: 20px;"/>
+            <a-badge dot>
+                <a-icon type="bell" style="font-size: 16px;"/>
             </a-badge>
         </div>
         <a-dropdown>
             <span class="ant-dropdown-link">
-            <a-avatar icon="user" /> {{loginInfo.name}}
+            <a-avatar shape="square" icon="user" /> {{loginInfo.name}}
             </span>
             <a-menu slot="overlay">
                 <a-menu-item>
