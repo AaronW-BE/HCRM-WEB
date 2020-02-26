@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 
 import {Layout, Menu, Icon,Button,Form,Input,Checkbox, Dropdown, Avatar, Badge, Table,
-  Card, Popconfirm
+  Card, Popconfirm, List, Modal
 } from "ant-design-vue";
 
 Vue.use(Layout);
@@ -19,6 +19,8 @@ Vue.use(Badge);
 Vue.use(Table);
 Vue.use(Card);
 Vue.use(Popconfirm);
+Vue.use(List);
+Vue.use(Modal);
 
 import PermissionPlugin from './dicrectives/permission';
 
