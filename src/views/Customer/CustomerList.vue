@@ -54,47 +54,53 @@
                     title: '客户姓名',
                     dataIndex: 'name',
                     sorter: true,
+                    width: 120,
                 },
                 {
                     title: '微信号',
                     dataIndex: 'wechat',
-                    sorter: true
+                    sorter: true,
+                    width: 120,
                 },
                 {
                     title: '手机号',
                     dataIndex: 'phone',
-                    sorter: true
+                    width: 120,
                 },
                 {
                     title: '性别',
                     dataIndex: 'gender',
                     sorter: true,
-                    width: 100,
+                    width: 80,
                     scopedSlots: {customRender: 'gender'}
                 },
                 {
                     title: '组别',
                     dataIndex: 'groupName',
-                    sorter: true
+                    sorter: true,
+                    width: 100
                 },
                 {
                     title: '省份',
                     dataIndex: 'province',
-                    sorter: true
+                    sorter: true,
+                    width: 100
                 },
                 {
                     title: '城市',
                     dataIndex: 'city',
-                    sorter: true
+                    sorter: true,
+                    width: 100
                 },
                 {
                     title: '来源',
                     dataIndex: 'original',
-                    sorter: true
+                    sorter: true,
+                    width: 100
                 },
                 {
                     title: '操作',
-                    width: 250,
+                    width: 200,
                     scopedSlots: { customRender: 'action' },
                 }
             ];
