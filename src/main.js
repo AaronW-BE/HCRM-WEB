@@ -4,7 +4,7 @@ import router from './router'
 import {Layout, Menu, Icon,Button,Form,Input,Checkbox, Dropdown, Avatar, Badge, Table,
 
   Card, Popconfirm,Radio,DatePicker,TimePicker,Select,Divider,Cascader, List, Modal,
-
+    Skeleton,
     Row,Col,message
 
 } from "ant-design-vue";
@@ -37,6 +37,7 @@ Vue.use(List);
 Vue.use(Modal);
 Vue.use(Row);
 Vue.use(Col);
+Vue.use(Skeleton);
 
 
 import PermissionPlugin from './dicrectives/permission';

@@ -61,3 +61,8 @@ export const OrderList = {
     method: M.GET,
     path: '/order/query'
 };
+
+export const OrderDetail = {
+    method: M.GET,
+    path: '/order/:id'
+};

@@ -47,6 +47,16 @@ const routes = [
               icon: 'profile'
             },
             component: () => import('../views/Order/OrderList'),
+          },
+          {
+            path: ':id/detail',
+            name: 'orderDetail',
+            props: true,
+            meta: {
+              title: '订单详情',
+              unShow: true
+            },
+            component: () => import('../views/Order/OrderDetail'),
           }
         ]
       },
@@ -154,6 +164,15 @@ const routes = [
         ]
       }
     ]
+  },
+  {
+    path: '/404',
+    name: "notFound",
+    component: () => import('../views/errors/404')
+  },
+  {
+    path: '*',
+    redirect: '/404'
   }
 ];
 
