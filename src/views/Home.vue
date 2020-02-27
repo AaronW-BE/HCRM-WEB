@@ -9,7 +9,6 @@
 // @ is an alias to /src
 
 import {Button} from 'ant-design-vue'
-
 export default {
   name: 'Home',
   data() {

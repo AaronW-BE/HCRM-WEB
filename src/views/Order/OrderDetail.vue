@@ -1,33 +1,14 @@
 <template>
     <div>
-        <a-card title="订单详情">
+        <a-card>
             <a-skeleton active :loading="loading" >
                 <div>
-                    <a-row>
-                        <a-col :xs="24" :md="12" :lg="8">
-                            <span>订单号：</span>
-                            <span>{{detail.orderNo}}</span>
-                        </a-col>
-                        <a-col :xs="24" :md="12" :lg="8">
-                            <span>下单人：</span>
-                            <span>{{detail.orderName}}</span>
-                        </a-col>
-                        <a-col :xs="24" :md="12" :lg="8">
-                            <span>下单时间：</span>
-                            <span>{{detail.orderTime}}</span>
-                        </a-col>
-                    </a-row>
+                    <data-detail-list title="基础信息">
+                        <item term="订单号">{{detail.orderNo}}</item>
+                        <item term="下单人">{{detail.orderName}}</item>
+                        <item term="下单时间">{{detail.orderTime || '下单时间未知'}}</item>
+                    </data-detail-list>
                     <a-divider></a-divider>
-                    <a-row>
-                        <a-col :span="8">
-                            <span>订单号：</span>
-                            <span>{{detail.orderNo}}</span>
-                        </a-col>
-                        <a-col :span="8">
-                            <span>下单人：</span>
-                            <span>{{detail.orderName}}</span>
-                        </a-col>
-                    </a-row>
                 </div>
             </a-skeleton>
         </a-card>
@@ -37,6 +18,9 @@
 <script>
     import {API} from "../../api";
     import {OrderDetail} from "../../api/template";
+    import DataDetailList from "../../components/tool/DataDetailList";
+
+    const Item = DataDetailList.Item;
 
 
     export default {
@@ -46,6 +30,7 @@
                 required: true
             }
         },
+        components: {DataDetailList, Item},
         data() {
             return {
                 detail: {},
