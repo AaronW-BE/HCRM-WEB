@@ -64,7 +64,6 @@
     import {notification} from "ant-design-vue";
     import {toTime} from "../../../utils/timeConversion";
 
-
     export default {
         name: "UserList",
         data() {
