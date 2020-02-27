@@ -164,7 +164,12 @@
                 this.queryCustomer();
             },
             viewDetails(e){
-                console.log(e)
+                this.$router.push({
+                    name: 'customerDetails',
+                    params: {
+                        customer_id:e
+                    }
+                })
             },
             addCustomer() {
                 this.$router.push({

@@ -5,7 +5,7 @@ import {Layout, Menu, Icon,Button,Form,Input,Checkbox, Dropdown, Avatar, Badge, 
 
   Card, Popconfirm,Radio,DatePicker,TimePicker,Select,Divider,Cascader, List, Modal,
 
-    Row,Col,message
+    Row,Col,message,Tabs,Timeline,
 
 } from "ant-design-vue";
 
@@ -37,6 +37,8 @@ Vue.use(List);
 Vue.use(Modal);
 Vue.use(Row);
 Vue.use(Col);
+Vue.use(Tabs);
+Vue.use(Timeline);
 
 
 import PermissionPlugin from './dicrectives/permission';

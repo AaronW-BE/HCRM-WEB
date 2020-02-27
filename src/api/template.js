@@ -52,3 +52,19 @@ export const OrderList = {
     method: M.GET,
     path: '/order/query'
 };
+//**********************************************************//
+// 客户回访api
+export const AddReturnVisit = {
+    method: M.POST,
+    path: '/customer/:id/return-visit'
+};
+
+export const CustomerAllVisits = {
+    method: M.GET,
+    path: '/customer/:cid/return-visit'
+}
+
+export const DeleteVisits = {
+    method: M.DELETE,
+    path: '/customer/:cid/return-visit/:id'
+}
