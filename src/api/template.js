@@ -30,6 +30,15 @@ export const AddCustomer = {
     path: '/customer/create'
 }
 
+/**
+ * 转交客户
+ * @type {{path: string, method: string}}
+ */
+export const TransferCustomer = {
+    method: M.POST,
+    path: '/customer/:id/transfer'
+};
+
 // ********************************************************** //
 // 后台用户api
 export const UserList = {

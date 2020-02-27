@@ -40,20 +40,26 @@
             </span>
                 <span slot="action" slot-scope="scope">
                 <a-button type="primary" size="small" @click="viewDetails(scope.id)">查看详情</a-button>
-                <a-button type="dashed" size="small">转交客户</a-button>
+                <a-button type="dashed" size="small" @click="showTransferCustomer(scope)">转交客户</a-button>
             </span>
             </a-table>
 
         </a-card>
+        <user-search-dialog :show.sync="showUserSelect" @selected="handleTransferCustomer"/>
     </div>
 </template>
 
 <script>
     import {API} from "../../api";
-    import {CustomerList} from "../../api/template";
+    import {CustomerList, TransferCustomer} from "../../api/template";
+    import UserSearchDialog from "../../components/UserSearchDialog";
+    import {Modal} from "ant-design-vue";
+
+    import {message} from 'ant-design-vue'
 
     export default {
         name: "CustomerList",
+        components: {UserSearchDialog},
         data() {
             const columns = [
                 {
@@ -117,7 +123,9 @@
                 list: [],
                 pagination: {
                     pageSize: 15
-                }
+                },
+                showUserSelect: false,
+                selectedCustomer: null
             };
         },
         mounted() {
@@ -170,6 +178,39 @@
                 this.$router.push({
                     name: 'customerInformation'
                 })
+            },
+            showTransferCustomer(customer) {
+                this.showUserSelect = true;
+                this.selectedCustomer = customer;
+            },
+            handleTransferCustomer(user) {
+                console.log(user, this.selectedCustomer);
+                Modal.confirm({
+                    title: "转交确认",
+                    content: `将客户【${this.selectedCustomer.name}】转交给 【${user.name}】`,
+                    okText: '确定',
+                    onOk:() => {
+                        // 确定转交
+                        console.log('转交中。。。。');
+                        API(TransferCustomer, {
+                            params: {
+                                id: this.selectedCustomer.id
+                            },
+                            data: {
+                                userId: user.id
+                            }
+                        }).then(res => {
+                            console.log(res);
+                            message.success("转交成功");
+                        }).catch((e) => {
+                            let msg = e.data.msg || '转交失败';
+                            message.error(msg);
+                        });
+                    },
+                    onCancel: () => {
+                        this.selectedCustomer = null;
+                    }
+                });
             }
         }
     }

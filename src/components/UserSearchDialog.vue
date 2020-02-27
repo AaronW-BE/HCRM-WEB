@@ -84,9 +84,10 @@
             handleOk() {
                 this.$emit('selected', this.selected);
                 this.$emit('update:show', false)
+                this.selected = null
             },
             handleCancel() {
-                this.selected = false;
+                this.selected = null;
                 this.$emit('update:show', false)
             },
             handleSearch(e) {
