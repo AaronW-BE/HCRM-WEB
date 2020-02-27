@@ -57,7 +57,7 @@
                     <a @click="redirect2CustomerDetail(row.customerId)">{{row.customer}}</a>
                 </span>
                 <span slot="action" slot-scope="order">
-                    <a :data-id="order.id">详情</a>
+                    <a :data-id="order.id" @click="$router.push({name: 'orderDetail', params: {id: order.id}})">详情</a>
                 </span>
             </a-table>
         </a-card>

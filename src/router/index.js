@@ -47,6 +47,16 @@ const routes = [
               icon: 'profile'
             },
             component: () => import('../views/Order/OrderList'),
+          },
+          {
+            path: ':id/detail',
+            name: 'orderDetail',
+            props: true,
+            meta: {
+              title: '订单详情',
+              unShow: true
+            },
+            component: () => import('../views/Order/OrderDetail'),
           }
         ]
       },
@@ -58,10 +68,10 @@ const routes = [
           icon: 'contacts',
         },
         component: BlackLayout,
-        redirect:{
+        redirect: {
           name: 'customerList'
         },
-        children:[
+        children: [
           {
             path: 'customerList',
             name: 'customerList',
@@ -74,7 +84,7 @@ const routes = [
           {
             path: 'customerInformation',
             name: 'customerInformation',
-            meta:{
+            meta: {
               title: '添加客户',
               icon: 'user-add',
               unShow: true
@@ -92,6 +102,44 @@ const routes = [
             // props: true,
             component: () => import('../views/Customer/CustomerDetails')
           }
+        ]
+      },
+      {
+        path: 'apps',
+        name: 'appCenter',
+        meta: {
+          title: '个人应用',
+          icon: 'appstore'
+        },
+        component: () => import('../views/apps/AppMain')
+      },
+      {
+        path: 'data-manage',
+        name: 'dataManage',
+        meta: {
+          title: '数据管理',
+          icon: 'database'
+        },
+        component: BlackLayout,
+        children: [
+          {
+            path: 'order',
+            name: 'orderData',
+            meta: {
+              title: '订单数据',
+              icon: 'shop'
+            },
+            component: BlackLayout
+          },
+          {
+            path: 'user',
+            name: 'userData',
+            meta: {
+              title: '用户数据',
+              icon: 'user'
+            },
+            component: BlackLayout
+          },
         ]
       },
       {
@@ -127,6 +175,15 @@ const routes = [
         ]
       }
     ]
+  },
+  {
+    path: '/404',
+    name: "notFound",
+    component: () => import('../views/errors/404')
+  },
+  {
+    path: '*',
+    redirect: '/404'
   }
 ];
 

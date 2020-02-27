@@ -1,5 +1,5 @@
 <template>
-    <a-menu theme="dark" mode="inline" :defaultSelectedKeys="['1']">
+    <a-menu theme="dark" mode="inline" :defaultSelectedKeys="defaultSelectedKeys" :defaultOpenKeys="defaultOpenKeys">
 <!--        暂不递归生成-->
         <template v-for="route in routes" >
             <template v-if="!route.children">
@@ -34,8 +34,14 @@
         name: "SideMenu",
         data() {
             return {
-                routes: []
+                routes: [],
+                defaultOpenKeys: [],
+                defaultSelectedKeys: []
             };
+        },
+        created() {
+            this.defaultSelectedKeys = [this.$route.name];
+            this.defaultOpenKeys = [this.$route.matched[this.$route.matched.length - 2].name];
         },
         mounted() {
             this.routes = this.$router.options.routes.find(route => route.name === 'home').children;

@@ -34,6 +34,7 @@ Axios.interceptors.response.use(response => {
         if (error.response.status === 401) {
             message.warning(error.response.data.msg || "登录过期，请重新登录").then(r => console.log(r))
             removeToken()
+            window.location.reload();
         }
         if (error.response.data.msg) {
             message.error(error.response.data.msg).then(r => console.log(r));
