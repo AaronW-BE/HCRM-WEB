@@ -61,7 +61,6 @@ export const OrderList = {
     method: M.GET,
     path: '/order/query'
 };
-<<<<<<< HEAD
 //**********************************************************//
 // 客户回访api
 export const AddReturnVisit = {
@@ -78,10 +77,8 @@ export const DeleteVisits = {
     method: M.DELETE,
     path: '/customer/:cid/return-visit/:id'
 }
-=======
 
 export const OrderDetail = {
     method: M.GET,
     path: '/order/:id'
 };
->>>>>>> 244a67b25196c9dde671889a3533a49e15c85250
