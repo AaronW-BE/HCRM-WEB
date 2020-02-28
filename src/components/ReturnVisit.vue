@@ -1,14 +1,7 @@
 <template>
     <div>
-<<<<<<< HEAD
-        <a-button type="primary" @click="() => return_visit_model = true">添加回访</a-button>
-        <a-modal title="添加回访" v-model="return_visit_model" okText="确认" cancelText="取消" @ok="addReturnVisit"
-            @
-        >
-=======
 <!--        <a-button type="primary" @click="return_visit_model = true" size="small">添加回访</a-button>-->
         <a-modal title="添加回访" v-model="return_visit_model" okText="确认" cancelText="取消" @ok="addReturnVisit">
->>>>>>> 15152c1450b09ddeb596fbdc00c8ea9a48cd289d
             <a-form :form="return_visit_info">
 <!--                <a-form-item label="回访时间">-->
 <!--                    <a-date-picker-->
