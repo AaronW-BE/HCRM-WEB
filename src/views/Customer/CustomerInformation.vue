@@ -4,7 +4,7 @@
             <a-form layout="inline" :form = 'form' @submit="handleSubmit">
                 <a-divider><div style="color:#001529; font-weight: bold">客户信息</div></a-divider>
                 <a-row>
-                    <a-col :span="8">
+                    <a-col :lg="8" :md="12" :xs="24">
                         <a-form-item
                                 :label-col="labelCol"
                                 :wrapper-col="wrapperCol"
@@ -17,7 +17,7 @@
                             />
                         </a-form-item>
                     </a-col>
-                    <a-col :span="8">
+                    <a-col :lg="8" :md="12" :xs="24">
                         <a-form-item
                                 :label-col="labelCol"
                                 :wrapper-col="wrapperCol"
@@ -29,7 +29,7 @@
                                     placeholder="请输入客户的电话" />
                         </a-form-item>
                     </a-col>
-                    <a-col :span="8">
+                    <a-col :lg="8" :md="12" :xs="24">
                         <a-form-item
                                 :label-col="labelCol"
                                 :wrapper-col="wrapperCol"
@@ -44,7 +44,7 @@
                 </a-row>
 
                 <a-row>
-                    <a-col :span="8">
+                    <a-col :lg="8" :md="12" :xs="24">
                         <a-form-item
                                 :label-col="labelCol"
                                 :wrapper-col="wrapperCol"
@@ -56,7 +56,7 @@
                                     placeholder="请输入客户微信" />
                         </a-form-item>
                     </a-col>
-                    <a-col :span="8">
+                    <a-col :lg="8" :md="12" :xs="24">
                         <a-form-item
                                 :label-col="labelCol"
                                 :wrapper-col="wrapperCol"
@@ -75,7 +75,7 @@
                             </a-radio-group>
                         </a-form-item>
                     </a-col>
-                    <a-col :span="8">
+                    <a-col :lg="8" :md="12" :xs="24">
                         <a-form-item
                                 :label-col="labelCol"
                                 :wrapper-col="wrapperCol"
@@ -90,7 +90,7 @@
                 </a-row>
 
                 <a-row>
-                    <a-col :span="8">
+                    <a-col :lg="8" :md="12" :xs="24">
                         <a-form-item
                                 :label-col="labelCol"
                                 :wrapper-col="wrapperCol"
@@ -104,7 +104,7 @@
                             />
                         </a-form-item>
                     </a-col>
-                    <a-col :span="8">
+                    <a-col :lg="8" :md="12" :xs="24">
                         <a-form-item
                                 :label-col="labelCol"
                                 :wrapper-col="wrapperCol"
@@ -117,7 +117,7 @@
                             />
                         </a-form-item>
                     </a-col>
-                    <a-col :span="8">
+                    <a-col :lg="8" :md="12" :xs="24">
                         <a-form-item
                                 :label-col="labelCol"
                                 :wrapper-col="wrapperCol"
@@ -132,7 +132,7 @@
                 </a-row>
 
                 <a-row>
-                    <a-col :span="8">
+                    <a-col :lg="8" :md="12" :xs="24">
                         <a-form-item
                                 :label-col="labelCol"
                                 :wrapper-col="wrapperCol"
@@ -149,7 +149,7 @@
                 <a-divider><div style="color:#001529; font-weight: bold">宝贝信息</div></a-divider>
 
                 <a-row>
-                    <a-col :span="8">
+                    <a-col :lg="8" :md="12" :xs="24">
                         <a-form-item
                                 :label-col="labelCol"
                                 :wrapper-col="wrapperCol"
@@ -161,7 +161,7 @@
                                     placeholder="请输入宝贝姓名"/>
                         </a-form-item>
                     </a-col>
-                    <a-col :span="8">
+                    <a-col :lg="8" :md="12" :xs="24">
                         <a-form-item
                                 :label-col="labelCol"
                                 :wrapper-col="wrapperCol"
@@ -177,7 +177,7 @@
                             </a-select>
                         </a-form-item>
                     </a-col>
-                    <a-col :span="8">
+                    <a-col :lg="8" :md="12" :xs="24">
                         <a-form-item
                             :label-col="labelCol"
                             :wrapper-col="wrapperCol"
