@@ -24,7 +24,7 @@
                 </a-form>
                 <a-form layout="inline">
                     <a-form-item>
-                        <a-button size="small" type="primary">新建</a-button>
+                        <a-button size="small" type="primary" @click="() => add_user_model = true">新建</a-button>
                     </a-form-item>
                     <a-form-item>
                         <a-button size="small" type="default">其他操作</a-button>
@@ -55,6 +55,26 @@
             </span>
             </a-table>
         </a-card>
+        <a-modal title="新建账户" v-model="add_user_model" @ok="addUser">
+           <a-form :form="create_user" @submit="handleSubmit">
+               <a-form-item label="用户名">
+                  <a-input
+                          placeholder="Username"
+                          v-decorator="['username',{rules:[{required:true, message: '内容不能为空'}] }]"
+                  ></a-input>
+               </a-form-item>
+               <a-form-item label="密码">
+                   <a-input
+                           type="password"
+                           placeholder="Password"
+                           v-decorator="['password',{rules:[{required:true, message: '内容不能为空'}] }]"
+                   ></a-input>
+               </a-form-item>
+               <a-form-item label="姓名">
+                   <a-input v-decorator="['name',{rules:[{required:true, message: '请输入真实姓名'}] }]"></a-input>
+               </a-form-item>
+           </a-form>
+        </a-modal>
     </div>
 </template>
 
@@ -100,11 +120,13 @@
             return {
                 userList: [],
                 searchForm: this.$form.createForm(this),
+                create_user: this.$form.createForm(this,{name: ''}),
                 columns,
                 loading: false,
                 pagination: {
                     pageSize: 15
-                }
+                },
+                add_user_model: false
             }
         },
         created() {
@@ -164,6 +186,9 @@
                         message: "操作失败"
                     });
                 });
+            },
+            addUser() {
+
             }
         }
     }

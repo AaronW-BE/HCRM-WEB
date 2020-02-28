@@ -1,14 +1,16 @@
 <template>
     <div>
         <a-button type="primary" @click="() => return_visit_model = true">添加回访</a-button>
-        <a-modal title="添加回访" v-model="return_visit_model" okText="确认" cancelText="取消" @ok="addReturnVisit">
+        <a-modal title="添加回访" v-model="return_visit_model" okText="确认" cancelText="取消" @ok="addReturnVisit"
+            @
+        >
             <a-form :form="return_visit_info">
-                <a-form-item label="回访时间">
-                    <a-date-picker
-                            showTime
-                            v-decorator="['time', { rules: [{ required: true, message: '请选择回访时间' }] }]"
-                    />
-                </a-form-item>
+<!--                <a-form-item label="回访时间">-->
+<!--                    <a-date-picker-->
+<!--                            showTime-->
+<!--                            v-decorator="['time', { rules: [{ required: true, message: '请选择回访时间' }] }]"-->
+<!--                    />-->
+<!--                </a-form-item>-->
                 <a-form-item label="回访内容">
                     <a-textarea
                             placeholder="回访内容..."
@@ -67,14 +69,13 @@
             return{
                 return_visit_model: false,
                 content: '',
-                return_visit_info: this.$form.createForm(this),
+                return_visit_info: null,
                 return_visit_records: [ ],
                 columns,
             }
         },
         created() {
             this.customerAllVisits()
-            console.log(this.$form)
         },
         methods:{
             addReturnVisit() {
@@ -120,10 +121,11 @@
             editVisit(visit){
                 this.return_visit_model = true;
                 console.log(visit)
-                this.return_visit_info.setFieldsValue({
-                    content: `Hi!`,
-                });
-                console.log(this.return_visit_info.content)
+                console.log(this.return_visit_info);
+                this.return_visit_info = this.$form.createFormField({
+                    content: visit.content,
+                })
+                // console.log(this.return_visit_info.content)
             },
             deleteVisit(visit) {
                 console.log(visit)
