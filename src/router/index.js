@@ -92,14 +92,14 @@ const routes = [
             component: () => import('../views/Customer/CustomerInformation')
           },
           {
-            path: '/:customer_id/customerDetails',
-            name: 'customerDetails',
+            path: ':id/detail',
+            name: 'customerDetail',
             meta: {
               title: '客户详情',
               icon: 'user',
               unShow: true
             },
-            // props: true,
+            props: true,
             component: () => import('../views/Customer/CustomerDetails')
           }
         ]

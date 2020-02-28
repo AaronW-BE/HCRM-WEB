@@ -186,6 +186,12 @@
             },
             redirect2CustomerDetail(id) {
                 console.log(id)
+                this.$router.push({
+                    name: 'customerDetail',
+                    params: {
+                        id
+                    }
+                })
             },
             handleShowSearchCustomer(order) {
                 this.selectedOrder = order;
