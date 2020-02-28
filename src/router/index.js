@@ -90,6 +90,17 @@ const routes = [
               unShow: true
             },
             component: () => import('../views/Customer/CustomerInformation')
+          },
+          {
+            path: '/:customer_id/customerDetails',
+            name: 'customerDetails',
+            meta: {
+              title: '客户详情',
+              icon: 'user',
+              unShow: true
+            },
+            // props: true,
+            component: () => import('../views/Customer/CustomerDetails')
           }
         ]
       },

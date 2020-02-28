@@ -3,9 +3,10 @@ import App from './App.vue'
 import router from './router'
 import {Layout, Menu, Icon,Button,Form,Input,Checkbox, Dropdown, Avatar, Badge, Table,
 
-  Card, Popconfirm,Radio,DatePicker,TimePicker,Select,Divider,Cascader, List, Modal,
-    Skeleton,
-    Row,Col,message
+    Card, Popconfirm,Radio,DatePicker,TimePicker,Select,Divider,Cascader, List, Modal,
+
+    Row,Col,message,Tabs,Timeline, Skeleton,
+
 
 } from "ant-design-vue";
 
@@ -37,7 +38,10 @@ Vue.use(List);
 Vue.use(Modal);
 Vue.use(Row);
 Vue.use(Col);
+Vue.use(Tabs);
+Vue.use(Timeline);
 Vue.use(Skeleton);
+
 
 
 import PermissionPlugin from './dicrectives/permission';

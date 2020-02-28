@@ -8,3 +8,10 @@ export const toTime = (value) => {
     let S = Time.getSeconds()<10 ? '0' + Time.getSeconds() : Time.getSeconds();
     return Y + '-' + M + '-' + D + ' ' + H + ':' + Minutes + ':' + S
 }
+export const YearMonthDay = (value) => {
+    let year_month_day = new Date(value)
+    let Y = year_month_day.getFullYear();
+    let M = (year_month_day.getMonth()+1)<10 ? '0' + (year_month_day.getMonth()+1) : year_month_day.getMonth()+1;
+    let D = year_month_day.getDate()<10 ? '0' + year_month_day.getDate() : year_month_day.getDate();
+    return Y + '-' + M + '-' + D
+};
