@@ -173,9 +173,9 @@
             },
             viewDetails(e){
                 this.$router.push({
-                    name: 'customerDetails',
+                    name: 'customerDetail',
                     params: {
-                        customer_id:e
+                        id:e
                     }
                 })
             },

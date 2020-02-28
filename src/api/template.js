@@ -82,7 +82,10 @@ export const CustomerAllVisits = {
     method: M.GET,
     path: '/customer/:cid/return-visit'
 }
-
+export const ModifyVisit = {
+    method: M.PUT,
+    path: '/customer/:cid/return-visit/:id'
+}
 export const DeleteVisits = {
     method: M.DELETE,
     path: '/customer/:cid/return-visit/:id'

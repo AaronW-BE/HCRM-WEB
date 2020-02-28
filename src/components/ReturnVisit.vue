@@ -1,21 +1,14 @@
 <template>
     <div>
-<<<<<<< HEAD
-        <a-button type="primary" @click="() => return_visit_model = true">添加回访</a-button>
-        <a-modal title="添加回访" v-model="return_visit_model" okText="确认" cancelText="取消" @ok="addReturnVisit"
-            @
-        >
-=======
-<!--        <a-button type="primary" @click="return_visit_model = true" size="small">添加回访</a-button>-->
+        <a-button type="primary" @click="return_visit_model = true" style="margin-bottom: 24px">添加回访</a-button>
         <a-modal title="添加回访" v-model="return_visit_model" okText="确认" cancelText="取消" @ok="addReturnVisit">
->>>>>>> 15152c1450b09ddeb596fbdc00c8ea9a48cd289d
             <a-form :form="return_visit_info">
-<!--                <a-form-item label="回访时间">-->
-<!--                    <a-date-picker-->
-<!--                            showTime-->
-<!--                            v-decorator="['time', { rules: [{ required: true, message: '请选择回访时间' }] }]"-->
-<!--                    />-->
-<!--                </a-form-item>-->
+                <a-form-item label="回访时间">
+                    <a-date-picker
+                            showTime
+                            v-decorator="['time', { rules: [{ required: true, message: '请选择回访时间' }] }]"
+                    />
+                </a-form-item>
                 <a-form-item label="回访内容">
                     <a-textarea
                             placeholder="回访内容..."
@@ -35,7 +28,7 @@
 
 <script>
     import {API} from "../api";
-    import {AddReturnVisit, CustomerAllVisits, DeleteVisits} from "../api/template";
+    import {AddReturnVisit, CustomerAllVisits, DeleteVisits, ModifyVisit} from "../api/template";
     import {toTime} from "../utils/timeConversion";
     import moment from 'moment';
     const columns = [
@@ -69,15 +62,18 @@
     export default {
         name: "ReturnVisit",
         props: {
-            customer_id:String
+            customer_id:{
+                required: true
+            }
         },
         data() {
             return{
                 return_visit_model: false,
                 content: '',
-                return_visit_info: null,
+                return_visit_info: this.$form.createForm(this),
                 return_visit_records: [ ],
                 columns,
+                visit_id: null
             }
         },
         created() {
@@ -88,23 +84,40 @@
             addReturnVisit() {
                 this.return_visit_info.validateFields((err, values) => {
                     if (!err) {
-                        let id =  this.customer_id;
+                        let cid =  this.customer_id;
+                        let id = this.visit_id;
                         let time = toTime(values.time._d);
                         let data = {
                             ...values,
                             time,
                         };
-                        API(AddReturnVisit,{
-                            params: {
-                                id,
-                            },
-                            data,
-                        }).then( (res) => {
-                            this.return_visit_model = false
-                            this.$message.success(res.msg)
-                        }).catch(err => {
-                            console.log(err)
-                        })
+                        if(this.visit_id || this.visit_id===0) {
+                            API(ModifyVisit,{
+                                params: {
+                                    cid,
+                                    id,
+                                },
+                                data,
+                            }).then(res => {
+                                // console.log(res)
+                                this.$message.success(res.msg)
+                                this.return_visit_model = false
+                            }).catch(err => {
+                                console.log(err)
+                            })
+                        }else{
+                            API(AddReturnVisit,{
+                                params: {
+                                    id:cid,
+                                },
+                                data,
+                            }).then( (res) => {
+                                this.$message.success(res.msg)
+                                this.return_visit_model = false
+                            }).catch(err => {
+                                console.log(err)
+                            })
+                        }
                     }
                 });
             },
@@ -127,14 +140,7 @@
             },
             editVisit(visit){
                 this.return_visit_model = true;
-<<<<<<< HEAD
-                console.log(visit)
-                console.log(this.return_visit_info);
-                this.return_visit_info = this.$form.createFormField({
-                    content: visit.content,
-                })
-                // console.log(this.return_visit_info.content)
-=======
+                this.visit_id = visit.id;
                 this.return_visit_info = this.$form.createForm(this, {
                     mapPropsToFields: () => {
                         return {
@@ -147,7 +153,6 @@
                         }
                     }
                 });
->>>>>>> 15152c1450b09ddeb596fbdc00c8ea9a48cd289d
             },
             deleteVisit(visit) {
                 console.log(visit)
@@ -173,7 +178,7 @@
                 if(val){
                     return
                 }
-                this.content = ''
+                this.return_visit_info.resetFields()
             }
         }
     }

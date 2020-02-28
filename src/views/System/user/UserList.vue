@@ -46,7 +46,7 @@
                 </span>
             </span>
             <span slot="action" slot-scope="user">
-                <a-button type="primary" size="small" @click="() => console.log(user.id)">查看详情</a-button>
+                <a-button type="primary" size="small" @click="viewUserDetail(user.id)">查看详情</a-button>
 
                 <a-popconfirm title="确定封禁/解封此用户?" okText="确定" cancelText="取消" @confirm="handleBlockUser(user)">
                     <a-button v-if="user.blocked === 0" type="danger" size="small">封禁该用户</a-button>
@@ -56,22 +56,24 @@
             </a-table>
         </a-card>
         <a-modal title="新建账户" v-model="add_user_model" @ok="addUser">
-           <a-form :form="create_user" @submit="handleSubmit">
+           <a-form :form="create_user">
                <a-form-item label="用户名">
                   <a-input
-                          placeholder="Username"
-                          v-decorator="['username',{rules:[{required:true, message: '内容不能为空'}] }]"
+                          placeholder="不少于6个字符"
+                          v-decorator="['username',{rules:[{required:true, message: '请输入不少于6位字符的用户名',min: 6}] }]"
                   ></a-input>
                </a-form-item>
                <a-form-item label="密码">
                    <a-input
                            type="password"
-                           placeholder="Password"
-                           v-decorator="['password',{rules:[{required:true, message: '内容不能为空'}] }]"
+                           placeholder="不少于6个字符"
+                           v-decorator="['password',{rules:[{required:true, message: '请设置不少于6位字符的密码',min: 6}] }]"
                    ></a-input>
                </a-form-item>
                <a-form-item label="姓名">
-                   <a-input v-decorator="['name',{rules:[{required:true, message: '请输入真实姓名'}] }]"></a-input>
+                   <a-input
+                           placeholder="actual name"
+                           v-decorator="['name',{rules:[{required:true, message: '请输入真实姓名'}] }]"></a-input>
                </a-form-item>
            </a-form>
         </a-modal>
@@ -80,7 +82,7 @@
 
 <script>
     import {API} from "../../../api";
-    import {BlockUser, UnblockUser, UserList} from "../../../api/template";
+    import {AddUser, BlockUser, UnblockUser, UserList} from "../../../api/template";
     import {notification} from "ant-design-vue";
     import {toTime} from "../../../utils/timeConversion";
 
@@ -120,7 +122,7 @@
             return {
                 userList: [],
                 searchForm: this.$form.createForm(this),
-                create_user: this.$form.createForm(this,{name: ''}),
+                create_user: this.$form.createForm(this),
                 columns,
                 loading: false,
                 pagination: {
@@ -166,7 +168,7 @@
                 this.queryUser();
             },
             handleBlockUser(user) {
-                console.log(this);
+                // console.log(this);
                 // 未封禁，执行封禁
                 const action = user.blocked === 1 ? UnblockUser : BlockUser;
 
@@ -188,7 +190,33 @@
                 });
             },
             addUser() {
-
+                this.create_user.validateFields((err,values) => {
+                    if(!err) {
+                        let data = {
+                            ...values
+                        };
+                        API(AddUser,{
+                            data,
+                        }).then(res => {
+                            // console.log(res)
+                            this.$message.success(res.msg)
+                            this.add_user_model = false
+                        }).catch(err => {
+                            console.log(err)
+                        })
+                    }
+                })
+            },
+            viewUserDetail(id) {
+                console.log(id)
+            }
+        },
+        watch: {
+            add_user_model(val) {
+                if(val) {
+                    return false
+                }
+                this.create_user.resetFields()
             }
         }
     }

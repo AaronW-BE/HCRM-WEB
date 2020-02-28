@@ -20,8 +20,7 @@
         components: {ReturnVisit},
         props: {
             id: {
-                required: true,
-                type: String
+                required: true
             }
         },
         data() {
