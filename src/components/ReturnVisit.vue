@@ -1,14 +1,21 @@
 <template>
     <div>
+<<<<<<< HEAD
+        <a-button type="primary" @click="() => return_visit_model = true">添加回访</a-button>
+        <a-modal title="添加回访" v-model="return_visit_model" okText="确认" cancelText="取消" @ok="addReturnVisit"
+            @
+        >
+=======
 <!--        <a-button type="primary" @click="return_visit_model = true" size="small">添加回访</a-button>-->
         <a-modal title="添加回访" v-model="return_visit_model" okText="确认" cancelText="取消" @ok="addReturnVisit">
+>>>>>>> 15152c1450b09ddeb596fbdc00c8ea9a48cd289d
             <a-form :form="return_visit_info">
-                <a-form-item label="回访时间">
-                    <a-date-picker
-                            showTime
-                            v-decorator="['time', { rules: [{ required: true, message: '请选择回访时间' }] }]"
-                    />
-                </a-form-item>
+<!--                <a-form-item label="回访时间">-->
+<!--                    <a-date-picker-->
+<!--                            showTime-->
+<!--                            v-decorator="['time', { rules: [{ required: true, message: '请选择回访时间' }] }]"-->
+<!--                    />-->
+<!--                </a-form-item>-->
                 <a-form-item label="回访内容">
                     <a-textarea
                             placeholder="回访内容..."
@@ -75,7 +82,6 @@
         },
         created() {
             this.customerAllVisits()
-            console.log(this.$form)
         },
         methods:{
             moment,
@@ -121,6 +127,14 @@
             },
             editVisit(visit){
                 this.return_visit_model = true;
+<<<<<<< HEAD
+                console.log(visit)
+                console.log(this.return_visit_info);
+                this.return_visit_info = this.$form.createFormField({
+                    content: visit.content,
+                })
+                // console.log(this.return_visit_info.content)
+=======
                 this.return_visit_info = this.$form.createForm(this, {
                     mapPropsToFields: () => {
                         return {
@@ -133,6 +147,7 @@
                         }
                     }
                 });
+>>>>>>> 15152c1450b09ddeb596fbdc00c8ea9a48cd289d
             },
             deleteVisit(visit) {
                 console.log(visit)

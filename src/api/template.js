@@ -56,6 +56,11 @@ export const UnblockUser = {
     path: '/user/:id/unblock'
 };
 
+export const AddUser = {
+    method: M.POST,
+    path: '/user/create'
+}
+
 // ********************************************************** //
 export const OrderList = {
     method: M.GET,
