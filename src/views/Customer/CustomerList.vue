@@ -171,11 +171,11 @@
                 this.pagination = pagination;
                 this.queryCustomer();
             },
-            viewDetails(e){
+            viewDetails(id){
                 this.$router.push({
-                    name: 'customerDetails',
+                    name: 'customerDetail',
                     params: {
-                        customer_id:e
+                        id
                     }
                 })
             },

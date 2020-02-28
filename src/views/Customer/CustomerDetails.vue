@@ -16,7 +16,7 @@
     import ReturnVisit from "../../components/ReturnVisit";
 
     export default {
-        name: "CustomerDetails",
+        name: "CustomerDetail",
         components: {ReturnVisit},
         props: {
             id: {
