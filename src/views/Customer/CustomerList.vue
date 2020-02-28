@@ -175,11 +175,7 @@
                 this.$router.push({
                     name: 'customerDetail',
                     params: {
-<<<<<<< HEAD
-                        id:e
-=======
                         id
->>>>>>> ec89661b7b4f139d55a80f4a2faaf7841db408ee
                     }
                 })
             },
