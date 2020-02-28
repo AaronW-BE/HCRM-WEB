@@ -28,7 +28,13 @@ export const CustomerList = {
 export const AddCustomer = {
     method: M.POST,
     path: '/customer/create'
-}
+};
+
+export const CustomerDetail = {
+    method: M.GET,
+    path: '/customer/:id'
+};
+
 
 /**
  * 转交客户

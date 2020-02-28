@@ -1,6 +1,10 @@
 <template>
     <div>
+<<<<<<< HEAD
         <a-button type="primary" @click="return_visit_model = true" style="margin-bottom: 24px">添加回访</a-button>
+=======
+<!--        <a-button type="primary" @click="return_visit_model = true" size="small">添加回访</a-button>-->
+>>>>>>> ec89661b7b4f139d55a80f4a2faaf7841db408ee
         <a-modal title="添加回访" v-model="return_visit_model" okText="确认" cancelText="取消" @ok="addReturnVisit">
             <a-form :form="return_visit_info">
                 <a-form-item label="回访时间">
@@ -140,7 +144,10 @@
             },
             editVisit(visit){
                 this.return_visit_model = true;
+<<<<<<< HEAD
                 this.visit_id = visit.id;
+=======
+>>>>>>> ec89661b7b4f139d55a80f4a2faaf7841db408ee
                 this.return_visit_info = this.$form.createForm(this, {
                     mapPropsToFields: () => {
                         return {

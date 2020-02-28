@@ -1,7 +1,11 @@
 <template>
     <div>
         <a-card title="客户信息" style="margin-bottom: 15px">
-            147
+            <data-detail-list>
+                <Item term="标签">
+                    <a-tag v-for="tag in detail.tags" :key="tag.name" :color="tag.type">{{tag.name}}</a-tag>
+                </Item>
+            </data-detail-list>
         </a-card>
         <a-card title="订单信息" style="margin-bottom: 15px">
             258
@@ -14,10 +18,15 @@
 
 <script>
     import ReturnVisit from "../../components/ReturnVisit";
+    import DataDetailList from "../../components/tool/DataDetailList";
+    import {API} from "../../api";
+    import {CustomerDetail} from "../../api/template";
+
+    const Item = DataDetailList.Item;
 
     export default {
-        name: "CustomerDetails",
-        components: {ReturnVisit},
+        name: "CustomerDetail",
+        components: {DataDetailList, ReturnVisit, Item},
         props: {
             id: {
                 required: true
@@ -25,9 +34,22 @@
         },
         data() {
             return{
+                detail: {}
             }
         },
+        mounted() {
+            this.getCustomerDetail();
+        },
         methods:{
+            getCustomerDetail() {
+                API(CustomerDetail, {
+                    params: {
+                        id: this.id
+                    }
+                }).then(res => {
+                    this.detail = res.data;
+                });
+            },
             handleTabsChange(val) {
                 console.log(val)
             }
