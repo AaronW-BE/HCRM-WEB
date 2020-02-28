@@ -61,6 +61,11 @@ export const OrderList = {
     method: M.GET,
     path: '/order/query'
 };
+
+export const LinkCustomer = {
+    method: M.POST,
+    path: '/order/:id/link'
+};
 //**********************************************************//
 // 客户回访api
 export const AddReturnVisit = {
