@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a-button type="primary" @click="() => return_visit_model = true">添加回访</a-button>
+<!--        <a-button type="primary" @click="return_visit_model = true" size="small">添加回访</a-button>-->
         <a-modal title="添加回访" v-model="return_visit_model" okText="确认" cancelText="取消" @ok="addReturnVisit">
             <a-form :form="return_visit_info">
                 <a-form-item label="回访时间">
@@ -17,7 +17,7 @@
                 </a-form-item>
             </a-form>
         </a-modal>
-        <a-table :columns="columns" :dataSource="return_visit_records" :pagination="false">
+        <a-table size="small" :columns="columns" :dataSource="return_visit_records" :pagination="false" :rowKey="record => record.id">
              <span slot="action" slot-scope="visit">
                 <a-button type="primary" @click="editVisit(visit)" style="margin-right: 10px">编辑</a-button>
                 <a-button type="danger" @click="deleteVisit(visit)">删除</a-button>
@@ -30,6 +30,7 @@
     import {API} from "../api";
     import {AddReturnVisit, CustomerAllVisits, DeleteVisits} from "../api/template";
     import {toTime} from "../utils/timeConversion";
+    import moment from 'moment';
     const columns = [
         {
             title: 'id',
@@ -67,7 +68,7 @@
             return{
                 return_visit_model: false,
                 content: '',
-                return_visit_info: this.$form.createForm(this),
+                return_visit_info: null,
                 return_visit_records: [ ],
                 columns,
             }
@@ -77,6 +78,7 @@
             console.log(this.$form)
         },
         methods:{
+            moment,
             addReturnVisit() {
                 this.return_visit_info.validateFields((err, values) => {
                     if (!err) {
@@ -119,11 +121,18 @@
             },
             editVisit(visit){
                 this.return_visit_model = true;
-                console.log(visit)
-                this.return_visit_info.setFieldsValue({
-                    content: `Hi!`,
+                this.return_visit_info = this.$form.createForm(this, {
+                    mapPropsToFields: () => {
+                        return {
+                            content: this.$form.createFormField({
+                                value: visit.content
+                            }),
+                            time: this.$form.createFormField({
+                                value: moment(visit.returnTime, 'YYYY-MM-DD HH:mm:ss')
+                            })
+                        }
+                    }
                 });
-                console.log(this.return_visit_info.content)
             },
             deleteVisit(visit) {
                 console.log(visit)
