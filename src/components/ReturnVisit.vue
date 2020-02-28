@@ -120,14 +120,6 @@
             },
             editVisit(visit){
                 this.return_visit_model = true;
-<<<<<<< HEAD
-                console.log(visit)
-                console.log(this.return_visit_info);
-                this.return_visit_info = this.$form.createFormField({
-                    content: visit.content,
-                })
-                // console.log(this.return_visit_info.content)
-=======
                 this.return_visit_info = this.$form.createForm(this, {
                     mapPropsToFields: () => {
                         return {
@@ -140,7 +132,6 @@
                         }
                     }
                 });
->>>>>>> 15152c1450b09ddeb596fbdc00c8ea9a48cd289d
             },
             deleteVisit(visit) {
                 console.log(visit)
