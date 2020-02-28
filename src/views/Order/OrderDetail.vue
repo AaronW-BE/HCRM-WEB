@@ -1,14 +1,30 @@
 <template>
     <div>
-        <a-card>
+        <a-card title="订单详情">
             <a-skeleton active :loading="loading" >
                 <div>
                     <data-detail-list title="基础信息">
                         <item term="订单号">{{detail.orderNo}}</item>
                         <item term="下单人">{{detail.orderName}}</item>
+                        <item term="下单手机">{{detail.orderPhone}}</item>
                         <item term="下单时间">{{detail.orderTime || '下单时间未知'}}</item>
+                        <item term="订单来源">{{detail.original}}</item>
+                        <item term="订单金额">{{detail.orderAmount}}</item>
                     </data-detail-list>
                     <a-divider></a-divider>
+
+                    <data-detail-list title="快递信息">
+                        <item term="快递公司">{{detail.orderExpressCorp}}</item>
+                        <item term="快递单号">{{detail.orderExpressNo}}</item>
+                        <item term="订单地址">{{detail.orderAddress}}</item>
+                    </data-detail-list>
+
+                    <a-divider></a-divider>
+                    <data-detail-list title="其他信息">
+                        <item term="备注">{{detail.orderRemark}}</item>
+                        <item term="订单创建时间">{{ new Date(detail.createAt).toLocaleString() }}</item>
+
+                    </data-detail-list>
                 </div>
             </a-skeleton>
         </a-card>

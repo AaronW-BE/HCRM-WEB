@@ -7,7 +7,7 @@
             258
         </a-card>
         <a-card title="客户回访">
-            <ReturnVisit :customer_id="customer_id"></ReturnVisit>
+            <ReturnVisit :customer_id="id"></ReturnVisit>
         </a-card>
     </div>
 </template>
@@ -18,13 +18,15 @@
     export default {
         name: "CustomerDetails",
         components: {ReturnVisit},
-        data() {
-            return{
-                customer_id: undefined
+        props: {
+            id: {
+                required: true,
+                type: String
             }
         },
-        created() {
-            this.customer_id = this.$route.params.customer_id
+        data() {
+            return{
+            }
         },
         methods:{
             handleTabsChange(val) {

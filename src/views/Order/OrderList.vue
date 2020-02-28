@@ -54,22 +54,28 @@
                      @change="handleChange"
             >
                 <span slot="customer" slot-scope="row">
-                    <a @click="redirect2CustomerDetail(row.customerId)">{{row.customer}}</a>
+                    <a v-if="row.customerId" title="点击查看客户" @click="redirect2CustomerDetail(row.customerId)">{{row.customer}}</a>
+                    <a-button v-else type="primary" size="small" @click="handleShowSearchCustomer(row)">关联客户</a-button>
                 </span>
                 <span slot="action" slot-scope="order">
                     <a :data-id="order.id" @click="$router.push({name: 'orderDetail', params: {id: order.id}})">详情</a>
                 </span>
             </a-table>
         </a-card>
+        <customer-search-dialog :show.sync="showLinkCustomer" @selected="handleCustomerSelect" />
     </div>
 </template>
 
 <script>
     import {API} from "../../api";
-    import {OrderList} from "../../api/template";
+    import {LinkCustomer, OrderList} from "../../api/template";
+    import CustomerSearchDialog from "../../components/CustomerSearchDialog";
+
+    import {message} from 'ant-design-vue';
 
     export default {
         name: "OrderList",
+        components: {CustomerSearchDialog},
         data() {
             const columns = [
                 {
@@ -126,6 +132,8 @@
             ];
             return {
                 searchForm: this.$form.createForm(this),
+                selectedOrder: null,
+                showLinkCustomer: false,
                 moreSearchFields: false,
                 loading: false,
                 orderList: [],
@@ -178,6 +186,38 @@
             },
             redirect2CustomerDetail(id) {
                 console.log(id)
+                this.$router.push({
+                    name: 'customerDetail',
+                    params: {
+                        id
+                    }
+                })
+            },
+            handleShowSearchCustomer(order) {
+                this.selectedOrder = order;
+                this.showLinkCustomer = true;
+            },
+            handleCustomerSelect(data) {
+                console.log(data);
+
+                API(LinkCustomer, {
+                    params: {
+                        id: this.selectedOrder.id,
+                    },
+                    data: {
+                        cid: data.id
+                    }
+                }).then(res => {
+                    console.log(res);
+                    message.success("关联客户成功");
+                    this.showLinkCustomer = false;
+                    this.queryOrderList();
+                }).catch(err => {
+                    message.error("关联失败");
+                    console.log(err);
+                }).finally(() => {
+                    this.selectedOrder = null;
+                });
             }
         }
     }
