@@ -21,10 +21,11 @@
                     {{detail.address}}
                 </Item>
                 <Item term="备注">
-                    {{detail.remark}}
+                    {{detail.remark }}
                 </Item>
                 <Item term="标签">
                     <a-tag v-for="tag in detail.tags" :key="tag.name" :color="tag.type">{{tag.name}}</a-tag>
+                    <span @click="addTag"><a-icon type="plus-circle" :style="{color: '#58A942' }"/></span>
                 </Item>
                 <Item term="性别">
                     <a-icon type="man" v-if="detail.gender===1" style="color: #1890ff" />
@@ -36,13 +37,16 @@
                 <Item term="生日">
                     {{detail.childBirth}}
                 </Item>
+                <Item term="年级">
+                    {{detail.childGrade}}
+                </Item>
             </data-detail-list>
         </a-card>
         <a-card title="订单信息" style="margin-bottom: 15px">
             258
         </a-card>
         <a-card title="客户回访">
-            <ReturnVisit :customer_id="id"></ReturnVisit>
+            <ReturnVisit :customer_id="id" :return_visit_records = 'return_visit_records'></ReturnVisit>
         </a-card>
     </div>
 </template>
@@ -66,11 +70,17 @@
         },
         data() {
             return{
-                detail: {}
+                detail: {},
+                return_visit_records:[]
             }
         },
+        created() {
+
+        },
         mounted() {
-            this.getCustomerDetail();
+            if(this.id){
+                this.getCustomerDetail();
+            }
         },
         methods:{
             getCustomerDetail() {
@@ -81,13 +91,24 @@
                 }).then(res => {
                     res.data.childBirth =  (res.data && res.data.childBirth) ? toTime(res.data.childBirth) : '';
                     this.detail = res.data;
+                    if(res.data.returnVisits){
+                        res.data.returnVisits.map( item => {
+                            item.returnTime =  toTime( item.returnTime)
+                            item.createAt =  toTime( item.createAt)
+                        })
+                    }
+                    this.return_visit_records = res.data.returnVisits || ''
                 });
             },
             handleTabsChange(val) {
                 console.log(val)
+            },
+            addTag() {
+
             }
         },
-
+        watch: {
+        }
     }
 </script>
 

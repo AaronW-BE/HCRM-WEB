@@ -64,20 +64,20 @@
         props: {
             customer_id:{
                 required: true
-            }
+            },
+            return_visit_records:Array
         },
         data() {
             return{
                 return_visit_model: false,
                 content: '',
                 return_visit_info: this.$form.createForm(this),
-                return_visit_records: [ ],
+                // return_visit_records: [ ],
                 columns,
                 visit_id: null
             }
         },
         created() {
-            this.customerAllVisits()
         },
         methods:{
             moment,
