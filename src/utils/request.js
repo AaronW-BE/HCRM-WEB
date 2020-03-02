@@ -3,6 +3,7 @@ import {getToken, removeToken} from "./tokenUtils";
 import {message} from "ant-design-vue";
 
 Axios.defaults.baseURL = '/';
+Axios.defaults.timeout = 5000;
 
 // Axios全局配置
 Axios.interceptors.request.use(config => {
