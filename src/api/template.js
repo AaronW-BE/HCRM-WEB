@@ -101,3 +101,9 @@ export const OrderDetail = {
     method: M.GET,
     path: '/order/:id'
 };
+//*****************************************************************//
+// 标签
+export const CreateTag = {
+    method: M.POST,
+    path: '/tag/create'
+}
