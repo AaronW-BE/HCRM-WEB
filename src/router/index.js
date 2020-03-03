@@ -164,6 +164,15 @@ const routes = [
           component: () => import('../views/System/SystemMain.vue'),
         },
           {
+            path: 'role',
+            name: 'roleManage',
+            meta: {
+              title: '角色管理',
+              icon: 'user'
+            },
+            component: () => import('../views/System/role/roleManage'),
+          },
+          {
             path: 'account',
             name: 'userAccountList',
             meta: {

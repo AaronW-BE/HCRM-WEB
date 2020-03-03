@@ -107,3 +107,21 @@ export const CreateTag = {
     method: M.POST,
     path: '/tag/create'
 }
+
+
+//*****************************************************************//
+// 角色相关
+export const RoleList = {
+    method: M.GET,
+    path: '/role/list'
+};
+
+export const CreateRole = {
+    method: M.POST,
+    path: '/role/create'
+};
+
+export const AllPermission = {
+    method: M.GET,
+    path: '/common/permissions'
+}
