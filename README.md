@@ -1,29 +1,9 @@
-# heymom-crm-web
+# H-CRM
 
-## Project setup
+### 自定义指令
+* v-permission: 权限测试指令
+```vuejs
+<a-button v-permission="['order:create']" >创建订单</a-button>
 ```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+指令自动查询用户是否拥有指令权限列表中的权限，若无则在dom中删除此元素。
+位置: [permission.js](src/dicrectives/permission.js)
