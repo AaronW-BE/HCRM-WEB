@@ -57,6 +57,15 @@ const routes = [
               unShow: true
             },
             component: () => import('../views/Order/OrderDetail'),
+          },
+          {
+            path: 'CreateOrder/:id?',
+            name: 'CreateOrder',
+            props: true,
+            meta: {
+              unShow: true
+            },
+            component: () => import('../views/Order/CreateOrder')
           }
         ]
       },

@@ -97,15 +97,22 @@ export const DeleteVisits = {
     path: '/customer/:cid/return-visit/:id'
 }
 
-export const OrderDetail = {
-    method: M.GET,
-    path: '/order/:id'
-};
+export const AddTag = {
+    method: M.POST,
+    path: '/customer/{cid}/tag'
+}
+
+
 //*****************************************************************//
 // 标签
 export const CreateTag = {
     method: M.POST,
     path: '/tag/create'
+}
+
+export const DeleteTag = {
+    method: M.DELETE,
+    path: '/tag/:id'
 }
 
 
