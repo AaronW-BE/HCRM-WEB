@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a-card title="客户信息" style="margin-bottom: 15px">
+        <a-card style="">
             <data-detail-list title="基本信息">
                 <Item term="姓名">
                     {{detail.name}}
@@ -45,7 +45,7 @@
                 </Item>
             </data-detail-list>
         </a-card>
-        <a-card title="订单信息" style="margin-bottom: 15px">
+        <a-card title="订单信息">
             258
         </a-card>
         <a-card title="客户回访">

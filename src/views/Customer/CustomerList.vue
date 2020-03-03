@@ -10,12 +10,29 @@
                                 }]"
                                 placeholder="请输入客户姓名" />
                     </a-form-item>
+                    <a-form-item label="客户昵称">
+                        <a-input
+                                v-decorator="['nickname', {
+                                    initialValue: ''
+                                }]"
+                                placeholder="请输入客户昵称" />
+                    </a-form-item>
+                    <a-form-item label="宝贝姓名">
+                        <a-input
+                                v-decorator="['childName', {
+                                    initialValue: ''
+                                }]"
+                                placeholder=宝贝姓名 />
+                    </a-form-item>
                     <a-form-item label="微信号">
                         <a-input
                                 v-decorator="['wechat', {
                                     initialValue: ''
                                 }]"
                                 placeholder=查询微信号 />
+                    </a-form-item>
+                    <a-form-item label="性别">
+                        <a-radio-group v-model="searchFields.gender" :options="[{label: '男', value: '1'}, {label: '女', value: '0'}, {label: '全部', value: ''}]" defaultValue="" />
                     </a-form-item>
                     <a-form-item>
                         <a-button type="primary" html-type="submit" style="margin-right: 10px">查询</a-button>
@@ -118,6 +135,9 @@
             ];
             return {
                 searchForm: this.$form.createForm(this),
+                searchFields: {
+                    gender: ''
+                },
                 columns,
                 loading: false,
                 list: [],
@@ -154,7 +174,8 @@
                     data: {
                         size: this.pagination.pageSize,
                         page: this.pagination.current,
-                        ...data
+                        ...data,
+                        ...this.searchFields
                     }
                 }).then(res => {
                     this.list = res.data.results;
