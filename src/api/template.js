@@ -68,6 +68,12 @@ export const AddUser = {
 }
 
 // ********************************************************** //
+//订单api
+export const CreateOrder = {
+    method: M.POST,
+    path: '/order/create'
+};
+
 export const OrderList = {
     method: M.GET,
     path: '/order/query'
@@ -76,6 +82,19 @@ export const OrderList = {
 export const LinkCustomer = {
     method: M.POST,
     path: '/order/:id/link'
+};
+export const DeleteOrder = {
+    method: M.DELETE,
+    path: '/order/:id'
+};
+
+export const ChangeOrder = {
+    method: M.POST,
+    path: '/order/:id'
+}
+export const OrderDetail = {
+    method: M.GET,
+    path: '/order/:id'
 };
 //**********************************************************//
 // 客户回访api
@@ -97,13 +116,20 @@ export const DeleteVisits = {
     path: '/customer/:cid/return-visit/:id'
 }
 
-export const OrderDetail = {
-    method: M.GET,
-    path: '/order/:id'
-};
+export const AddTag = {
+    method: M.POST,
+    path: '/customer/{cid}/tag'
+}
+
+
 //*****************************************************************//
 // 标签
 export const CreateTag = {
     method: M.POST,
     path: '/tag/create'
+}
+
+export const DeleteTag = {
+    method: M.DELETE,
+    path: '/tag/:id'
 }

@@ -44,7 +44,7 @@
                     </a-form-item>
                 </a-form>
                 <div>
-                    <a-button size="small" type="primary">创建</a-button>
+                    <a-button size="small" type="primary" @click="$router.push({name: 'CreateOrder'})">创建</a-button>
                 </div>
             </div>
             <a-table :dataSource="orderList" :columns="columns"
@@ -58,7 +58,16 @@
                     <a-button v-else type="primary" size="small" @click="handleShowSearchCustomer(row)">关联客户</a-button>
                 </span>
                 <span slot="action" slot-scope="order">
-                    <a :data-id="order.id" @click="$router.push({name: 'orderDetail', params: {id: order.id}})">详情</a>
+                    <a :data-id="order.id" @click="$router.push({name: 'CreateOrder', params: {id: order.id}})">修改</a>
+                    <a :data-id="order.id" @click="$router.push({name: 'orderDetail', params: {id: order.id}})" style="margin-left: 10px">详情</a>
+                    <a-popconfirm
+                            title="确定删除此订单吗？"
+                            @confirm="deleteOrder(order.id)"
+                            okText="确定"
+                            cancelText="取消"
+                    >
+                        <a style="margin-left: 10px">删除</a>
+                    </a-popconfirm>
                 </span>
             </a-table>
         </a-card>
@@ -68,7 +77,7 @@
 
 <script>
     import {API} from "../../api";
-    import {LinkCustomer, OrderList} from "../../api/template";
+    import {DeleteOrder, LinkCustomer, OrderList} from "../../api/template";
     import CustomerSearchDialog from "../../components/CustomerSearchDialog";
 
     import {message} from 'ant-design-vue';
@@ -218,6 +227,20 @@
                 }).finally(() => {
                     this.selectedOrder = null;
                 });
+            },
+            deleteOrder(order) {
+                let id = order
+                API(DeleteOrder,{
+                    params: {
+                        id,
+                    }
+                }).then(res => {
+                    console.log(res)
+                    this.$message.info('删除成功')
+                    this.queryOrderList();
+                }).catch(err => {
+                    console.log(err)
+                })
             }
         }
     }
