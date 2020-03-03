@@ -201,6 +201,7 @@
                             // console.log(res)
                             this.$message.success(res.msg)
                             this.add_user_model = false
+                            this.queryUser();
                         }).catch(err => {
                             console.log(err)
                         })
