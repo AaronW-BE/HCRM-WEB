@@ -1,7 +1,7 @@
 <template>
     <div>
-        <a-card title="客户信息" style="margin-bottom: 15px">
-            <data-detail-list>
+        <a-card style="">
+            <data-detail-list title="基本信息">
                 <Item term="姓名">
                     {{detail.name}}
                 </Item>
@@ -23,12 +23,6 @@
                 <Item term="备注">
                     {{detail.remark }}
                 </Item>
-                <Item term="标签">
-                    <a-tag v-for="tag in detail.tags" :key="tag.name" :color="tag.type">{{tag.name}}</a-tag>
-                    <span @click=" tag_model = true">
-                        <a-icon type="plus-circle" :style="{color: '#19ff75'}"/>
-                    </span>
-                </Item>
                 <Item term="性别">
                     <a-icon type="man" v-if="detail.gender===1" style="color: #1890ff" />
                     <a-icon type="woman" v-if="detail.gender===2" style="color: deeppink" />
@@ -43,8 +37,15 @@
                     {{detail.childGrade}}
                 </Item>
             </data-detail-list>
+            <data-detail-list title="附加信息">
+                <item term="顾问">{{detail.adviserName}}</item>
+                <Item term="标签">
+                    <a-tag v-for="tag in detail.tags" :key="tag.name" :color="tag.type">{{tag.name}}</a-tag>
+                    <span @click=" tag_model = true"><a-icon type="plus-circle" :style="{color: '#58A942' }"/></span>
+                </Item>
+            </data-detail-list>
         </a-card>
-        <a-card title="订单信息" style="margin-bottom: 15px">
+        <a-card title="订单信息">
             258
         </a-card>
         <a-card title="客户回访">
@@ -141,7 +142,7 @@
                         })
                     }
                 });
-            }
+            },
         },
         watch: {
         }

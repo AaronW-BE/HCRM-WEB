@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a-button type="primary" @click="return_visit_model = true" style="margin-bottom: 24px">添加回访</a-button>
+        <a-button type="primary" @click="return_visit_model = true" size="small" style="margin-bottom: 15px">添加回访</a-button>
         <a-modal title="添加回访" v-model="return_visit_model" okText="确认" cancelText="取消" @ok="addReturnVisit">
             <a-form :form="return_visit_info">
                 <a-form-item label="回访时间">
