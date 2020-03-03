@@ -68,6 +68,12 @@ export const AddUser = {
 }
 
 // ********************************************************** //
+// 订单
+export const CreateOrder = {
+    method: M.POST,
+    path: '/order/create'
+};
+
 export const OrderList = {
     method: M.GET,
     path: '/order/query'
@@ -76,6 +82,19 @@ export const OrderList = {
 export const LinkCustomer = {
     method: M.POST,
     path: '/order/:id/link'
+};
+export const DeleteOrder = {
+    method: M.DELETE,
+    path: '/order/:id'
+};
+
+export const ChangeOrder = {
+    method: M.POST,
+    path: '/order/:id'
+}
+export const OrderDetail = {
+    method: M.GET,
+    path: '/order/:id'
 };
 //**********************************************************//
 // 客户回访api
