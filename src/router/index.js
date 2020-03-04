@@ -126,12 +126,32 @@ const routes = [
       },
       {
         path: 'apps',
-        name: 'appCenter',
+        name: 'appManage',
         meta: {
           title: '个人应用',
           icon: 'appstore'
         },
-        component: () => import('../views/apps/AppMain')
+        component: BlackLayout,
+        children: [
+          {
+            path: '',
+            name: 'appCenter',
+            meta: {
+              title: '个人应用',
+              icon: 'appstore'
+            },
+            component: () => import('../views/apps/AppMain'),
+          },
+          {
+            path: 'tag',
+            name: 'tagManage',
+            meta: {
+              title: '标签管理',
+              icon: 'tag',
+            },
+            component: () => import('../views/apps/TagManage')
+          }
+        ]
       },
       {
         path: 'data-manage',

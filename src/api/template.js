@@ -126,10 +126,18 @@ export const DeleteVisits = {
     path: '/customer/:cid/return-visit/:id'
 }
 
+//*****************************************************************//
+// TAG
+
 export const AddTag = {
     method: M.POST,
     path: '/customer/{cid}/tag'
-}
+};
+
+export const QueryTag = {
+    method: M.GET,
+    path: '/tag/query'
+};
 
 
 //*****************************************************************//
