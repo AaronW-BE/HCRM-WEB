@@ -91,11 +91,16 @@ export const DeleteOrder = {
 export const ChangeOrder = {
     method: M.PUT,
     path: '/order/:id'
-}
+};
 export const OrderDetail = {
     method: M.GET,
     path: '/order/:id'
 };
+//领取订单--登录用户自己领取未分配的订单
+export const ReceiveOrder = {
+    method: M.POST,
+    path: '/order/:id/receive'
+}
 //**********************************************************//
 // 客户回访api
 export const AddReturnVisit = {

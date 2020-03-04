@@ -198,7 +198,7 @@
                     }
                 }).then(res => {
                     // console.log(res);
-                    let address_item = res.data.orderAddress.split(',') || '';
+                    let address_item = res.data.orderAddress.substring(0, res.data.orderAddress.lastIndexOf(',')).split(',');
                     let address_item2 = res.data.orderAddress.substring(res.data.orderAddress.lastIndexOf(',')+1) || ''
                     let data = {
                         name: res.data.orderName,

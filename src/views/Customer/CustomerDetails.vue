@@ -41,7 +41,6 @@
                 <item term="顾问">{{detail.adviserName}}</item>
                 <Item term="标签">
                     <a-tag v-for="tag in detail.tags" :key="tag.name" :color="tag.type">{{tag.name}}</a-tag>
-                    <span @click=" tag_model = true"><a-icon type="plus-circle" :style="{color: '#58A942' }"/></span>
                 </Item>
             </data-detail-list>
         </a-card>
@@ -51,25 +50,6 @@
         <a-card title="客户回访">
             <ReturnVisit :customer_id="id" :return_visit_records = 'return_visit_records'></ReturnVisit>
         </a-card>
-        <a-modal
-                title="添加tag"
-                :visible="tag_model"
-                @ok="handleTagModel"
-        >
-           <a-form :form="tag_info">
-               <a-form-item label="标签名">
-                   <a-input
-                           v-decorator="['name', { rules: [{ required: true, message: '请输入标签名' }] }]"
-                   />
-               </a-form-item>
-               <a-form-item label="颜色">
-                   <a-input
-                           placeholder="输入64位颜色值 如#f50"
-                           v-decorator="['type', { rules: [{ required: true, message: '请输入64位颜色值，如#f50' }] }]"
-                   />
-               </a-form-item>
-           </a-form>
-        </a-modal>
     </div>
 </template>
 
@@ -77,7 +57,7 @@
     import ReturnVisit from "../../components/ReturnVisit";
     import DataDetailList from "../../components/tool/DataDetailList";
     import {API} from "../../api";
-    import {CreateTag, CustomerDetail} from "../../api/template";
+    import { CustomerDetail} from "../../api/template";
     import {toTime} from "../../utils/timeConversion";
 
     const Item = DataDetailList.Item;
@@ -127,22 +107,22 @@
             handleTabsChange(val) {
                 console.log(val)
             },
-            handleTagModel() {
-                this.tag_info.validateFields((err, values) => {
-                    if (!err) {
-                        console.log(values);
-                        let data = values
-                        API(CreateTag,{
-                            data,
-                        }).then(res => {
-                            console.log(res)
-                            this.$message.success(res.msg)
-                        }).catch(err => {
-                            console.log(err)
-                        })
-                    }
-                });
-            },
+            // handleTagModel() {
+            //     this.tag_info.validateFields((err, values) => {
+            //         if (!err) {
+            //             console.log(values);
+            //             let data = values
+            //             API(CreateTag,{
+            //                 data,
+            //             }).then(res => {
+            //                 console.log(res)
+            //                 this.$message.success(res.msg)
+            //             }).catch(err => {
+            //                 console.log(err)
+            //             })
+            //         }
+            //     });
+            // },
         },
         watch: {
         }
