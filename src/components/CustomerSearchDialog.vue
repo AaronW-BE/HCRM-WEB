@@ -1,7 +1,7 @@
 <template>
     <div>
         <a-modal :visible="show"
-                 title="选择用户"
+                 title="选择客户"
                  @ok="handleOk"
                  @cancel="handleCancel"
         >

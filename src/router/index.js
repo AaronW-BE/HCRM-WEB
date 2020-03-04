@@ -110,6 +110,17 @@ const routes = [
             },
             props: true,
             component: () => import('../views/Customer/CustomerDetails')
+          },
+          {
+            path: ':id/orders',
+            name: 'customerOrders',
+            meta: {
+              title: '客户所有订单',
+              icon: 'goods',
+              unShow: true
+            },
+            props: true,
+            component: () => import('../views/Customer/CustomerOrderList')
           }
         ]
       },

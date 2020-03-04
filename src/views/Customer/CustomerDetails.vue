@@ -25,7 +25,7 @@
                 </Item>
                 <Item term="性别">
                     <a-icon type="man" v-if="detail.gender===1" style="color: #1890ff" />
-                    <a-icon type="woman" v-if="detail.gender===2" style="color: deeppink" />
+                    <a-icon type="woman" v-else style="color: deeppink" />
                 </Item>
                 <Item term="宝贝">
                     {{detail.childName}}
@@ -45,6 +45,7 @@
             </data-detail-list>
         </a-card>
         <a-card title="订单信息">
+            <a href="#" @click="$router.push({name: 'customerOrders', params: {id}})" slot="extra">更多</a>
             258
         </a-card>
         <a-card title="客户回访">
