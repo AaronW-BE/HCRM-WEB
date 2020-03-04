@@ -5,8 +5,9 @@
                     v-model="selectedAddress"
                     :options="address"
                     @change="onAddressSelected"
+                    placeholder="请选择城市"
             ></a-cascader>
-            <a-input placeholder="请输入详细地址" v-model="detail" v-if="showDetail" @blur="onDetailBlur" />
+            <a-input placeholder="请输入详细地址" v-model="detail" v-if="showDetail" @blur="onDetailBlur" style="width:200px"/>
         </a-input-group>
     </div>
 </template>

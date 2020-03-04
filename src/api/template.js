@@ -94,7 +94,7 @@ export const DeleteOrder = {
 };
 
 export const ChangeOrder = {
-    method: M.POST,
+    method: M.PUT,
     path: '/order/:id'
 }
 export const OrderDetail = {

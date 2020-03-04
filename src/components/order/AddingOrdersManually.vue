@@ -163,7 +163,7 @@
     import {address} from "../../assets/js/cities";
     import {toTime} from "../../utils/timeConversion";
     import {API} from "../../api";
-    import {CreateOrder, OrderDetail} from "../../api/template";
+    import {ChangeOrder, CreateOrder, OrderDetail} from "../../api/template";
     import moment from "moment";
     export default {
         name: "AddingOrdersManually",
@@ -197,7 +197,9 @@
                         id,
                     }
                 }).then(res => {
-                    console.log(res);
+                    // console.log(res);
+                    let address_item = res.data.orderAddress.split(',') || '';
+                    let address_item2 = res.data.orderAddress.substring(res.data.orderAddress.lastIndexOf(',')+1) || ''
                     let data = {
                         name: res.data.orderName,
                         phone: res.data.orderPhone,
@@ -207,7 +209,9 @@
                         expressCorp: res.data.orderExpressCorp,
                         remark: res.data.orderRemark,
                         expressNo: res.data.orderExpressNo,
-                        original: res.data.original
+                        original: res.data.original,
+                        address_item:address_item,
+                        address: address_item2
                     }
                     this.$nextTick(() => {
                         this.order_info.setFieldsValue(data)
@@ -220,23 +224,46 @@
                 e.preventDefault();
                 this.order_info.validateFields((err,values) => {
                     if(!err) {
-                        // console.log(values)
+                        if( values.address_item && values.address) {
+                            if(values.address_item.indexOf(values.address) === -1){
+                                values.address_item.push(values.address)
+                            }
+                        }
                         let data = {
                             ...values,
                             orderDate: values.orderDate && toTime(values.orderDate._d),
-                            address: values.address_item && values.address_item[0] + values.address_item[1] + (values.address_item[2] || '') + (values.address && values.address)
+                            address: (values.address_item && values.address_item.join(',')) || (values.address || '')
                         };
-                        API(CreateOrder,{
-                            data,
-                        }).then(res => {
-                            // console.log(res)
-                            this.$message.success(res.msg)
-                            this.$router.push({
-                                name: 'orderList'
+                        console.log(data)
+                        if(this.id) {
+                            API(ChangeOrder,{
+                                params:{
+                                    id:this.id
+                                },
+                                data,
+                            }).then(res => {
+                                console.log(res);
+                                this.$message.success(res.msg);
+                                this.$router.push({
+                                    name: 'orderList'
+                                })
+                            }).catch(err => {
+                                console.log(err)
                             })
-                        }).catch(err => {
-                            console.log(err)
-                        })
+                        }else{
+                            API(CreateOrder,{
+                                data,
+                            }).then(res => {
+                                // console.log(res)
+                                this.$message.success(res.msg);
+                                this.$router.push({
+                                    name: 'orderList'
+                                })
+                            }).catch(err => {
+                                console.log(err)
+                            })
+                        }
+
                     }
                 })
             },
