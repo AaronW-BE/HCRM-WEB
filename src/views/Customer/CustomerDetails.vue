@@ -25,7 +25,7 @@
                 </Item>
                 <Item term="性别">
                     <a-icon type="man" v-if="detail.gender===1" style="color: #1890ff" />
-                    <a-icon type="woman" v-if="detail.gender===2" style="color: deeppink" />
+                    <a-icon type="woman" v-else style="color: deeppink" />
                 </Item>
                 <Item term="宝贝">
                     {{detail.childName}}
