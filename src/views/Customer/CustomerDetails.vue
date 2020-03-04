@@ -46,6 +46,7 @@
             </data-detail-list>
         </a-card>
         <a-card title="订单信息">
+            <a href="#" @click="$router.push({name: 'customerOrders', params: {id}})" slot="extra">更多</a>
             258
         </a-card>
         <a-card title="客户回访">

@@ -35,6 +35,11 @@ export const CustomerDetail = {
     path: '/customer/:id'
 };
 
+export const CustomerOrders = {
+    method: M.GET,
+    path: '/customer/:id/orders'
+};
+
 
 /**
  * 转交客户
