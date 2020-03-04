@@ -169,7 +169,6 @@
                 API(OrderList, {
                     data
                 }).then(res => {
-                    console.log(res);
                     this.orderList = res.data.results;
 
                     this.pagination = {

@@ -34,6 +34,12 @@
                     <a-form-item label="性别">
                         <a-radio-group v-model="searchFields.gender" :options="[{label: '男', value: '1'}, {label: '女', value: '0'}, {label: '全部', value: ''}]" defaultValue="" />
                     </a-form-item>
+                    <a-form-item label="服务人">
+                        <a-radio-group v-model="searchFields.showSelfServe">
+                            <a-radio :value="true">仅自己服务</a-radio>
+                            <a-radio :value="false" checked>全部</a-radio>
+                        </a-radio-group>
+                    </a-form-item>
                     <a-form-item>
                         <a-button type="primary" html-type="submit" style="margin-right: 10px">查询</a-button>
                         <a-button @click="resetSearch" >重置</a-button>
@@ -51,6 +57,9 @@
                      :pagination="pagination"
                      @change="onTableChange"
             >
+                <span slot="adviser" slot-scope="adviser">
+                    <a-icon type="check-circle" v-if="adviser" theme="filled" style="color: #42b983" />
+                </span>
             <span slot="gender" slot-scope="gender">
                 <a-icon type="man" v-if="gender" style="color: #1890ff" />
                 <a-icon type="woman" v-else style="color: deeppink" />
@@ -128,6 +137,12 @@
                     width: 100
                 },
                 {
+                    title: "服务状态",
+                    dataIndex: 'adviser',
+                    width: 70,
+                    scopedSlots: { customRender: 'adviser' },
+                },
+                {
                     title: '操作',
                     width: 200,
                     scopedSlots: { customRender: 'action' },
@@ -136,7 +151,8 @@
             return {
                 searchForm: this.$form.createForm(this),
                 searchFields: {
-                    gender: ''
+                    gender: '',
+                    showSelfServe: false
                 },
                 columns,
                 loading: false,
@@ -228,6 +244,7 @@
                         }).then(res => {
                             console.log(res);
                             message.success("转交成功");
+                            this.queryCustomer();
                         }).catch((e) => {
                             let msg = e.data.msg || '转交失败';
                             message.error(msg);
