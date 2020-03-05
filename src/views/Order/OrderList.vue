@@ -68,6 +68,14 @@
                     >
                         <a style="margin-left: 10px">删除</a>
                     </a-popconfirm>
+                    <a-popconfirm
+                        title="请确保领取的为自己的订单"
+                        okText="是我的订单"
+                        cancelText="取消"
+                        @confirm="handleReceiveOrder(order.id)"
+                    >
+                        <a-button type="link" v-if="!order.creatorId" style="color: #40b95b">領取訂單</a-button>
+                    </a-popconfirm>
                 </span>
             </a-table>
         </a-card>
@@ -77,7 +85,7 @@
 
 <script>
     import {API} from "../../api";
-    import {DeleteOrder, LinkCustomer, OrderList} from "../../api/template";
+    import {DeleteOrder, LinkCustomer, OrderList, ReceiveOrder} from "../../api/template";
     import CustomerSearchDialog from "../../components/CustomerSearchDialog";
 
     import {message} from 'ant-design-vue';
@@ -156,6 +164,15 @@
             this.queryOrderList();
         },
         methods: {
+            handleReceiveOrder(id) {
+                API(ReceiveOrder, {
+                    params: {id}
+                    // eslint-disable-next-line no-unused-vars
+                }).then(res => {
+                    this.$message.success('领取成功')
+                    this.queryOrderList();
+                });
+            },
             queryOrderList() {
                 this.loading = true;
 
