@@ -130,6 +130,15 @@ export const DeleteVisits = {
     path: '/customer/:cid/return-visit/:id'
 }
 
+/**
+ * 近期回访列表
+ * @type {{path: string, method: string}}
+ */
+export const SelfReturnVist = {
+    method: M.GET,
+    path: '/user/return-list'
+};
+
 //*****************************************************************//
 // TAG
 

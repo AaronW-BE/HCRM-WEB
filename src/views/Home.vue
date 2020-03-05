@@ -25,12 +25,7 @@
           </a-col>
           <a-col :md="10">
             <a-card title="回访记录" size="small">
-              <ul>
-                <li>1</li>
-                <li>1</li>
-                <li>1</li>
-                <li>1</li>
-              </ul>
+              <recent-return-visit :list="returnVisitList" style="min-height: 200px" />
             </a-card>
           </a-col>
         </a-row>
@@ -62,24 +57,36 @@
 // @ is an alias to /src
 
 import {API} from "../api";
-import {NormalStatistics} from "../api/template";
+import {NormalStatistics, SelfReturnVist} from "../api/template";
 import PieChart from "../components/charts/PieChart";
+import RecentReturnVisit from "../components/RecentReturnVisit";
 export default {
   name: 'Home',
   data() {
     return {
       permission: 'delete',
       permission2: ['create', 'delete'],
-      data: []
+      data: [],
+      returnVisitList: []
     }
   },
   components: {
+    RecentReturnVisit,
     PieChart,
   },
   created() {
     API(NormalStatistics).then(res => {
       this.data = res.data
     });
+
+    this.queryRecentVisit();
+  },
+  methods: {
+    queryRecentVisit() {
+      API(SelfReturnVist).then(res => {
+        this.returnVisitList = res.data;
+      });
+    }
   }
 }
 </script>
