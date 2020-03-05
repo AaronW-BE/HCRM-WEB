@@ -2,11 +2,12 @@
     <div class="login-wrap">
             <a-form id="components-form-demo-normal-login" :form="form" class="login-form login-input" @submit="handleSubmit">
                 <h2 style="text-align: center">客户关系管理</h2>
+                <a-alert message="管理员用户名：admin, 密码： 123456" />
                 <a-form-item>
                     <a-input
                             v-decorator="['username',
-          { rules: [{ required: true, message: 'Please input your username!' }] }
-        ]" placeholder="Username">
+          { rules: [{ required: true, message: '请输入用户名' }] }
+        ]" placeholder="用户名">
                         <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)"/>
                     </a-input>
                 </a-form-item>
@@ -14,7 +15,7 @@
                     <a-input
                             v-decorator="[
           'password',
-          { rules: [{ required: true, message: 'Please input your Password!' }] }
+          { rules: [{ required: true, message: '请输入用户密码' }] }
         ]"
                             type="password" placeholder="请输入密码">
                         <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
@@ -95,7 +96,6 @@
         background-size: cover;
     }
     .login-input{
-        height:300px;
         width:400px;
         background-color: rgba(255,255,255,.4);
         padding:30px;
