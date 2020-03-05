@@ -249,10 +249,14 @@ router.beforeEach((to, from, next) => {
 
   if (to.name !== 'login') {
     if (!getToken()) {
+      const url = window.location.href;
       // eslint-disable-next-line no-unused-vars
       message.warning("登录失效，请重新登录", 1).then(_ => {
         next({
-          name: 'login'
+          name: 'login',
+          query: {
+            location: encodeURI(url)
+          }
         });
       });
       return;

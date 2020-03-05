@@ -70,6 +70,12 @@
 
                             API(LoginInfo).then(res2 => {
                                 sessionStorage.setItem('hcm_permission', res2.data.permissions.join(','))
+
+                                let location = this.$route.query.location || '';
+                                if (location) {
+                                    window.location.href = location;
+                                    return;
+                                }
                                 this.$router.replace({name: "main"});
                             });
 
