@@ -40,6 +40,10 @@ export const CustomerOrders = {
     path: '/customer/:id/orders'
 };
 
+export const CustomerAddTags = {
+    method: M.POST,
+    path: '/customer/:cid/tag'
+};
 
 /**
  * 转交客户
@@ -150,8 +154,7 @@ export const CreateTag = {
 export const DeleteTag = {
     method: M.DELETE,
     path: '/tag/:id'
-}
-
+};
 
 //*****************************************************************//
 // 角色相关
