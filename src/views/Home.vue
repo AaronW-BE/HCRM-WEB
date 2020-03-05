@@ -1,23 +1,44 @@
 <template>
   <div class="home">
-    <a-card title="数据统计" size="small"  style="min-height: 100px">
-      <a-row>
+    <div class="box-container">
+      <a-alert message="测试阶段，有问题随时提交" banner  />
+    </div>
+
+    <a-card size="small"  style="min-height: 100px">
+      <a-row :gutter="{md: 50}">
         <a-col :md="16">
-          <a-row>
-            <a-col :md="6">订单</a-col>
-            <a-col :md="6">客户</a-col>
-            <a-col :md="6">回访</a-col>
-            <a-col :md="6">其他</a-col>
+          <a-row :gutter="{md: 10}">
+            <a-col :md="6">
+              <a-card title="订单" size="small">
+                <span class="data-value">{{baseStatistics.order || 'N/A'}}</span>
+              </a-card>
+            </a-col>
+            <a-col :md="6">
+              <a-card title="客户" size="small">
+                <span class="data-value">{{baseStatistics.customer || 'N/A'}}</span>
+              </a-card>
+            </a-col>
+            <a-col :md="6">
+              <a-card title="回访" size="small">
+                <span class="data-value">{{baseStatistics.visit || 'N/A'}}</span>
+              </a-card>
+            </a-col>
+            <a-col :md="6">
+              <a-card title="其他" size="small">
+                <span class="data-value">{{0}}</span>
+              </a-card>
+            </a-col>
           </a-row>
         </a-col>
         <a-col :md="8">
-            <a-divider type="vertical" ></a-divider>
-            <span>其他数据</span>
+          <a-card title="其他" size="small">
+            <span class="data-value">{{'N/A'}}</span>
+          </a-card>
         </a-col>
       </a-row>
     </a-card>
 
-    <a-row>
+    <a-row style="margin-top: 5px;">
       <a-col :md="16">
         <a-row>
           <a-col :md="14">
@@ -57,7 +78,7 @@
 // @ is an alias to /src
 
 import {API} from "../api";
-import {NormalStatistics, SelfReturnVist} from "../api/template";
+import {NormalStatistics, SelfBaseStatistic, SelfReturnVisit} from "../api/template";
 import PieChart from "../components/charts/PieChart";
 import RecentReturnVisit from "../components/RecentReturnVisit";
 export default {
@@ -67,7 +88,8 @@ export default {
       permission: 'delete',
       permission2: ['create', 'delete'],
       data: [],
-      returnVisitList: []
+      returnVisitList: [],
+      baseStatistics: {}
     }
   },
   components: {
@@ -80,13 +102,26 @@ export default {
     });
 
     this.queryRecentVisit();
+    this.queryBaseStatisticsData();
   },
   methods: {
     queryRecentVisit() {
-      API(SelfReturnVist).then(res => {
+      API(SelfReturnVisit).then(res => {
         this.returnVisitList = res.data;
+      });
+    },
+    queryBaseStatisticsData() {
+      API(SelfBaseStatistic).then(res => {
+        this.baseStatistics = res.data;
+        console.log(res);
       });
     }
   }
 }
 </script>
+
+<style scoped>
+  .data-value {
+    font-size: 1.5rem;
+  }
+</style>
