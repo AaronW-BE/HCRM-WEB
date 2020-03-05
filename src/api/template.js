@@ -176,7 +176,7 @@ export const AllPermission = {
 //*****************************************************************//
 // Statistics
 
-export const NoralStatistics = {
+export const NormalStatistics = {
     method: M.GET,
     path: '/statistic/normal'
 };

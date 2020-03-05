@@ -62,7 +62,7 @@
 // @ is an alias to /src
 
 import {API} from "../api";
-import {NoralStatistics} from "../api/template";
+import {NormalStatistics} from "../api/template";
 import PieChart from "../components/charts/PieChart";
 export default {
   name: 'Home',
@@ -77,7 +77,7 @@ export default {
     PieChart,
   },
   created() {
-    API(NoralStatistics).then(res => {
+    API(NormalStatistics).then(res => {
       this.data = res.data
     });
   }
