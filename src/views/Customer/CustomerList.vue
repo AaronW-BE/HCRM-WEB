@@ -60,14 +60,15 @@
                 <span slot="adviser" slot-scope="adviser">
                     <a-icon type="check-circle" v-if="adviser" theme="filled" style="color: #42b983" />
                 </span>
-            <span slot="gender" slot-scope="gender">
-                <a-icon type="man" v-if="gender" style="color: #1890ff" />
-                <a-icon type="woman" v-else style="color: deeppink" />
-            </span>
+                <span slot="gender" slot-scope="gender">
+                    <a-icon type="man" v-if="gender" style="color: #1890ff" />
+                    <a-icon type="woman" v-else style="color: deeppink" />
+                </span>
                 <span slot="action" slot-scope="scope">
-                <a-button type="primary" size="small" @click="viewDetails(scope.id)">查看详情</a-button>
-                <a-button type="dashed" size="small" @click="showTransferCustomer(scope)">转交客户</a-button>
-            </span>
+                    <a-button type="primary" size="small" @click="viewDetails(scope.id)">查看详情</a-button>
+                    <a-button v-if="scope.adviser" type="dashed" size="small" @click="showTransferCustomer(scope)">转交客户</a-button>
+                    <a-button v-else type="primary" size="small" @click="showTransferCustomer(scope)">领取此用户</a-button>
+                </span>
             </a-table>
 
         </a-card>
