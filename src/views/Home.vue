@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <a-card title="数据统计" size="small">
+    <a-card title="数据统计" size="small"  style="min-height: 100px">
       <a-row>
         <a-col :md="16">
           <a-row>
@@ -21,11 +21,11 @@
       <a-col :md="16">
         <a-row>
           <a-col :md="14">
-            <a-card title="收入数据" size="small"></a-card>
+            <a-card title="收入数据" size="small"  style="min-height: 300px"></a-card>
           </a-col>
           <a-col :md="10">
-            <a-card title="回访记录" size="small">
-              <recent-return-visit :list="returnVisitList" style="min-height: 200px" />
+            <a-card title="回访记录" size="small"  style="min-height: 300px">
+              <recent-return-visit :list="returnVisitList" />
             </a-card>
           </a-col>
         </a-row>
@@ -44,7 +44,7 @@
         </a-card>
       </a-col>
       <a-col :md="8">
-        <a-card title="备忘录" size="small">
+        <a-card title="备忘录" size="small"  style="min-height: 200px">
           备忘录列表
         </a-card>
       </a-col>
