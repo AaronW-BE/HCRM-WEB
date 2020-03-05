@@ -142,9 +142,9 @@ export const SelfReturnVisit = {
 //*****************************************************************//
 // TAG
 
-export const AddTag = {
+export const CustomerAddTag = {
     method: M.POST,
-    path: '/customer/{cid}/tag'
+    path: '/customer/:cid/tag'
 };
 
 export const QueryTag = {

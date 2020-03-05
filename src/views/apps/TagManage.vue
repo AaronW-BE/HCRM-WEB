@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="tag-list">
-            <a-tag v-for="tag in tags" :key="tag.id" :color="tag.type">{{tag.name}}</a-tag>
+            <a-tag v-for="tag in tags" :key="tag.id" :color="tag.type" closable @close="log(tag.id)">{{tag.name}}</a-tag>
         </div>
 
         <a-button @click="showCreateTagDialog = true">新建标签</a-button>
@@ -12,7 +12,7 @@
 
 <script>
     import {API} from "../../api";
-    import {QueryTag} from "../../api/template";
+    import {DeleteTag, QueryTag} from "../../api/template";
     import CreateTagDialog from "../../components/CreateTagDialog";
 
     export default {
@@ -36,6 +36,18 @@
             },
             onTagCreated() {
                 this.queryTags();
+            },
+            log(id){
+                API(DeleteTag, {
+                    params: {
+                        id,
+                    }
+                }).then(() => {
+                    // console.log(res)
+                    this.$message.info('删除成功')
+                }).catch(err => {
+                    console.log(err)
+                })
             }
         }
     }
