@@ -58,8 +58,8 @@
             </a-modal>
         </a-card>
         <a-card title="订单信息">
-            <a href="#" @click="$router.push({name: 'customerOrders', params: {id}})" slot="extra">更多</a>
-            258
+<!--            <a href="#" @click="$router.push({name: 'customerOrders', params: {id}})" slot="extra">更多</a>-->
+            <customer-order-list :id="id"></customer-order-list>
         </a-card>
         <a-card title="客户回访">
             <ReturnVisit :customer_id="id" :return_visit_records = 'return_visit_records'></ReturnVisit>
@@ -71,14 +71,15 @@
     import ReturnVisit from "../../components/ReturnVisit";
     import DataDetailList from "../../components/tool/DataDetailList";
     import {API} from "../../api";
-    import {CustomerAddTag, CustomerDeleteTag, CustomerDetail, QueryTag} from "../../api/template";
+    import {CustomerAddTag, CustomerDeleteTag, CustomerDetail, DeleteOrder, QueryTag} from "../../api/template";
     import {toTime} from "../../utils/timeConversion";
+    import CustomerOrderList from "./CustomerOrderList";
 
     const Item = DataDetailList.Item;
 
     export default {
         name: "CustomerDetail",
-        components: {DataDetailList, ReturnVisit, Item},
+        components: {CustomerOrderList, DataDetailList, ReturnVisit, Item},
         props: {
             id: {
                 required: true,
@@ -92,7 +93,53 @@
                 tag_info: this.$form.createForm(this),
                 tagsModel: false,
                 customer_tag: null,
-                tags: null
+                tags: null,
+                orders: [
+                    {
+                        title: '下单人姓名',
+                        dataIndex: 'orderName',
+                    },
+                    {
+                        title: '下单手机号',
+                        dataIndex: 'orderPhone',
+                    },
+                    {
+                        title: '订单号',
+                        dataIndex: 'orderNo'
+                    },
+                    {
+                        title: '金额',
+                        dataIndex: 'orderAmount'
+                    },
+                    {
+                        title: '下单时间',
+                        dataIndex: 'orderTime',
+                        customRender(scopedSlot) {
+                            if (scopedSlot) {
+                                return new Date(scopedSlot).toLocaleString();
+                            }
+                        }
+                    },
+                    {
+                        title: '来源',
+                        dataIndex: 'original',
+                        // width: 120
+                    },
+                    {
+                        title: '创建时间',
+                        dataIndex: 'createAt',
+                        customRender(scopedSlot) {
+                            if (scopedSlot) {
+                                return new Date(scopedSlot).toLocaleString();
+                            }
+                        }
+                    },
+                    {
+                        title: '操作',
+                        width: 200,
+                        scopedSlots: { customRender: 'action' },
+                    }
+                ],
             }
         },
         created() {
@@ -161,6 +208,20 @@
                 }).then(res => {
                     console.log(res)
                     this.$message.info('删除成功')
+                }).catch(err => {
+                    console.log(err)
+                })
+            },
+            deleteOrder(order) {
+                let id = order
+                API(DeleteOrder,{
+                    params: {
+                        id,
+                    }
+                }).then(res => {
+                    console.log(res)
+                    this.$message.info('删除成功')
+                    this.queryOrders();
                 }).catch(err => {
                     console.log(err)
                 })

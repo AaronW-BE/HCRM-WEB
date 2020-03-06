@@ -7,7 +7,7 @@
                         <item term="订单号">{{detail.orderNo}}</item>
                         <item term="下单人">{{detail.orderName}}</item>
                         <item term="下单手机">{{detail.orderPhone}}</item>
-                        <item term="下单时间">{{detail.orderTime || '下单时间未知'}}</item>
+                        <item term="下单时间">{{toTime(detail.orderTime) || '下单时间未知'}}</item>
                         <item term="订单来源">{{detail.original}}</item>
                         <item term="订单金额">{{detail.orderAmount}}</item>
                     </data-detail-list>
@@ -38,6 +38,7 @@
     import {API} from "../../api";
     import {OrderDetail} from "../../api/template";
     import DataDetailList from "../../components/tool/DataDetailList";
+    import {toTime} from "../../utils/timeConversion";
 
     const Item = DataDetailList.Item;
 
@@ -54,10 +55,15 @@
             return {
                 detail: {},
                 loading: false,
+                toTime: ''
             };
+        },
+        created() {
+            this.toTime = toTime
         },
         mounted() {
             this.getOrderDetail();
+
         },
         methods: {
             getOrderDetail() {

@@ -96,6 +96,12 @@
                     width: 120,
                 },
                 {
+                    title: '昵称',
+                    dataIndex: 'nickname',
+                    sorter: true,
+                    width: 120
+                },
+                {
                     title: '微信号',
                     dataIndex: 'wechat',
                     sorter: true,

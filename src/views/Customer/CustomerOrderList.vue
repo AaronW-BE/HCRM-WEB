@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a-card title="客户订单">
+<!--        <a-card title="客户订单">-->
 <!--            <span slot="extra">-->
 <!--                <a-button type="primary" size="small">新建</a-button>-->
 <!--            </span>-->
@@ -18,7 +18,7 @@
                     </a-popconfirm>
                 </span>
             </a-table>
-        </a-card>
+<!--        </a-card>-->
     </div>
 </template>
 
@@ -36,6 +36,10 @@
         data() {
             return {
                 columns: [
+                    {
+                        title: '下单人',
+                        dataIndex: 'orderName'
+                    },
                     {
                         title: '订单号',
                         dataIndex: 'orderNo'
