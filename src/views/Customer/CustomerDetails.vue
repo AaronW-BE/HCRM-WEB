@@ -5,6 +5,9 @@
                 <Item term="姓名">
                     {{detail.name}}
                 </Item>
+                <Item term="昵称">
+                    {{detail.nickname}}
+                </Item>
                 <Item term="电话">
                     {{detail.phone}}
                 </Item>

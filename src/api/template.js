@@ -134,7 +134,7 @@ export const DeleteVisits = {
  * 近期回访列表
  * @type {{path: string, method: string}}
  */
-export const SelfReturnVist = {
+export const SelfReturnVisit = {
     method: M.GET,
     path: '/user/return-list'
 };
@@ -192,4 +192,9 @@ export const AllPermission = {
 export const NormalStatistics = {
     method: M.GET,
     path: '/statistic/normal'
+};
+
+export const SelfBaseStatistic = {
+    method: M.GET,
+    path: '/statistic/self-base'
 };

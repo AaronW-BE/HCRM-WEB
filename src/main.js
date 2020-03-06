@@ -5,7 +5,7 @@ import {Layout, Menu, Icon,Button,Form,Input,Checkbox, Dropdown, Avatar, Badge, 
 
     Card, Popconfirm,Radio,DatePicker,TimePicker,Select,Divider,Cascader, List, Modal,
 
-    Row,Col,message,Tabs,Timeline, Skeleton, Tooltip, Tag,Popover
+    Row,Col,message,Tabs,Timeline, Skeleton, Tooltip, Tag,Popover, Alert
 
 
 } from "ant-design-vue";
@@ -44,6 +44,7 @@ Vue.use(Skeleton);
 Vue.use(Tooltip);
 Vue.use(Tag);
 Vue.use(Popover);
+Vue.use(Alert);
 
 
 

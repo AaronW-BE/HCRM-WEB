@@ -15,4 +15,7 @@
   .form-container {
     padding-bottom: 1rem;
   }
+  .box-container {
+    margin-bottom: 10px;
+  }
 </style>
