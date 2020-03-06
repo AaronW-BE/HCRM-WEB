@@ -42,7 +42,9 @@
       <a-col :md="16">
         <a-row>
           <a-col :md="14">
-            <a-card title="收入数据" size="small"  style="min-height: 300px"></a-card>
+            <a-card title="收入数据" size="small"  style="height: 300px">
+              <bar-chart id="incomeChart" :data="income" x-field="value" y-field="label" style="height: 250px" />
+            </a-card>
           </a-col>
           <a-col :md="10">
             <a-card title="回访记录" size="small"  style="min-height: 300px">
@@ -81,6 +83,7 @@ import {API} from "../api";
 import {NormalStatistics, SelfBaseStatistic, SelfReturnVisit} from "../api/template";
 import PieChart from "../components/charts/PieChart";
 import RecentReturnVisit from "../components/RecentReturnVisit";
+import BarChart from "../components/charts/BarChart";
 export default {
   name: 'Home',
   data() {
@@ -88,11 +91,26 @@ export default {
       permission: 'delete',
       permission2: ['create', 'delete'],
       data: [],
+      income: [
+        {
+          label: "总收入",
+          value: 230,
+        },
+        {
+          label: "销售金额",
+          value: 160,
+        },
+        {
+          label: "其他",
+          value: 70,
+        },
+      ],
       returnVisitList: [],
       baseStatistics: {}
     }
   },
   components: {
+    BarChart,
     RecentReturnVisit,
     PieChart,
   },
