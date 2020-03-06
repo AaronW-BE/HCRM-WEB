@@ -1,50 +1,45 @@
 <template>
-    <div :id="id"></div>
+    <div :id="id" style="height: 100%"></div>
 </template>
 
 <script>
-    import {Pie} from '@antv/g2plot';
+    import {Bar} from "@antv/g2plot";
 
     export default {
+        name: "BarChart",
         props: {
             id: {},
-            data: {},
             title: {},
-            angleField: {},
-            colorField: {}
-        },
-        name: "PieChart",
-        data() {
-            return {
-                chart: null
-            }
+            data: {},
+            xField: {},
+            yField: {},
+            color: {}
         },
         mounted() {
             this.drawChart();
         },
         watch: {
-            data() {
+            data: function () {
                 this.drawChart();
             }
         },
         methods: {
             drawChart() {
                 this.chart && this.chart.destroy();
-                this.chart = new Pie(this.id, {
+                this.chart = new Bar(this.id, {
                     forceFit: true,
                     data: this.data,
                     title: {
                         text: this.title,
                         visible: true
                     },
-                    radius: 0.8,
+                    color: this.color,
+                    colorField: 'label',
+                    xField: this.xField,
+                    yField: this.yField,
                     label: {
-                        visible: true,
-                        type: 'outer',
-                        offset: 20,
-                    },
-                    angleField: this.angleField,
-                    colorField: this.colorField,
+                        visible: false
+                    }
                 });
 
                 this.chart.render();

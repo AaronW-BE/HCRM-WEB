@@ -2,7 +2,8 @@ const M = {
     GET: 'get',
     POST: 'post',
     PUT: 'put',
-    DELETE: 'delete'
+    DELETE: 'delete',
+    FILE: 'file'
 };
 
 export const Login = {
@@ -209,4 +210,10 @@ export const NormalStatistics = {
 export const SelfBaseStatistic = {
     method: M.GET,
     path: '/statistic/self-base'
+};
+
+
+export const TestFileUpload = {
+    method: M.FILE,
+    path: '/test/upload'
 };

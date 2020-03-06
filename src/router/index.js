@@ -222,6 +222,26 @@ const routes = [
             component: () => import('../views/System/user/UserList'),
           }
         ]
+      },
+      {
+        name: "test",
+        path: "test",
+        meta: {
+          title: '功能测试',
+          icon: 'setting',
+        },
+        component: BlackLayout,
+        children: [
+          {
+            path: 'file-upload',
+            name: 'fileUpload',
+            meta: {
+              title: '文件上传',
+              icon: 'file'
+            },
+            component: () => import('../views/test/FileUploadTest'),
+          }
+        ]
       }
     ]
   },
