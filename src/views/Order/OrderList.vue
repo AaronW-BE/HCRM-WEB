@@ -210,7 +210,6 @@
                 this.queryOrderList();
             },
             redirect2CustomerDetail(id) {
-                console.log(id)
                 this.$router.push({
                     name: 'customerDetail',
                     params: {

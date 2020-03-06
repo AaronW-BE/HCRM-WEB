@@ -69,7 +69,7 @@
                                 <a-radio :value="1" >
                                     男
                                 </a-radio>
-                                <a-radio :value="2" >
+                                <a-radio :value="0" >
                                     女
                                 </a-radio>
                             </a-radio-group>

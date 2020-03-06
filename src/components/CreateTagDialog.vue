@@ -61,6 +61,13 @@
                     }
                 })
             }
+        },
+        watch:{
+            show(val){
+                if(!val){
+                    this.tag_info.resetFields()
+                }
+            }
         }
     }
 </script>

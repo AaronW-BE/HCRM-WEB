@@ -147,6 +147,10 @@ export const CustomerAddTag = {
     method: M.POST,
     path: '/customer/:cid/tag'
 };
+export const CustomerDeleteTag = {
+    method: M.DELETE,
+    path: '/customer/:cid/tag'
+}
 
 export const QueryTag = {
     method: M.GET,
