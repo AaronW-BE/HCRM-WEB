@@ -55,13 +55,13 @@
         <a-card title="图形报表" size="small">
           <a-row>
             <a-col :md="8">
-              <pie-chart id="chart" :data="data" color-field="name" angle-field="amount" title="订单来源分布" />
+              <pie-chart id="chart" :data="data" color-field="name" angle-field="amount" title="订单来源分布" style="height: 200px;" />
             </a-col>
             <a-col :md="8">
-              <pie-chart id="chart2" :data="data" color-field="name" angle-field="amount" title="订单来源分布" />
+              <pie-chart id="chart2" :data="data" color-field="name" angle-field="amount" title="订单来源分布" style="height: 200px;" />
             </a-col>
             <a-col :md="8">
-              <pie-chart id="chart3" :data="data" color-field="name" angle-field="amount" title="订单来源分布" />
+              <pie-chart id="chart3" :data="data" color-field="name" angle-field="amount" title="订单来源分布" style="height: 200px;" />
             </a-col>
           </a-row>
         </a-card>

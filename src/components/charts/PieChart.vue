@@ -31,6 +31,7 @@
             drawChart() {
                 this.chart && this.chart.destroy();
                 this.chart = new Pie(this.id, {
+                    forceFit: true,
                     data: this.data,
                     title: {
                         text: this.title,
