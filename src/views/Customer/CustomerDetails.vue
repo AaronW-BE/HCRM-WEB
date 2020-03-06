@@ -40,7 +40,7 @@
             <data-detail-list title="附加信息">
                 <item term="顾问">{{detail.adviserName}}</item>
                 <Item term="标签">
-                    <a-tag v-for="tag in detail.tags" :key="tag.name" :color="tag.type" closable @close="deleteCustomer(tag)">{{tag.name}}</a-tag>
+                    <a-tag v-for="tag in detail.tags" :key="tag.name" :color="tag.type" closable @close="deleteCustomer(tag.id)">{{tag.name}}</a-tag>
                     <span @click="showTagsModel">
                         <a-icon type="plus-circle" />
                     </span>
@@ -68,7 +68,7 @@
     import ReturnVisit from "../../components/ReturnVisit";
     import DataDetailList from "../../components/tool/DataDetailList";
     import {API} from "../../api";
-    import {CustomerAddTag, CustomerDetail, QueryTag} from "../../api/template";
+    import {CustomerAddTag, CustomerDeleteTag, CustomerDetail, QueryTag} from "../../api/template";
     import {toTime} from "../../utils/timeConversion";
 
     const Item = DataDetailList.Item;
@@ -147,7 +147,20 @@
                 })
             },
             deleteCustomer(e){
-                console.log(e)
+                let tagId = e
+                API(CustomerDeleteTag,{
+                    params: {
+                        cid: this.id
+                    },
+                    data:{
+                        tagId,
+                    }
+                }).then(res => {
+                    console.log(res)
+                    this.$message.info('删除成功')
+                }).catch(err => {
+                    console.log(err)
+                })
             }
         },
         watch: {

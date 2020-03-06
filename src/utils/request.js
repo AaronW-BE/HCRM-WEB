@@ -90,7 +90,7 @@ export const PUT = (url, data, headers = {}) => {
 export const DELETE = (url, data, headers = {}) => {
     return Axios.delete(url, {
         headers,
-        params: data
+        data,
     })
 };
 
