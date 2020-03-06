@@ -76,6 +76,14 @@ export const AddUser = {
     path: '/user/create'
 }
 
+export const AddUserRole = {
+    method: M.POST,
+    path: '/user/:id/role'
+}
+export const RemoveUserRole = {
+    method: M.DELETE,
+    path: '/user/:id/role'
+}
 // ********************************************************** //
 // 订单
 export const CreateOrder = {
@@ -180,6 +188,10 @@ export const CreateRole = {
     method: M.POST,
     path: '/role/create'
 };
+export const RemoveRole = {
+    method: M.DELETE,
+    path: '/role/:id'
+}
 
 export const AllPermission = {
     method: M.GET,

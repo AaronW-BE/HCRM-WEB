@@ -52,6 +52,18 @@
                     <a-button v-if="user.blocked === 0" type="danger" size="small">封禁该用户</a-button>
                     <a-button v-else type="dashed" size="small">封禁该用户</a-button>
                 </a-popconfirm>
+                <template v-if="!user.roleName">
+                    <a-button type="primary" size="small" @click="showAddRolesModel(user.id)">添加角色</a-button>
+                </template>
+                <template v-else>
+                    <a-popconfirm
+                        okText="确定"
+                        @confirm="showRemoveRoleModel(user)"
+                    >
+                        <div slot="title">确定要移除用户的【{{user.roleName}}】角色吗</div>
+                        <a-button type="danger" size="small">移除角色</a-button>
+                    </a-popconfirm>
+                </template>
             </span>
             </a-table>
         </a-card>
@@ -77,12 +89,29 @@
                </a-form-item>
            </a-form>
         </a-modal>
+        <a-modal
+                title="添加角色"
+                v-model="add_roles"
+                @ok="addRoles"
+        >
+            <a-radio-group v-model="role_id">
+                <a-radio v-for="i in roleList" :key="i.id" :value="i.id">{{i.name}}</a-radio>
+            </a-radio-group>
+        </a-modal>
     </div>
 </template>
 
 <script>
     import {API} from "../../../api";
-    import {AddUser, BlockUser, UnblockUser, UserList} from "../../../api/template";
+    import {
+        AddUser,
+        AddUserRole,
+        BlockUser,
+        RemoveUserRole,
+        RoleList,
+        UnblockUser,
+        UserList
+    } from "../../../api/template";
     import {notification} from "ant-design-vue";
     import {toTime} from "../../../utils/timeConversion";
 
@@ -101,6 +130,10 @@
                     sorter: true,
                 },
                 {
+                    title: '账户角色',
+                    dataIndex: 'roleName'
+                },
+                {
                     title: '账户状态',
                     dataIndex: 'blocked',
                     scopedSlots: {customRender: 'status'},
@@ -115,7 +148,7 @@
                 },
                 {
                     title: '操作',
-                    width: 250,
+                    width: 300,
                     scopedSlots: {customRender: 'action'},
                 }
             ];
@@ -128,7 +161,11 @@
                 pagination: {
                     pageSize: 15
                 },
-                add_user_model: false
+                add_user_model: false,
+                add_roles: false,
+                roleList: [],
+                user_id: null,
+                role_id: null
             }
         },
         created() {
@@ -210,14 +247,61 @@
             },
             viewUserDetail(id) {
                 console.log(id)
+            },
+            showAddRolesModel(userId) {
+                this.add_roles = true
+                this.user_id = userId
+                API(RoleList).then(res => {
+                    console.log(res);
+                    this.roleList = res.data.results;
+                });
+            },
+            addRoles() {
+                API(AddUserRole,{
+                    params: {
+                        id: this.user_id,
+                    },
+                    data: {
+                        roleId:this.role_id
+                    }
+                }).then(res => {
+                    // console.log(res)
+                    this.$message.success(res.msg)
+                    this.queryUser();
+                }).catch(err => {
+                    console.log(err)
+                }).finally(() => {
+                    this.add_roles = false;
+                })
+            },
+            showRemoveRoleModel(e) {
+                API(RemoveUserRole,{
+                    params:{
+                        id:e.id
+                    },
+                    data: {
+                        roleId:e.roleId
+                    }
+                }).then(res => {
+                    console.log(res)
+                    this.$message.info('移除角色成功')
+                    this.queryUser()
+                }).catch(err => {
+                    console.log(err)
+                })
             }
         },
         watch: {
             add_user_model(val) {
-                if(val) {
-                    return false
+                if(!val) {
+                    this.create_user.resetFields()
                 }
-                this.create_user.resetFields()
+            },
+            add_roles(val) {
+                if(!val){
+                    this.user_id = null;
+                    this.role_id = null
+                }
             }
         }
     }

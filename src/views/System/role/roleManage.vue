@@ -10,7 +10,13 @@
                             }"
                             :columns="columns" :dataSource="roleList" size="small" :rowKey="key => key.id">
                         <template slot-scope="scope" slot="action">
-                            <a-button type="danger" size="small" @click="handleRemoveRole(scope)">删除</a-button>
+                            <a-popconfirm
+                                    title="确定要删除该角色吗?"
+                                    @confirm="handleRemoveRole(scope)"
+                                    okText="确定"
+                            >
+                                <a-button type="danger" size="small">删除</a-button>
+                            </a-popconfirm>
                         </template>
                     </a-table>
                     <a-button type="primary" size="small" @click="showCreateRole = true" :disabled="showCreateRole">新建角色</a-button>
@@ -53,7 +59,7 @@
 
 <script>
     import {API} from "../../../api";
-    import {AllPermission, CreateRole, RoleList} from "../../../api/template";
+    import {AllPermission, CreateRole, RemoveRole, RoleList} from "../../../api/template";
 
     import {message} from 'ant-design-vue';
 
@@ -114,8 +120,19 @@
 
 
             },
-            handleRemoveRole() {
-
+            handleRemoveRole(e) {
+                // console.log(e)
+                API(RemoveRole,{
+                    params: {
+                        id:e.id
+                    }
+                }).then(res => {
+                    console.log(res)
+                    this.$message.info('删除成功')
+                    this.queryRoleList();
+                }).catch(err => {
+                    console.log(err)
+                })
             }
         }
     }
