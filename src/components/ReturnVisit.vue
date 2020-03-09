@@ -39,6 +39,11 @@
         },
         {
             title: '回访时间',
+            dataIndex: 'createAt',
+            key: 'createAt',
+        },
+        {
+            title: '下次回访时间',
             dataIndex: 'returnTime',
             key: 'returnTime',
             sorter: true
@@ -47,11 +52,6 @@
             title: '回访内容',
             dataIndex: 'content',
             key: 'content',
-        },
-        {
-            title: '创建时间',
-            dataIndex: 'createAt',
-            key: 'createAt',
         },
         {
             title: '操作',

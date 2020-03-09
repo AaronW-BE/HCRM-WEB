@@ -61,8 +61,11 @@
                     <a-icon type="check-circle" v-if="adviser" theme="filled" style="color: #42b983" />
                 </span>
                 <span slot="gender" slot-scope="gender">
-                    <a-icon type="man" v-if="gender" style="color: #1890ff" />
-                    <a-icon type="woman" v-else style="color: deeppink" />
+                    <a-icon type="man" v-if="gender===1" style="color: #1890ff" />
+                    <a-icon type="woman" v-else-if="gender===0" style="color: deeppink" />
+                    <template v-else>
+                        未填写
+                    </template>
                 </span>
                 <span slot="action" slot-scope="scope">
                     <a-button type="primary" size="small" @click="viewDetails(scope.id)">查看详情</a-button>

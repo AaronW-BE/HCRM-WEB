@@ -8,6 +8,7 @@
                                 onSelect:  handleRowSelect,
                                 type: 'radio'
                             }"
+                            :pagination="false"
                             :columns="columns" :dataSource="roleList" size="small" :rowKey="key => key.id">
                         <template slot-scope="scope" slot="action">
                             <a-popconfirm
@@ -17,15 +18,15 @@
                             >
                                 <a-button type="danger" size="small">删除</a-button>
                             </a-popconfirm>
+                            <a-button type="primary" size="small" style="margin-left: 10px" @click="modifyRole(scope)">修改</a-button>
                         </template>
                     </a-table>
                     <a-button type="primary" size="small" @click="showCreateRole = true" :disabled="showCreateRole">新建角色</a-button>
                     <div v-if="showCreateRole">
                         <a-card>
                             <a-form :form="createRoleForm" @submit="handleSaveRole">
-                                <a-form-item label="角色名" :label-col="{span: 2}"  :wrapper-col="{ span: 8 }" :required="true">
+                                <a-form-item label="角色名称" :label-col="{span: 4}"  :wrapper-col="{ span: 8 }" :required="true">
                                     <a-input
-                                            size="small"
                                             v-decorator="['name', { rules: [{ required: true, message: '请输入角色名称', min: 2 }] }]"
                                             placeholder="请输入角色名称"
                                     />
@@ -41,12 +42,12 @@
                 <a-col :md="12">
                     <a-card title="已拥有权限">
                         <template v-if="selectedRow">
-                            <a-tag v-for="p in selectedRow.permissions" color="#6c6" :key="p.id">{{p.name}} - {{p.code}}</a-tag>
+                            <a-tag style="margin: 5px" v-for="p in roleList.find(item => item.id === selectedRow.id).permissions" color="#6c6" :key="p.id" @click="handlePermission('remove',selectedRow.id,p.id)">{{p.name}} - {{p.code}}</a-tag>
                         </template>
                     </a-card>
 
                     <a-card title="所有权限">
-                        <a-tag v-for="p in permissions" :key="p.id">{{p.name}} - {{p.code}}</a-tag>
+                        <a-tag style="margin: 5px" v-for="p in permissions" :key="p.id" @click="handlePermission('',selectedRow && selectedRow.id,p.id)">{{p.name}} - {{p.code}}</a-tag>
                     </a-card>
                 </a-col>
             </a-row>
@@ -59,7 +60,14 @@
 
 <script>
     import {API} from "../../../api";
-    import {AllPermission, CreateRole, RemoveRole, RoleList} from "../../../api/template";
+    import {
+        AddPermission,
+        AllPermission,
+        CreateRole, ModifyRole,
+        RemovePermission,
+        RemoveRole,
+        RoleList
+    } from "../../../api/template";
 
     import {message} from 'ant-design-vue';
 
@@ -82,6 +90,7 @@
                 showCreateRole: false,
                 createRoleForm: this.$form.createForm(this),
                 selectedRow: null,
+                modify_role_id: null
             };
         },
         created() {
@@ -94,8 +103,8 @@
             },
             queryRoleList() {
                 API(RoleList).then(res => {
-                    console.log(res);
-                    this.roleList = res.data.results;
+                    // console.log(res);
+                    this.roleList = res.data;
                 });
             },
             queryPermissionList() {
@@ -105,20 +114,34 @@
             },
             handleSaveRole(e) {
                 e.preventDefault();
-
-                this.createRoleForm.validateFields((err, values) => {
-                    if (!err) {
-                        API(CreateRole, {
-                            data: values
-                        }).then(res => {
-                            message.success(res.msg);
-                            this.showCreateRole = false;
-                            this.queryRoleList();
-                        });
-                    }
-                });
-
-
+                    this.createRoleForm.validateFields((err, values) => {
+                        if (!err) {
+                            if(this.modify_role_id||this.modify_role_id===0){
+                                API(ModifyRole,{
+                                    params: {
+                                        id: this.modify_role_id
+                                    },
+                                    data:values
+                                }).then(res => {
+                                    // console.log(res)
+                                    this.$message.success(res.msg)
+                                    this.modify_role_id = null
+                                    this.showCreateRole = false;
+                                    this.queryRoleList();
+                                }).catch(err => {
+                                    console.log(err)
+                                })
+                            }else{
+                                API(CreateRole, {
+                                    data: values
+                                }).then(res => {
+                                    message.success(res.msg);
+                                    this.showCreateRole = false;
+                                    this.queryRoleList();
+                                });
+                            }
+                        }
+                    });
             },
             handleRemoveRole(e) {
                 // console.log(e)
@@ -132,6 +155,36 @@
                     this.queryRoleList();
                 }).catch(err => {
                     console.log(err)
+                })
+            },
+            handlePermission(action='',id='',permissionId=''){
+                if(id && permissionId) {
+                    let PATH = action === 'remove'?RemovePermission:AddPermission;
+                    API(PATH,{
+                        params: {
+                            id,
+                        },
+                        data:{
+                            permissionId
+                        }
+                    }).then(res => {
+                        console.log(res)
+                        this.queryRoleList();
+                        this.$message.info('请求成功')
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                }else{
+                    console.log('id不存在')
+                }
+            },
+            modifyRole(e) {
+                this.modify_role_id = e.id;
+                this.showCreateRole = true;
+                this.$nextTick(() => {
+                    this.createRoleForm.setFieldsValue({
+                        name: e.name
+                    })
                 })
             }
         }

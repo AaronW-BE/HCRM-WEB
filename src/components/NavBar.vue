@@ -7,7 +7,7 @@
         </div>
         <a-dropdown>
             <span class="ant-dropdown-link">
-            <a-avatar shape="square" icon="user" /> {{loginInfo.name}}
+            <a-avatar shape="square" icon="user" /> {{loginInfo.name}}【{{loginInfo.roleName}}】
             </span>
             <a-menu slot="overlay">
                 <a-menu-item>

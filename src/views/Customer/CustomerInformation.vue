@@ -191,6 +191,28 @@
                     </a-col>
                 </a-row>
 
+                <a-row>
+                    <a-col :lg="8" :md="12" :xs="24">
+                        <a-form-item
+                                :label-col="labelCol"
+                                :wrapper-col="wrapperCol"
+                                style="width: 100%"
+                                label="宝贝性别"
+                        >
+                            <a-radio-group
+                                    v-decorator="['childGender']"
+                            >
+                                <a-radio :value="1" >
+                                    男孩
+                                </a-radio>
+                                <a-radio :value="0" >
+                                    女孩
+                                </a-radio>
+                            </a-radio-group>
+                        </a-form-item>
+                    </a-col>
+                </a-row>
+
                 <div class="handle-form-btn">
                     <a-button type="primary" html-type="submit">提交</a-button>
                     <a-button @click="reset">重置</a-button>

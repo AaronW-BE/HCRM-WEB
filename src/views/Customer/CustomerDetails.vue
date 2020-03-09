@@ -28,10 +28,20 @@
                 </Item>
                 <Item term="性别">
                     <a-icon type="man" v-if="detail.gender===1" style="color: #1890ff" />
-                    <a-icon type="woman" v-else style="color: deeppink" />
+                    <a-icon type="woman" v-else-if="detail.gender===0" style="color: deeppink" />
+                    <template v-else>
+                        未填写
+                    </template>
                 </Item>
                 <Item term="宝贝">
                     {{detail.childName}}
+                </Item>
+                <Item term="宝贝性别">
+                    <a-icon type="man" v-if="detail.childGender===1" style="color: #1890ff" />
+                    <a-icon type="woman" v-else-if="detail.childGender===0" style="color: #1890ff" />
+                   <template v-else>
+                       未填写
+                   </template>
                 </Item>
                 <Item term="生日">
                     {{detail.childBirth}}

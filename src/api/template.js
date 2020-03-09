@@ -189,6 +189,11 @@ export const CreateRole = {
     method: M.POST,
     path: '/role/create'
 };
+export const ModifyRole = {
+    method: M.PUT,
+    path: '/role/:id'
+};
+
 export const RemoveRole = {
     method: M.DELETE,
     path: '/role/:id'
@@ -199,6 +204,17 @@ export const AllPermission = {
     path: '/common/permissions'
 }
 
+
+//*****************************************************************//
+//权限
+export const RemovePermission = {
+    method: M.DELETE,
+    path:'/role/:id/permission'
+}
+export const AddPermission = {
+    method: M.POST,
+    path:'/role/:id/permission'
+}
 //*****************************************************************//
 // Statistics
 
