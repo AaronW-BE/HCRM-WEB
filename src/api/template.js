@@ -233,3 +233,8 @@ export const TestFileUpload = {
     method: M.FILE,
     path: '/test/upload'
 };
+
+export const ImportCustomerByExcel = {
+    method: M.FILE,
+    path: '/customer/import-by-excel'
+};

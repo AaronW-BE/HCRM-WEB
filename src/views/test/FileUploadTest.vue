@@ -7,14 +7,14 @@
 <script>
 
     import {API} from "../../api";
-    import {TestFileUpload} from "../../api/template";
+    import {ImportCustomerByExcel} from "../../api/template";
 
     export default {
         name: "FileUploadTest",
         methods: {
             fileChange(e) {
                 let file = e.target.files[0];
-                API(TestFileUpload, {
+                API(ImportCustomerByExcel, {
                     name: 'file',
                     file: file
                 }).then(res => {
