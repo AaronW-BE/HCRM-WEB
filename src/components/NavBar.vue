@@ -1,7 +1,7 @@
 <template>
     <div class="action-container">
         <div class="notice-icon">
-            <a-badge :dot="notifications.length">
+            <a-badge :dot="notifications.length > 0">
                 <a-icon type="bell" style="font-size: 16px;"/>
             </a-badge>
         </div>
