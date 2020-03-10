@@ -1,7 +1,7 @@
 <template>
     <div class="action-container">
         <div class="notice-icon">
-            <a-badge dot>
+            <a-badge :dot="notifications.length > 0">
                 <a-icon type="bell" style="font-size: 16px;"/>
             </a-badge>
         </div>
@@ -31,13 +31,15 @@
         name: "NavBar",
         data() {
             return {
-                loginInfo: {}
+                loginInfo: {},
+                notifications: []
             };
         },
         mounted() {
             API(LoginInfo).then(res => {
                 this.loginInfo = res.data;
                 const permissions = res.data.permissions;
+                this.notifications = res.data.notifications;
                 sessionStorage.setItem('hcm_permission', permissions.join(','))
             });
         },
