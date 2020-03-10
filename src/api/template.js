@@ -85,6 +85,20 @@ export const RemoveUserRole = {
     method: M.DELETE,
     path: '/user/:id/role'
 }
+
+//用户通知
+export const UserNotice = {
+    method: M.GET,
+    path: '/user/notification/list'
+}
+export const ReadNotice = {
+    method: M.POST,
+    path: '/user/notification/:id/mark'
+}
+export const NoticeDetails = {
+    method: M.GET,
+    path: '/user/notification/:id'
+}
 // ********************************************************** //
 // 订单
 export const CreateOrder = {
