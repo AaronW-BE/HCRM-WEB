@@ -4,39 +4,49 @@
       <a-alert message="测试阶段，有问题随时提交" banner  />
     </div>
 
-    <a-card size="small"  style="min-height: 100px">
+    <!--    <a-card size="small"  style="min-height: 100px">-->
       <a-row :gutter="{md: 50}">
-        <a-col :md="16">
+        <a-col :md="18">
           <a-row :gutter="{md: 10}">
             <a-col :md="6">
-              <a-card title="订单" size="small">
-                <span class="data-value">{{baseStatistics.order || 'N/A'}}</span>
-              </a-card>
+              <chart-card title="销售总额" total="￥ 50556">
+                <a-tooltip title="图表说明" slot="action">
+                  <a-icon type="info-circle-o" />
+                </a-tooltip>
+                <div>
+                  <trend :type="true" term="周同比" :percentage="3.5" style="margin-right: 10px" />
+                  <trend :type="false" term="日同比" :percentage="11"></trend>
+                </div>
+                <template slot="footer">日均销售额<span>￥ 234.56</span></template>
+              </chart-card>
             </a-col>
             <a-col :md="6">
-              <a-card title="客户" size="small">
-                <span class="data-value">{{baseStatistics.customer || 'N/A'}}</span>
-              </a-card>
+              <chart-card title="订单总数" :total="baseStatistics.order || 'N/A'">
+                <div style="height: 100%">
+                  <area-chart id="order"  :data="baseStatistics.orderInMonth" x-field="name" y-field="amount" />
+                </div>
+                <template slot="footer">日均订单数：<span> {{baseStatistics.order / ( baseStatistics.orderInMonth && baseStatistics.orderInMonth.length)}} </span></template>
+              </chart-card>
             </a-col>
             <a-col :md="6">
-              <a-card title="回访" size="small">
-                <span class="data-value">{{baseStatistics.visit || 'N/A'}}</span>
-              </a-card>
+              <chart-card title="客户" :total="baseStatistics.customer || 'N/A'">
+                <template slot="footer">日均新增用户：<span>N/A</span></template>
+              </chart-card>
             </a-col>
             <a-col :md="6">
-              <a-card title="其他" size="small">
-                <span class="data-value">{{0}}</span>
-              </a-card>
+              <chart-card title="回访" :total="baseStatistics.returnVisit || 'N/A'">
+                <template slot="footer">日均销售额<span>￥ 234.56</span></template>
+              </chart-card>
             </a-col>
           </a-row>
         </a-col>
-        <a-col :md="8">
-          <a-card title="其他" size="small">
-            <span class="data-value">{{'N/A'}}</span>
-          </a-card>
+        <a-col :md="6">
+          <chart-card title="其他数据" :total="'N/A'">
+            <template slot="footer">日均销售额<span>￥ 234.56</span></template>
+          </chart-card>
         </a-col>
       </a-row>
-    </a-card>
+<!--    </a-card>-->
 
     <a-row style="margin-top: 5px;">
       <a-col :md="16">
@@ -84,6 +94,9 @@ import {NormalStatistics, SelfBaseStatistic, SelfReturnVisit} from "../api/templ
 import PieChart from "../components/charts/PieChart";
 import RecentReturnVisit from "../components/RecentReturnVisit";
 import BarChart from "../components/charts/BarChart";
+import ChartCard from "../components/charts/ChartCard";
+import Trend from "../components/charts/Trend";
+import AreaChart from "../components/charts/AreaChart";
 export default {
   name: 'Home',
   data() {
@@ -110,6 +123,9 @@ export default {
     }
   },
   components: {
+    AreaChart,
+    Trend,
+    ChartCard,
     BarChart,
     RecentReturnVisit,
     PieChart,
