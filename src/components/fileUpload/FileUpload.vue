@@ -18,7 +18,7 @@
                 <a-icon type="info-circle" style="font-size: 50px;color: #5ed4a5"/>
             </div>
             <div class="loading-text">
-                数据处理中,请稍后查看结果...
+                数据处理中,请耐心等待...
             </div>
             <div>
                 <a-button style="margin-right:10px" @click="showUpload = true">继续上传</a-button>
@@ -30,24 +30,27 @@
 
 <script>
     import {API} from "../../api";
-    import {ImportOrderByExcel,} from "../../api/template";
+    import {ImportCustomerByExcel, } from "../../api/template";
+    import {message} from 'ant-design-vue';
+
     export default {
-        name: "ImportOrder",
+        name: "FileUpload",
+        props:{
+        },
         data() {
-            return {
+            return{
                 showUpload:true
             }
         },
         methods:{
             request(e){
                 let file = e.file;
-                API(ImportOrderByExcel, {
+                API(ImportCustomerByExcel, {
                     name: 'file',
                     file: file
                 }).then(res => {
                     console.log(res);
-                    // message.success(res.msg)
-                    this.showUpload = false
+                    message.success(res.msg)
                 });
             }
         }
@@ -59,10 +62,10 @@
         text-align: center;
     }
     .loading-icon{
-        padding-bottom: 20px;
+        padding-bottom: 10px;
     }
     .loading-text{
-        font-size: 15px;
-        padding-bottom: 20px;
+        font-size: 20px;
+        padding-bottom: 10px;
     }
 </style>

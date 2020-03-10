@@ -22,7 +22,7 @@
             </div>
             <div>
                 <a-button style="margin-right:10px" @click="showUpload = true">继续上传</a-button>
-                <a-button type="primary" @click="$router.push({name:'orderList'})">返回列表</a-button>
+                <a-button type="primary" @click="$router.push({name:'customerList'})">返回列表</a-button>
             </div>
         </div>
     </div>
@@ -30,18 +30,19 @@
 
 <script>
     import {API} from "../../api";
-    import {ImportOrderByExcel,} from "../../api/template";
+    import {ImportCustomerByExcel} from "../../api/template";
+
     export default {
-        name: "ImportOrder",
+        name: "ImportCustomers",
         data() {
-            return {
-                showUpload:true
+            return{
+                showUpload: true
             }
         },
         methods:{
             request(e){
                 let file = e.file;
-                API(ImportOrderByExcel, {
+                API(ImportCustomerByExcel, {
                     name: 'file',
                     file: file
                 }).then(res => {

@@ -38,7 +38,7 @@
                 </Item>
                 <Item term="宝贝性别">
                     <a-icon type="man" v-if="detail.childGender===1" style="color: #1890ff" />
-                    <a-icon type="woman" v-else-if="detail.childGender===0" style="color: #1890ff" />
+                    <a-icon type="woman" v-else-if="detail.childGender===0" style="color: deeppink" />
                    <template v-else>
                        未填写
                    </template>

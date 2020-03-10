@@ -228,13 +228,30 @@ export const SelfBaseStatistic = {
     path: '/statistic/self-base'
 };
 
-
+//excel
 export const TestFileUpload = {
     method: M.FILE,
     path: '/test/upload'
 };
+//用户导入
 
 export const ImportCustomerByExcel = {
     method: M.FILE,
     path: '/customer/import-by-excel'
+};
+
+export const ImportOrderByExcel = {
+    method: M.FILE,
+    path: '/order/import-by-excel'
+};
+
+//批量导入订单
+export const ImportOrder = {
+    method: M.FILE,
+    path: '/system/batch-import/order'
+};
+//批量导入客户
+export const ImportCustomer = {
+    method: M.FILE,
+    path: '/system/batch-import/user'
 };
