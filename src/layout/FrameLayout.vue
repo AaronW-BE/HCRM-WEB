@@ -19,7 +19,7 @@
                             :type="collapsed ? 'menu-unfold' : 'menu-fold'"
                             @click="()=> collapsed = !collapsed"
                     />
-                    <nav-bar />
+                    <nav-bar ref="navBar" />
                 </div>
             </a-layout-header>
             <a-layout-content
@@ -44,6 +44,9 @@
             return {
                 collapsed: false,
             }
+        },
+        mounted() {
+            this.$root.$refs['navBar'] = this.$refs['navBar'];
         },
         computed: {
 

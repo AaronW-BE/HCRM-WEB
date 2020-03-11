@@ -41,15 +41,18 @@
             };
         },
         mounted() {
-            API(LoginInfo).then(res => {
-                this.loginInfo = res.data;
-                const permissions = res.data.permissions;
-                this.notifications = res.data.notifications;
-                sessionStorage.setItem('hcm_permission', permissions.join(','))
-            });
+            this.init();
         },
         methods: {
-
+            init() {
+                console.log('nav bar init');
+                API(LoginInfo).then(res => {
+                    this.loginInfo = res.data;
+                    const permissions = res.data.permissions;
+                    this.notifications = res.data.notifications;
+                    sessionStorage.setItem('hcm_permission', permissions.join(','))
+                });
+            }
         }
     };
 </script>

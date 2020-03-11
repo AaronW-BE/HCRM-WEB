@@ -17,12 +17,14 @@
             </template>
         </a-table>
         <a-modal
-                title="通知详情"
                 v-model="notice_details_model"
         >
-            <p><span class="title">title:</span>{{notice_details && notice_details.title}}</p>
-            <p><span class="title">时间:</span>{{notice_details && toTime(notice_details.createAt)}}</p>
-            <p><span class="title">内容:</span>{{notice_details && notice_details.content}}</p>
+            <h2>{{notice_details && notice_details.title}}</h2>
+            <p>{{notice_details && toTime(notice_details.createAt)}}</p>
+            <p>{{notice_details && notice_details.content}}</p>
+            <span slot="footer">
+                <a-button type="primary" @click="notice_details_model = false">确定</a-button>
+            </span>
         </a-modal>
     </a-card>
 </template>
@@ -74,6 +76,9 @@
             this.toTime = toTime
         },
         methods: {
+            updateNavbar() {
+                this.$root.$refs['navBar'].init();
+            },
             getUserNotice() {
                         API(UserNotice,).then(res => {
                             console.log(res)
@@ -107,8 +112,9 @@
                     }
                 }).then(res => {
                     console.log(res)
-                    this.$message.success('请求成功')
                     this.getUserNotice()
+                    
+                    this.updateNavbar();
                 }).catch(err => {
                     console.log(err)
                 })
