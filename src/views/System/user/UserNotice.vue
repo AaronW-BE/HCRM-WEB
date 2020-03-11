@@ -19,8 +19,9 @@
         <a-modal
                 title="通知详情"
                 v-model="notice_details_model"
+                @ok="notice_details_model = false"
         >
-            <p><span class="title">title:</span>{{notice_details && notice_details.title}}</p>
+            <p><span class="title">标题:</span>{{notice_details && notice_details.title}}</p>
             <p><span class="title">时间:</span>{{notice_details && toTime(notice_details.createAt)}}</p>
             <p><span class="title">内容:</span>{{notice_details && notice_details.content}}</p>
         </a-modal>
@@ -85,6 +86,9 @@
                         })
                     },
             noticeDetail(e) {
+                if(!e.status) {
+                    this.read(e)
+                }
                 this.notice_details_model = true
                 let id = e.id;
                 API(NoticeDetails,{
