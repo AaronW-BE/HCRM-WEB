@@ -33,23 +33,24 @@
     import {toTime} from "../../../utils/timeConversion";
     const columns = [
         {
-            title: 'Status',
+            title: '状态',
             dataIndex: '',
             scopedSlots: { customRender: 'read'},
-            width:  8
+            width:  80
         },
         {
-            title: 'Title',
-            dataIndex: '',
+            title: '通知标题',
             scopedSlots: { customRender: 'notice'}
         },
         {
-            title: 'Time',
+            title: '通知时间',
             dataIndex: 'createAt',
+            width: 300
         },
         {
-            title: 'Action',
+            title: '操作',
             dataIndex: '',
+            width: 300,
             scopedSlots: { customRender: 'action' } },
     ];
     export default {

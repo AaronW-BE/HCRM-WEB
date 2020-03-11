@@ -58,6 +58,11 @@
           </a-col>
           <a-col :md="10">
             <a-card title="回访记录" size="small"  style="min-height: 300px">
+              <span slot="extra" @click="$router.push({name: 'returnList'})">
+               <a-tooltip title="查看全部">
+                  <a-icon type="ellipsis" />
+               </a-tooltip>
+              </span>
               <recent-return-visit :list="returnVisitList" />
             </a-card>
           </a-col>
@@ -140,8 +145,12 @@ export default {
   },
   methods: {
     queryRecentVisit() {
-      API(SelfReturnVisit).then(res => {
-        this.returnVisitList = res.data;
+      API(SelfReturnVisit, {
+        data: {
+          size: 6
+        }
+      }).then(res => {
+        this.returnVisitList = res.data.results;
       });
     },
     queryBaseStatisticsData() {
