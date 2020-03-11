@@ -1,6 +1,6 @@
 <template>
     <div class="action-container">
-        <div class="notice-icon" @click="$router.push({name: 'userNotice'})">
+        <div class="notice-icon" @click="$router.push({name: 'userNotice'}).catch(() => {})">
             <a-badge
                     :count="notifications.length"
                     :numberStyle="{fontSize: '8px'}"
@@ -10,7 +10,8 @@
         </div>
         <a-dropdown>
             <span class="ant-dropdown-link">
-            <a-avatar shape="square" icon="user" /> {{loginInfo.name}}【{{loginInfo.roleName}}】
+            <a-avatar shape="square" icon="user" /> {{loginInfo.name}}
+<!--                【{{loginInfo.roleName}}】-->
             </span>
             <a-menu slot="overlay">
                 <a-menu-item>
@@ -40,15 +41,18 @@
             };
         },
         mounted() {
-            API(LoginInfo).then(res => {
-                this.loginInfo = res.data;
-                const permissions = res.data.permissions;
-                this.notifications = res.data.notifications;
-                sessionStorage.setItem('hcm_permission', permissions.join(','))
-            });
+            this.init();
         },
         methods: {
-
+            init() {
+                console.log('nav bar init');
+                API(LoginInfo).then(res => {
+                    this.loginInfo = res.data;
+                    const permissions = res.data.permissions;
+                    this.notifications = res.data.notifications;
+                    sessionStorage.setItem('hcm_permission', permissions.join(','))
+                });
+            }
         }
     };
 </script>

@@ -31,6 +31,15 @@ const routes = [
         component: () => import('../views/Home')
       },
       {
+        path: 'return-list',
+        name: 'returnList',
+        meta: {
+          title: '我的回访',
+          unShow: true
+        },
+        component: () => import('../views/ReturnVisitList')
+      },
+      {
         path: 'order',
         name: 'orderManage',
         meta: {
@@ -247,7 +256,7 @@ const routes = [
         path: 'userNotice',
         name: 'userNotice',
         meta: {
-          unShow:true
+          unShow: true
         },
         component: () => import('../views/System/user/UserNotice')
       }
