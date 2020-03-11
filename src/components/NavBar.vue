@@ -1,8 +1,11 @@
 <template>
     <div class="action-container">
-        <div class="notice-icon">
-            <a-badge :dot="notifications.length > 0">
-                <a-icon type="bell" style="font-size: 16px;"/>
+        <div class="notice-icon" @click="$router.push({name: 'userNotice'})">
+            <a-badge
+                    :count="notifications.length"
+                    :numberStyle="{fontSize: '8px'}"
+            >
+                <a-icon type="bell" style="font-size: 20px;"/>
             </a-badge>
         </div>
         <a-dropdown>
@@ -32,7 +35,8 @@
         data() {
             return {
                 loginInfo: {},
-                notifications: []
+                notifications: [],
+                count: null
             };
         },
         mounted() {
@@ -43,7 +47,9 @@
                 sessionStorage.setItem('hcm_permission', permissions.join(','))
             });
         },
-        methods: {}
+        methods: {
+
+        }
     };
 </script>
 

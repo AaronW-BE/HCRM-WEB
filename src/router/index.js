@@ -242,6 +242,14 @@ const routes = [
             component: () => import('../views/test/FileUploadTest'),
           }
         ]
+      },
+      {
+        path: 'userNotice',
+        name: 'userNotice',
+        meta: {
+          unShow:true
+        },
+        component: () => import('../views/System/user/UserNotice')
       }
     ]
   },
