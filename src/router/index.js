@@ -147,7 +147,7 @@ const routes = [
             name: 'appCenter',
             meta: {
               title: '个人应用',
-              icon: 'appstore'
+              icon: 'appstore',
             },
             component: () => import('../views/apps/AppMain'),
           },
@@ -157,6 +157,7 @@ const routes = [
             meta: {
               title: '标签管理',
               icon: 'tag',
+              unShow: true,
             },
             component: () => import('../views/apps/TagManage')
           }

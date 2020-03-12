@@ -1,21 +1,16 @@
 <template>
-    <a-card>
-        <a-card :hoverable="true" style="width: 300px" size="small">
-            <img
-                    alt="example"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                    slot="cover"
-                    style="height: 120px"
-            />
-            <a-card-meta title="导入数据"
-                         description="This is the description">
-            </a-card-meta>
-            <template class="ant-card-actions" slot="actions">
-                <a-icon type="close-circle" />
-                <a-icon type="edit" />
-            </template>
-        </a-card>
-    </a-card>
+    <div>
+        <a-row :gutter="24">
+            <a-col :md="4">
+                <a-card :hoverable="true" @click="$router.push({name: 'tagManage'})">
+                    <a-card-meta title="标签管理" description="标签管理">
+                        <a-icon type="tags" style="color: #7755ff" slot="avatar" />
+                    </a-card-meta>
+                </a-card>
+            </a-col>
+        </a-row>
+
+    </div>
 </template>
 
 <script>
