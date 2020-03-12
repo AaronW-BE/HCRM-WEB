@@ -5,8 +5,9 @@ import {Layout, Menu, Icon,Button,Form,Input,Checkbox, Dropdown, Avatar, Badge, 
 
     Card, Popconfirm,Radio,DatePicker,TimePicker,Select,Divider,Cascader, List, Modal,
 
-    Row,Col,message,Tabs,Timeline, Skeleton, Tooltip, Tag,Popover, Alert,Upload
+    Row,Col,message,Tabs,Timeline, Skeleton, Tooltip, Tag,Popover, Alert,Upload,
 
+    LocaleProvider
 
 } from "ant-design-vue";
 
@@ -47,6 +48,7 @@ Vue.use(Popover);
 Vue.use(Alert);
 Vue.use(Upload);
 
+Vue.use(LocaleProvider);
 
 
 import PermissionPlugin from './dicrectives/permission';
