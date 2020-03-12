@@ -93,7 +93,7 @@
                 <span slot="action" slot-scope="scope">
                     <a-button type="primary" size="small" @click="viewDetails(scope.id)">查看详情</a-button>
                     <a-button v-if="scope.adviser" type="dashed" size="small" @click="showTransferCustomer(scope)">转交客户</a-button>
-                    <a-button v-else type="primary" size="small" style="margin-left: 5px" @click="showTransferCustomer(scope)">领取此用户</a-button>
+                    <a-button v-else type="primary" size="small" style="margin-left: 5px" @click="handleTransferToSelf(scope)">领取此用户</a-button>
                 </span>
             </a-table>
 
@@ -104,7 +104,7 @@
 
 <script>
     import {API} from "../../api";
-    import {CustomerList, TransferCustomer} from "../../api/template";
+    import {CustomerList, TransferCustomer, TransferCustomer2self,} from "../../api/template";
     import UserSearchDialog from "../../components/UserSearchDialog";
     import {Modal} from "ant-design-vue";
 
@@ -268,6 +268,16 @@
             showTransferCustomer(customer) {
                 this.showUserSelect = true;
                 this.selectedCustomer = customer;
+            },
+            handleTransferToSelf(customer) {
+                API(TransferCustomer2self, {
+                    params: {
+                        id: customer.id
+                    }
+                }).then(() => {
+                    message.success("领取成功");
+                    this.queryCustomer();
+                });
             },
             handleTransferCustomer(user) {
                 console.log(user, this.selectedCustomer);

@@ -55,6 +55,15 @@ export const TransferCustomer = {
     path: '/customer/:id/transfer'
 };
 
+/**
+ * 领取客户
+ * @type {{path: string, method: string}}
+ */
+export const TransferCustomer2self = {
+    method: M.POST,
+    path: '/customer/:id/transfer2self'
+};
+
 // ********************************************************** //
 // 后台用户api
 export const UserList = {
