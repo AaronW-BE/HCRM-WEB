@@ -28,7 +28,7 @@
 
 <script>
     import {API} from "../api";
-    import {AddReturnVisit, CustomerAllVisits, DeleteVisits, ModifyVisit} from "../api/template";
+    import {AddReturnVisit, DeleteVisits, ModifyVisit} from "../api/template";
     import {toTime} from "../utils/timeConversion";
     import moment from 'moment';
     const columns = [
@@ -77,8 +77,9 @@
                 visit_id: null
             }
         },
-        created() {
-        },
+        inject: [
+            'refreshCustomer'
+        ],
         methods:{
             moment,
             addReturnVisit() {
@@ -99,9 +100,10 @@
                                 },
                                 data,
                             }).then(res => {
-                                // console.log(res)
                                 this.$message.success(res.msg)
                                 this.return_visit_model = false
+                                this.refreshCustomer();
+
                             }).catch(err => {
                                 console.log(err)
                             })
@@ -114,29 +116,14 @@
                             }).then( (res) => {
                                 this.$message.success(res.msg)
                                 this.return_visit_model = false
+
+                                this.refreshCustomer();
                             }).catch(err => {
                                 console.log(err)
                             })
                         }
                     }
                 });
-            },
-            customerAllVisits() {
-                let cid =  this.customer_id;
-                API(CustomerAllVisits,{
-                    params:{
-                        cid,
-                    }
-                }).then(res => {
-                    console.log(res)
-                    res.data.results.map(item => {
-                        item.returnTime = toTime( item.returnTime)
-                        item.createAt = toTime( item.createAt)
-                    })
-                    this.return_visit_records = res.data.results;
-                }).catch(err => {
-                    console.log(err)
-                })
             },
             editVisit(visit){
                 this.return_visit_model = true;
@@ -160,13 +147,14 @@
                 let cid = this.customer_id
                 API(DeleteVisits, {
                     params:{
-                        id,
-                       cid
+                        cid,
+                        id
                     }
                 }).then( () => {
                     // console.log(res);
-                    this.$message.info('删除成功')
-                    this.customerAllVisits()
+                    this.$message.info('删除成功');
+
+                    this.refreshCustomer();
                 }).catch(err => {
                     console.log(err)
                     this.$message.error('删除失败')

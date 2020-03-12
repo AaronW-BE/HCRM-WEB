@@ -53,6 +53,11 @@
                                 </a-radio-group>
                             </a-form-item>
                         </a-col>
+                        <a-col :md="8">
+                            <a-form-item label="回访时间">
+                                <a-range-picker v-model="nextReturnDate" showTime />
+                            </a-form-item>
+                        </a-col>
                         <a-col :md="6">
                             <a-form-item>
                                 <a-button type="primary" html-type="submit" style="margin-right: 10px">查询</a-button>
@@ -180,8 +185,9 @@
                 searchForm: this.$form.createForm(this),
                 searchFields: {
                     gender: '',
-                    showSelfServe: false
+                    showSelfServe: false,
                 },
+                nextReturnDate: [],
                 columns,
                 loading: false,
                 list: [],
@@ -214,11 +220,21 @@
                 data = {
                     ...searchData
                 };
+
+                let nextReturnRange = {};
+                if (this.nextReturnDate.length === 2) {
+                    nextReturnRange = {
+                        nextDateStart: this.nextReturnDate[0].format("YYYY-MM-DD HH:mm:ss"),
+                        nextDateEnd: this.nextReturnDate[1].format("YYYY-MM-DD HH:mm:ss")
+                    };
+                }
+
                 API(CustomerList, {
                     data: {
                         size: this.pagination.pageSize,
                         page: this.pagination.current,
                         ...data,
+                        ...nextReturnRange,
                         ...this.searchFields
                     }
                 }).then(res => {

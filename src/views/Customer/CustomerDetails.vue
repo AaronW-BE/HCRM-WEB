@@ -43,11 +43,11 @@
                        未填写
                    </template>
                 </Item>
-                <Item term="生日">
-                    {{detail.childBirth}}
+                <Item term="宝贝生日">
+                    {{detail.childBirth || '未填写'}}
                 </Item>
                 <Item term="年级">
-                    {{detail.childGrade}}
+                    {{detail.childGrade || '未知'}}
                 </Item>
             </data-detail-list>
             <data-detail-list title="附加信息">
@@ -58,6 +58,7 @@
                         <a-icon type="plus-circle" />
                     </span>
                 </Item>
+                <Item term="下次回访">{{new Date(detail.nextFollowAt).toLocaleString()}}</Item>
             </data-detail-list>
             <a-modal title="添加标签" v-model="tagsModel" @ok="addTags">
                 <a-radio-group v-model="customer_tag">
@@ -157,6 +158,11 @@
         mounted() {
             if(this.id){
                 this.getCustomerDetail();
+            }
+        },
+        provide: function () {
+            return {
+                refreshCustomer: this.getCustomerDetail
             }
         },
         methods:{
