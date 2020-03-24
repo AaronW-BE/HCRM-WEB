@@ -2,7 +2,8 @@ import Axios from 'axios'
 import {getToken, removeToken} from "./tokenUtils";
 import {message} from "ant-design-vue";
 
-Axios.defaults.baseURL = '/';
+const host = process.env.NODE_ENV === 'production' ? '/api' : '/';
+Axios.defaults.baseURL = host;
 Axios.defaults.timeout = 5000;
 
 // Axios全局配置

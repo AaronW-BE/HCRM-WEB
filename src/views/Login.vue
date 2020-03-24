@@ -2,7 +2,6 @@
     <div class="login-wrap">
             <a-form id="components-form-demo-normal-login" :form="form" class="login-form login-input" @submit="handleSubmit">
                 <h2 style="text-align: center">客户关系管理</h2>
-                <a-alert message="管理员用户名：admin, 密码： 123456" />
                 <a-form-item>
                     <a-input
                             v-decorator="['username',

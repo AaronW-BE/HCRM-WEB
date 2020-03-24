@@ -4,7 +4,7 @@
             <a-list-item v-for="item in list" :key="item.id">
                 <a-list-item-meta :description="new Date(item.returnTime).toLocaleString()" />
                 <a href="#" @click="$router.push({name: 'customerDetail', params: {'id': item.customerId}})">
-                    {{item.content}}
+                    <span style="word-break: break-all">{{item.content}}</span>
                 </a>
             </a-list-item>
         </a-list>

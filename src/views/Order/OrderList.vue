@@ -76,6 +76,16 @@
                     >
                         <a-button type="link" v-if="!order.creatorId" style="color: #40b95b">領取訂單</a-button>
                     </a-popconfirm>
+                    <a-popconfirm
+                            cancelText="取消"
+                            @confirm="handleModifyCommission(order.id)"
+                    >
+                        <template slot="title">
+                            <span>分成比例：</span>
+                            <a-input-number size="small" v-model="commissionRate" :min="0" :max="100"  />
+                        </template>
+                        <a-button type="link" v-permission="['modify:commission']">设置提成比例</a-button>
+                    </a-popconfirm>
                 </span>
             </a-table>
         </a-card>
@@ -85,7 +95,7 @@
 
 <script>
     import {API} from "../../api";
-    import {DeleteOrder, LinkCustomer, OrderList, ReceiveOrder} from "../../api/template";
+    import {DeleteOrder, LinkCustomer, ModifyCommissionRate, OrderList, ReceiveOrder} from "../../api/template";
     import CustomerSearchDialog from "../../components/CustomerSearchDialog";
 
     import {message} from 'ant-design-vue';
@@ -156,6 +166,7 @@
                 loading: false,
                 orderList: [],
                 columns: columns,
+                commissionRate: 0,
                 pagination: {
                     pageSize: 15,
                 }
@@ -165,6 +176,19 @@
             this.queryOrderList();
         },
         methods: {
+            handleModifyCommission(id) {
+                API(ModifyCommissionRate, {
+                    params: {id},
+                    data: {
+                        rate: this.commissionRate
+                    }
+                }).then(res => {
+                    message.success(res.msg);
+                    this.commissionRate = 0;
+                }).catch(err => {
+                    message.error(err.msg);
+                });
+            },
             handleReceiveOrder(id) {
                 API(ReceiveOrder, {
                     params: {id}

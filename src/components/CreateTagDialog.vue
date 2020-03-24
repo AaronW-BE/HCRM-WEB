@@ -13,8 +13,10 @@
             </a-form-item>
             <a-form-item label="颜色">
                 <a-input
-                        placeholder="输入64位颜色值 如#f50"
-                        v-decorator="['type', { rules: [{ required: true, message: '请输入64位颜色值，如#f50' }] }]"
+                        type="color"
+                        v-decorator="['type', {
+                            value: '#ff0000',
+                            rules: [{ required: true, message: '请输入64位颜色值，如#f50' }] }]"
                 />
             </a-form-item>
         </a-form>

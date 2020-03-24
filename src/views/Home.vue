@@ -6,22 +6,25 @@
 
     <!--    <a-card size="small"  style="min-height: 100px">-->
       <a-row :gutter="{md: 50}">
-        <a-col :md="18">
+        <a-col :md="24">
           <a-row :gutter="{md: 10}">
             <a-col :md="6">
-              <chart-card title="销售总额" total="￥ 50556">
-                <a-tooltip title="图表说明" slot="action">
+              <chart-card title="销售总额" :total="'￥' + (baseStatistics.salesVolume || 0)">
+                <a-tooltip title="本月总销售额" slot="action">
                   <a-icon type="info-circle-o" />
                 </a-tooltip>
-                <div>
-                  <trend :type="true" term="周同比" :percentage="3.5" style="margin-right: 10px" />
-                  <trend :type="false" term="日同比" :percentage="11"></trend>
-                </div>
-                <template slot="footer">日均销售额<span>￥ 234.56</span></template>
+<!--                <div>-->
+<!--                  <trend :type="true" term="周同比" :percentage="3.5" style="margin-right: 10px" />-->
+<!--                  <trend :type="false" term="日同比" :percentage="11"></trend>-->
+<!--                </div>-->
+                <template slot="footer">日均销售额<span>￥ {{baseStatistics.salesVolume / 30}}</span></template>
               </chart-card>
             </a-col>
             <a-col :md="6">
-              <chart-card title="订单总数" :total="baseStatistics.order || 'N/A'">
+              <chart-card title="订单总数" :total="baseStatistics.order || 0">
+                <a-tooltip title="本月订单总数" slot="action">
+                  <a @click="$router.push({name: 'orderList'})" ><a-icon type="info-circle-o" /></a>
+                </a-tooltip>
                 <div style="height: 100%">
                   <area-chart id="order"  :data="baseStatistics.orderInMonth" x-field="name" y-field="amount" />
                 </div>
@@ -29,22 +32,28 @@
               </chart-card>
             </a-col>
             <a-col :md="6">
-              <chart-card title="客户" :total="baseStatistics.customer || 'N/A'">
+              <chart-card title="客户" :total="baseStatistics.customer || 0">
+                <a-tooltip title="本月新增客户总数" slot="action">
+                  <a @click="$router.push({name: 'customerList'})" ><a-icon type="info-circle-o" /></a>
+                </a-tooltip>
                 <template slot="footer">日均新增用户：<span>N/A</span></template>
               </chart-card>
             </a-col>
             <a-col :md="6">
-              <chart-card title="回访" :total="baseStatistics.returnVisit || 'N/A'">
+              <chart-card title="回访" :total="baseStatistics.returnVisit || 0">
+                <a-tooltip title="本月回访数量" slot="action">
+                  <a @click="$router.push({name: 'returnList'})" ><a-icon type="info-circle-o" /></a>
+                </a-tooltip>
                 <template slot="footer">日均销售额<span>￥ 234.56</span></template>
               </chart-card>
             </a-col>
           </a-row>
         </a-col>
-        <a-col :md="6">
-          <chart-card title="其他数据" :total="'N/A'">
-            <template slot="footer">日均销售额<span>￥ 234.56</span></template>
-          </chart-card>
-        </a-col>
+<!--        <a-col :md="6">-->
+<!--          <chart-card title="其他数据" :total="'N/A'">-->
+<!--            <template slot="footer">日均销售额<span>￥ 234.56</span></template>-->
+<!--          </chart-card>-->
+<!--        </a-col>-->
       </a-row>
 <!--    </a-card>-->
 
@@ -52,17 +61,17 @@
       <a-col :md="16">
         <a-row>
           <a-col :md="14">
-            <a-card title="收入数据" size="small"  style="height: 300px">
+            <a-card title="收入数据（示例）" size="small"  style="height: 300px">
               <bar-chart id="incomeChart" :data="income" x-field="value" y-field="label" style="height: 250px" />
             </a-card>
           </a-col>
           <a-col :md="10">
             <a-card title="回访记录" size="small"  style="min-height: 300px">
-              <span slot="extra" @click="$router.push({name: 'returnList'})">
-               <a-tooltip title="查看全部">
-                  <a-icon type="ellipsis" />
-               </a-tooltip>
-              </span>
+              <a slot="extra" @click="$router.push({name: 'returnList'})">
+                 <a-tooltip title="查看全部">
+                    <a-icon type="ellipsis" />
+                 </a-tooltip>
+              </a>
               <recent-return-visit :list="returnVisitList" />
             </a-card>
           </a-col>
@@ -73,10 +82,12 @@
               <pie-chart id="chart" :data="data" color-field="name" angle-field="amount" title="订单来源分布" style="height: 200px;" />
             </a-col>
             <a-col :md="8">
-              <pie-chart id="chart2" :data="data" color-field="name" angle-field="amount" title="订单来源分布" style="height: 200px;" />
+              <div>暂未开发</div>
+<!--              <pie-chart id="chart2" :data="data" color-field="name" angle-field="amount" title="订单来源分布" style="height: 200px;" />-->
             </a-col>
             <a-col :md="8">
-              <pie-chart id="chart3" :data="data" color-field="name" angle-field="amount" title="订单来源分布" style="height: 200px;" />
+              <div>暂未开发</div>
+              <!--              <pie-chart id="chart3" :data="data" color-field="name" angle-field="amount" title="订单来源分布" style="height: 200px;" />-->
             </a-col>
           </a-row>
         </a-card>
@@ -100,7 +111,7 @@ import PieChart from "../components/charts/PieChart";
 import RecentReturnVisit from "../components/RecentReturnVisit";
 import BarChart from "../components/charts/BarChart";
 import ChartCard from "../components/charts/ChartCard";
-import Trend from "../components/charts/Trend";
+// import Trend from "../components/charts/Trend";
 import AreaChart from "../components/charts/AreaChart";
 export default {
   name: 'Home',
@@ -129,7 +140,7 @@ export default {
   },
   components: {
     AreaChart,
-    Trend,
+    // Trend,
     ChartCard,
     BarChart,
     RecentReturnVisit,

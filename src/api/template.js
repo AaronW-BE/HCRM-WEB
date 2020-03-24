@@ -142,6 +142,15 @@ export const ReceiveOrder = {
     method: M.POST,
     path: '/order/:id/receive'
 }
+
+/**
+ * 修改订单提成比例
+ * @type {{path: string, method: string}}
+ */
+export const ModifyCommissionRate = {
+    method: M.PUT,
+    path: '/order/:id/commissionRate'
+}
 //**********************************************************//
 // 客户回访api
 export const AddReturnVisit = {
