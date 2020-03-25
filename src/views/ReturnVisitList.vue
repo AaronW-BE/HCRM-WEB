@@ -2,9 +2,9 @@
     <a-card>
         <div class="form-container">
             <a-form layout="inline" @submit="handleSearch">
-                <a-form-item label="回访时间范围">
-                    <a-range-picker v-model="searchForm.returnTime" showTime />
-                </a-form-item>
+<!--                <a-form-item label="回访时间范围">-->
+<!--                    <a-range-picker v-model="searchForm.returnTime" showTime />-->
+<!--                </a-form-item>-->
                 <a-form-item label="下次回访时间范围">
                     <a-range-picker v-model="searchForm.nextReturnTime" showTime />
                 </a-form-item>
@@ -32,18 +32,20 @@
                         width: 150
                     },
                     {
+                        dataIndex: 'createAt',
+                        title: '创建回访时间',
+                        width: 250
+                    },
+                    {
                         dataIndex: 'content',
                         title: '内容',
                     },
-                    {
-                        dataIndex: 'createAt',
-                        title: '回访时间',
-                        width: 250
-                    },
+
                     {
                         dataIndex: 'returnTime',
                         title: '下次回访时间',
-                        width: 250
+                        width: 250,
+
                     }
                 ],
                 v: null,

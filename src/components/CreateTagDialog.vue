@@ -1,6 +1,6 @@
 <template>
     <a-modal
-            title="添加tag"
+            title="添加标签"
             :visible="show"
             @ok="handleTagModel"
             @cancel="closeModal"
@@ -11,11 +11,11 @@
                         v-decorator="['name', { rules: [{ required: true, message: '请输入标签名' }] }]"
                 />
             </a-form-item>
-            <a-form-item label="颜色">
+            <a-form-item label="标签样式">
                 <a-input
                         type="color"
                         v-decorator="['type', {
-                            value: '#ff0000',
+                            initialValue: '#80cb54',
                             rules: [{ required: true, message: '请输入64位颜色值，如#f50' }] }]"
                 />
             </a-form-item>

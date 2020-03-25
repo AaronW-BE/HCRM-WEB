@@ -14,6 +14,20 @@
                             </a-form-item>
                         </a-col>
                         <a-col :md="6">
+                            <a-form-item label="标签">
+                                <a-select
+                                        mode="multiple"
+                                        placeholder="选择查询的标签"
+                                        style="min-width: 200px; max-width: 250px"
+                                        allowClear
+                                        :maxTagCount="5"
+                                        v-model="searchFields.tagIds"
+                                >
+                                    <a-select-option v-for="tag in tagList" :key="tag.id">{{tag.name}}</a-select-option>
+                                </a-select>
+                            </a-form-item>
+                        </a-col>
+                        <a-col :md="6">
                             <a-form-item label="客户昵称">
                                 <a-input
                                         v-decorator="['nickname', {
@@ -79,6 +93,9 @@
                      :pagination="pagination"
                      @change="onTableChange"
             >
+                <span slot="tags" slot-scope="tags">
+                    <a-tag v-for="tag in tags.slice(0,4)" :key="tag.id" :color="tag.type">{{tag.name}}</a-tag>
+                </span>
                 <span slot="adviser" slot-scope="adviser">
                     <a-icon type="check-circle" v-if="adviser" theme="filled" style="color: #42b983" />
                 </span>
@@ -102,7 +119,7 @@
 
 <script>
     import {API} from "../../api";
-    import {CustomerList, TransferCustomer, TransferCustomer2self,} from "../../api/template";
+    import {CustomerList, QueryTag, TransferCustomer, TransferCustomer2self,} from "../../api/template";
     import UserSearchDialog from "../../components/UserSearchDialog";
     import {Modal} from "ant-design-vue";
 
@@ -135,6 +152,12 @@
                     title: '手机号',
                     dataIndex: 'phone',
                     width: 120,
+                },
+                {
+                    title: '标签',
+                    dataIndex: 'tags',
+                    width: 200,
+                    scopedSlots: {customRender: 'tags'}
                 },
                 {
                     title: '性别',
@@ -184,7 +207,9 @@
                 searchFields: {
                     gender: '',
                     showSelfServe: false,
+                    tagIds: []
                 },
+                tagList: [],
                 nextReturnDate: [],
                 columns,
                 loading: false,
@@ -198,6 +223,7 @@
         },
         mounted() {
             this.queryCustomer();
+            this.queryTagList();
         },
         methods: {
             handleSearch(e) {
@@ -227,13 +253,16 @@
                     };
                 }
 
+                let tagIds = this.searchFields.tagIds.join(',');
+
                 API(CustomerList, {
                     data: {
                         size: this.pagination.pageSize,
                         page: this.pagination.current,
                         ...data,
                         ...nextReturnRange,
-                        ...this.searchFields
+                        ...this.searchFields,
+                        tagIds: tagIds,
                     }
                 }).then(res => {
                     this.list = res.data.results;
@@ -244,6 +273,12 @@
                     };
                 }).finally(() => {
                     this.loading = false;
+                });
+            },
+
+            queryTagList() {
+                API(QueryTag).then(res => {
+                    this.tagList = res.data;
                 });
             },
             onTableChange(pagination) {

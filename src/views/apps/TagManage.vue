@@ -1,10 +1,14 @@
 <template>
     <div>
-        <div class="tag-list">
-            <a-tag v-for="tag in tags" :key="tag.id" :color="tag.type" closable @close="log(tag.id)">{{tag.name}}</a-tag>
-        </div>
+        <a-card>
+            <div class="tag-item" v-for="tag in tags" :key="tag.id">
+                <a-tag  :color="tag.type" closable @close="log(tag.id)">{{tag.name}}</a-tag>
+            </div>
+            <div style="margin-top: 20px">
+                <a-button @click="showCreateTagDialog = true">新建标签</a-button>
+            </div>
+        </a-card>
 
-        <a-button @click="showCreateTagDialog = true">新建标签</a-button>
 
         <create-tag-dialog :show.sync="showCreateTagDialog" @success="onTagCreated" />
     </div>
@@ -54,10 +58,8 @@
 </script>
 
 <style scoped>
-.tag-list {
-}
-    .tag-list>* {
+    .tag-item {
         margin: .5rem;
-
+        display: inline-block;
     }
 </style>
