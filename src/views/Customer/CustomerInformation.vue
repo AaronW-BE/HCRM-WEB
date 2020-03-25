@@ -4,7 +4,7 @@
             <a-tab-pane tab="手动添加客户" key="1">
                 <AddingCustomersManually></AddingCustomersManually>
             </a-tab-pane>
-            <a-tab-pane tab="批量导入客户" key="2" forceRender>
+            <a-tab-pane tab="批量导入客户" key="2">
                 <ImportCustomers></ImportCustomers>
             </a-tab-pane>
         </a-tabs>

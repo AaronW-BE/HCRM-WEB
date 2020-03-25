@@ -63,17 +63,16 @@
                                 <a-button type="primary" html-type="submit" style="margin-right: 10px">查询</a-button>
                                 <a-button @click="resetSearch" >重置</a-button>
                             </a-form-item>
+                            <a-form-item>
+                                <a-divider type="vertical" />
+                            </a-form-item>
+                            <a-form-item>
+                                <a-button type="primary" @click="addCustomer">新建</a-button>
+                            </a-form-item>
                         </a-col>
                     </a-row>
                 </a-form>
-                <a-form layout="inline">
-                    <a-form-item>
-                        <a-button size="small" type="primary" @click="addCustomer">新建</a-button>
-                    </a-form-item>
-                </a-form>
             </div>
-        </a-card>
-        <a-card>
             <a-table :columns="columns" :dataSource="list"
                      :rowKey="record => record.id"
                      :loading="loading"
@@ -96,7 +95,6 @@
                     <a-button v-else type="primary" size="small" style="margin-left: 5px" @click="handleTransferToSelf(scope)">领取此用户</a-button>
                 </span>
             </a-table>
-
         </a-card>
         <user-search-dialog :show.sync="showUserSelect" @selected="handleTransferCustomer"/>
     </div>
