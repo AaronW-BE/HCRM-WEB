@@ -36,17 +36,20 @@
             title: 'id',
             dataIndex: 'id',
             key: 'id',
+            width: 50
         },
         {
             title: '回访时间',
             dataIndex: 'createAt',
             key: 'createAt',
+            width: 200,
         },
         {
             title: '下次回访时间',
             dataIndex: 'returnTime',
             key: 'returnTime',
-            sorter: true
+            sorter: true,
+            width: 200,
         },
         {
             title: '回访内容',

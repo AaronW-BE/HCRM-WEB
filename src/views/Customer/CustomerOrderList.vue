@@ -38,23 +38,38 @@
                 columns: [
                     {
                         title: '下单人',
-                        dataIndex: 'orderName'
+                        dataIndex: 'orderName',
+                        width: 80
                     },
                     {
                         title: '订单号',
-                        dataIndex: 'orderNo'
+                        dataIndex: 'orderNo',
+                        width: 150
                     },
                     {
                         title: '金额',
-                        dataIndex: 'orderAmount'
+                        dataIndex: 'orderAmount',
+                        width: 120
                     },
                     {
                         title: '下单手机号',
                         dataIndex: 'orderPhone',
+                        width: 150
                     },
                     {
                         title: '下单时间',
                         dataIndex: 'orderTime',
+                        width: 180,
+                        customRender(scopedSlot) {
+                            if (scopedSlot) {
+                                return new Date(scopedSlot).toLocaleString();
+                            }
+                        }
+                    },
+                    {
+                        title: '创建时间',
+                        dataIndex: 'createAt',
+                        width: 180,
                         customRender(scopedSlot) {
                             if (scopedSlot) {
                                 return new Date(scopedSlot).toLocaleString();
@@ -64,16 +79,7 @@
                     {
                         title: '来源',
                         dataIndex: 'original',
-                        width: 120
-                    },
-                    {
-                        title: '创建时间',
-                        dataIndex: 'createAt',
-                        customRender(scopedSlot) {
-                            if (scopedSlot) {
-                                return new Date(scopedSlot).toLocaleString();
-                            }
-                        }
+                        width: 100
                     },
                     {
                         title: '操作',

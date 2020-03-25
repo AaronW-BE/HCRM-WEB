@@ -123,14 +123,27 @@
                 {
                     title: '订单号',
                     dataIndex: 'orderNo',
+                    width: 100
                 },
                 {
                     title: '下单手机号',
                     dataIndex: 'orderPhone',
+                    width: 100
                 },
                 {
                     title: '下单时间',
                     dataIndex: 'orderTime',
+                    width: 150,
+                    customRender(scopedSlot) {
+                        if (scopedSlot) {
+                            return new Date(scopedSlot).toLocaleString();
+                        }
+                    }
+                },
+                {
+                    title: '创建时间',
+                    dataIndex: 'createAt',
+                    width: 150,
                     customRender(scopedSlot) {
                         if (scopedSlot) {
                             return new Date(scopedSlot).toLocaleString();
@@ -140,16 +153,7 @@
                 {
                     title: '来源',
                     dataIndex: 'original',
-                    width: 120
-                },
-                {
-                    title: '创建时间',
-                    dataIndex: 'createAt',
-                    customRender(scopedSlot) {
-                        if (scopedSlot) {
-                            return new Date(scopedSlot).toLocaleString();
-                        }
-                    }
+                    width: 100
                 },
                 {
                     title: '操作',
