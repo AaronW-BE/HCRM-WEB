@@ -46,12 +46,12 @@
                             </a-form-item>
                         </a-col>
                         <a-col :md="6">
-                            <a-form-item label="微信号">
+                            <a-form-item label="手机号">
                                 <a-input
-                                        v-decorator="['wechat', {
+                                        v-decorator="['phone', {
                                     initialValue: ''
                                 }]"
-                                        placeholder=查询微信号 />
+                                        placeholder=手机号 />
                             </a-form-item>
                         </a-col>
                         <a-col :md="6">
