@@ -166,12 +166,12 @@
                     width: 80,
                     scopedSlots: {customRender: 'gender'}
                 },
-                {
-                    title: '组别',
-                    dataIndex: 'groupName',
-                    sorter: true,
-                    width: 100
-                },
+                // {
+                //     title: '组别',
+                //     dataIndex: 'groupName',
+                //     sorter: true,
+                //     width: 100
+                // },
                 {
                     title: '省份',
                     dataIndex: 'province',
@@ -193,7 +193,7 @@
                 {
                     title: "服务状态",
                     dataIndex: 'adviser',
-                    width: 70,
+                    width: 80,
                     scopedSlots: { customRender: 'adviser' },
                 },
                 {

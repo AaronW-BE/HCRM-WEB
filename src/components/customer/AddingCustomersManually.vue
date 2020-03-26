@@ -215,6 +215,8 @@
             <div class="handle-form-btn">
                 <a-button type="primary" html-type="submit">提交</a-button>
                 <a-button @click="reset">重置</a-button>
+                <a-divider type="vertical" />
+                <a-button @click="$router.back()">返回</a-button>
             </div>
         </a-form>
     </a-card>

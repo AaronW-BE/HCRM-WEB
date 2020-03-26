@@ -17,7 +17,7 @@
 <!--                  <trend :type="true" term="周同比" :percentage="3.5" style="margin-right: 10px" />-->
 <!--                  <trend :type="false" term="日同比" :percentage="11"></trend>-->
 <!--                </div>-->
-                <template slot="footer">日均销售额<span>￥ {{baseStatistics.salesVolume / 30}}</span></template>
+                <template slot="footer">日均销售额<span>￥ {{(baseStatistics.salesVolume / 30).toFixed(2)}}</span></template>
               </chart-card>
             </a-col>
             <a-col :md="6">
