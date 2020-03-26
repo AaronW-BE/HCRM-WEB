@@ -1,7 +1,13 @@
 <template>
   <div class="home">
     <div class="box-container">
-      <a-alert message="测试阶段，有问题随时提交" banner  />
+      <a-alert banner >
+        <span slot="message">
+          <span>测试阶段，有问题随时提交 </span>
+          <a-divider type="vertical"/>
+          <a href="https://docs.qq.com/sheet/DUnhJaU9UWVNYeldm?tab=BB08J2">我要反馈</a>
+        </span>
+      </a-alert>
     </div>
 
     <!--    <a-card size="small"  style="min-height: 100px">-->
