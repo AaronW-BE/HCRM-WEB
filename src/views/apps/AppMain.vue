@@ -8,6 +8,20 @@
                     </a-card-meta>
                 </a-card>
             </a-col>
+            <a-col :md="4">
+                <a-card :hoverable="true">
+                    <a-card-meta title="产品管理" description="管理已有产品">
+                        <a-icon type="shopping" style="color: #ff8f5b" slot="avatar" />
+                    </a-card-meta>
+                </a-card>
+            </a-col>
+            <a-col :md="4">
+                <a-card :hoverable="true">
+                    <a-card-meta title="生日提醒" description="生日自动提醒工具">
+                        <a-icon type="tags" style="color: #56b469" slot="avatar" />
+                    </a-card-meta>
+                </a-card>
+            </a-col>
         </a-row>
 
     </div>
