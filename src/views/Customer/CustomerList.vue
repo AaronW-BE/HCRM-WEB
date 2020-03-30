@@ -37,6 +37,15 @@
                             </a-form-item>
                         </a-col>
                         <a-col :md="6">
+                            <a-form-item label="客户住址">
+                                <a-input
+                                        v-decorator="['address', {
+                                    initialValue: ''
+                                }]"
+                                        placeholder=客户住址 />
+                            </a-form-item>
+                        </a-col>
+                        <a-col :md="6">
                             <a-form-item label="宝贝姓名">
                                 <a-input
                                         v-decorator="['childName', {
