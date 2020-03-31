@@ -9,7 +9,7 @@
                 </a-card>
             </a-col>
             <a-col :md="4">
-                <a-card :hoverable="true">
+                <a-card :hoverable="true" @click="$router.push({name: 'productManage'})">
                     <a-card-meta title="产品管理" description="管理已有产品">
                         <a-icon type="shopping" style="color: #ff8f5b" slot="avatar" />
                     </a-card-meta>

@@ -160,6 +160,15 @@ const routes = [
               unShow: true,
             },
             component: () => import('../views/apps/TagManage')
+          },
+          {
+            path: 'product',
+            name: 'productManage',
+            meta: {
+              title: '产品管理',
+              unShow: true,
+            },
+            component: () => import('../views/apps/product/ProductManage')
           }
         ]
       },

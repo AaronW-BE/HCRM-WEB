@@ -210,6 +210,25 @@ export const DeleteTag = {
     path: '/tag/:id'
 };
 
+export const ProductList = {
+    method: M.GET,
+    path: '/product/list'
+};
+
+export const DeleteProduct = {
+    method: M.DELETE,
+    path: '/product/:id'
+};
+
+export const CreateProduct = {
+    method: M.POST,
+    path: '/product'
+};
+
+export const UpdateProduct = {
+    method: M.PUT,
+    path: '/product/:id'
+};
 //*****************************************************************//
 // 角色相关
 export const RoleList = {

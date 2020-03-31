@@ -150,6 +150,26 @@
                         </a-form-item>
                     </a-col>
                 </a-row>
+                <a-row>
+                    <a-col :lg="8" :md="12" :xs="24">
+                        <a-form-item
+                                :label-col="labelCol"
+                                :wrapper-col="wrapperCol"
+                                label="关联产品"
+                                style="width: 100%;"
+                        >
+                            <a-select
+                                    style="width: 100%;"
+                                    v-decorator="['productId']"
+                                    placeholder="请选择订单关联产品">
+                                <a-select-option v-for="product in productList" :key="product.id">
+                                    {{product.name}} - ￥{{product.price}}
+                                </a-select-option>
+                            </a-select>
+                        </a-form-item>
+                    </a-col>
+                </a-row>
+
 
                 <div class="handle-form-btn">
                     <a-button type="primary" html-type="submit">提交</a-button>
@@ -163,7 +183,7 @@
     import {address} from "../../assets/js/cities";
     import {toTime} from "../../utils/timeConversion";
     import {API} from "../../api";
-    import {ChangeOrder, CreateOrder, OrderDetail} from "../../api/template";
+    import {ChangeOrder, CreateOrder, OrderDetail, ProductList} from "../../api/template";
     import moment from "moment";
     export default {
         name: "AddingOrdersManually",
@@ -182,6 +202,7 @@
                 },
                 order_info: this.$form.createForm(this),
                 grade_item: null,
+                productList: []
             }
         },
         created() {
@@ -189,6 +210,7 @@
             if(this.id){
                 this.getOrderDetail(this.id)
             }
+            this.loadProductList();
         },
         methods: {
             getOrderDetail(id) {
@@ -266,6 +288,15 @@
 
                     }
                 })
+            },
+            loadProductList() {
+                API(ProductList, {
+                    data: {
+                        page_size: 999
+                    }
+                }).then(res => {
+                    this.productList = res.data.results;
+                });
             },
             reset() {
                 this.order_info.resetFields()
