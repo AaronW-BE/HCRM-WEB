@@ -173,7 +173,7 @@
 
                 <div class="handle-form-btn">
                     <a-button type="primary" html-type="submit">提交</a-button>
-                    <a-button @click="reset">重置</a-button>
+                    <a-button @click="$router.back()">返回</a-button>
                 </div>
             </a-form>
         </a-card>
@@ -187,7 +187,7 @@
     import moment from "moment";
     export default {
         name: "AddingOrdersManually",
-        props:['id'],
+        props:['id', 'customerId'],
         data() {
             return{
                 labelCol: {
@@ -256,7 +256,10 @@
                             orderDate: values.orderDate && toTime(values.orderDate._d),
                             address: (values.address_item && values.address_item.join(',')) || (values.address || '')
                         };
-                        console.log(data)
+                        if (this.customerId) {
+                            data['customerId'] = this.customerId
+                        }
+                        console.log(data);
                         if(this.id) {
                             API(ChangeOrder,{
                                 params:{
@@ -298,9 +301,9 @@
                     this.productList = res.data.results;
                 });
             },
-            reset() {
-                this.order_info.resetFields()
-            }
+            // reset() {
+            //     this.order_info.resetFields()
+            // }
         }
     }
 </script>

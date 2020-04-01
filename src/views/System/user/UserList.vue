@@ -94,9 +94,13 @@
                 v-model="add_roles"
                 @ok="addRoles"
         >
-            <a-radio-group v-model="role_id">
-                <a-radio v-for="i in roleList" :key="i.id" :value="i.id">{{i.name}}</a-radio>
-            </a-radio-group>
+            <a-form>
+                <a-form-item label="选择角色">
+                    <a-select v-model="role_id">
+                        <a-select-option v-for="role in roleList" :key="role.id" :value="role.id">{{role.name}}</a-select-option>
+                    </a-select>
+                </a-form-item>
+            </a-form>
         </a-modal>
     </div>
 </template>
@@ -182,7 +186,7 @@
                 }).then(res => {
                     res.data.results.map(item => {
                         item.lastLogin = toTime(item.lastLogin);
-                    })
+                    });
                     this.userList = res.data.results;
                     this.pagination = {
                         current: res.data.metadata.page,
@@ -253,7 +257,7 @@
                 this.user_id = userId
                 API(RoleList).then(res => {
                     console.log(res);
-                    this.roleList = res.data.results;
+                    this.roleList = res.data;
                 });
             },
             addRoles() {

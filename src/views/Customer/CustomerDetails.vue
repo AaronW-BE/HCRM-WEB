@@ -33,7 +33,7 @@
                         未填写
                     </template>
                 </Item>
-                <Item term="宝贝">
+                <Item term="宝贝姓名">
                     {{detail.childName}}
                 </Item>
                 <Item term="宝贝性别">
@@ -69,9 +69,10 @@
             </a-modal>
         </a-card>
         <a-card title="订单信息">
-<!--            <a href="#" @click="$router.push({name: 'customerOrders', params: {id}})" slot="extra">更多</a>-->
-            <customer-order-list :id="id"></customer-order-list>
+            <a href="#" @click="$router.push({name: 'customerOrders', params: {id}})" slot="extra">更多</a>
         </a-card>
+        <customer-order-list :id="id" :is-thin="true"></customer-order-list>
+
         <a-card title="客户回访">
             <ReturnVisit :customer_id="id" :return_visit_records = 'return_visit_records'></ReturnVisit>
         </a-card>

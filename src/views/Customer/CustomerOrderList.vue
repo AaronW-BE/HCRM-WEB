@@ -1,9 +1,10 @@
 <template>
     <div>
-<!--        <a-card title="客户订单">-->
-<!--            <span slot="extra">-->
-<!--                <a-button type="primary" size="small">新建</a-button>-->
-<!--            </span>-->
+        <a-card title="客户订单">
+            <span slot="extra">
+                <a-button v-if="!isThin" type="primary" size="small" @click="$router.push({name: 'CreateOrder', params: {customerId: id}})">新建</a-button>
+                <a-button v-else @click="$router.push({name: 'customerOrders', params: {id}})" type="link" size="small">查看更多</a-button>
+            </span>
             <a-table :dataSource="list" :columns="columns" :rowKey="row => row.id" size="small" :pagination="pagination">
                 <span slot="action" slot-scope="order">
                     <a :data-id="order.id" @click="$router.push({name: 'CreateOrder', params: {id: order.id}})">修改</a>
@@ -18,7 +19,7 @@
                     </a-popconfirm>
                 </span>
             </a-table>
-<!--        </a-card>-->
+        </a-card>
     </div>
 </template>
 
@@ -31,6 +32,10 @@
         props: {
             id: {
                 required: true
+            },
+            isThin: {
+                default: false,
+                type: Boolean
             }
         },
         data() {
@@ -89,7 +94,7 @@
                 ],
                 list: [],
                 pagination: {
-                    pageSize: 15,
+                    pageSize: this.isThin ? 5 : 15,
                 }
             }
         },
