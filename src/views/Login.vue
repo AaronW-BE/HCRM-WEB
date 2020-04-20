@@ -77,6 +77,8 @@
                                     return;
                                 }
                                 this.$router.replace({name: "main"});
+                            }).catch(() => {
+                                this.$message.error("登录失败");
                             });
 
                         })

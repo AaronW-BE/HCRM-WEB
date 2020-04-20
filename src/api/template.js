@@ -306,3 +306,8 @@ export const ImportCustomer = {
     method: M.FILE,
     path: '/system/batch-import/user'
 };
+
+export const VdGetOrderList = {
+    method: M.GET,
+    path: '/vd/order-list'
+};
