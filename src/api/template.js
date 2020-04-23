@@ -311,3 +311,12 @@ export const VdGetOrderList = {
     method: M.GET,
     path: '/vd/order-list'
 };
+export const VdGetOrderDetail = {
+    method: M.GET,
+    path: '/vd/order-detail'
+}
+
+export const VdImportOrder = {
+    method: M.POST,
+    path: '/vd/order-import'
+}

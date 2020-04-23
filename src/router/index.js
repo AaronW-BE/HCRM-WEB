@@ -188,7 +188,7 @@ const routes = [
               title: '订单数据',
               icon: 'shop'
             },
-            component: BlackLayout
+            component: () => import('../views/apps/vdOrder/vdOrderList')
           },
           {
             path: 'user',

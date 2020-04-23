@@ -7,16 +7,18 @@ import {Layout, Menu, Icon,Button,Form,Input,Checkbox, Dropdown, Avatar, Badge, 
 
     Row,Col,message,Tabs,Timeline, Skeleton, Tooltip, Tag,Popover, Alert,Upload,InputNumber,
 
-    LocaleProvider
+    LocaleProvider, Spin, notification
 
 } from "ant-design-vue";
 
 Vue.prototype.$message = message;
+Vue.prototype.$notification = notification;
 message.config({
   duration: 1,
 });
 
 Vue.use(Layout);
+Vue.use(Spin);
 Vue.use(Menu);
 Vue.use(Icon);
 Vue.use(Button);
