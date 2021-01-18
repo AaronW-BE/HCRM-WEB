@@ -1,5 +1,10 @@
 <template>
-    <div class="login-wrap">
+    <div v-if="isWeworkBrowser">
+      <div class="loading-wrp">
+        <a-spin size="large" tip="正在登录企业微信" />
+      </div>
+    </div>
+    <div v-else class="login-wrap">
             <a-form id="components-form-demo-normal-login" :form="form" class="login-form login-input" @submit="handleSubmit">
                 <h2 style="text-align: center">客户关系管理</h2>
                 <a-form-item>
@@ -44,6 +49,7 @@
     import {API} from "../api";
     import {Login, LoginInfo} from "../api/template";
     import {setToken} from "../utils/tokenUtils";
+    import {WeworkUser} from "@/api/wework/user";
 
     export default {
         name: "Login",
@@ -51,13 +57,31 @@
             return {
                 checkNick: false,
                 form: this.$form.createForm(this),
+                isWeworkBrowser: navigator.userAgent.indexOf('wxwork') !== -1
             }
         },
         beforeCreate () {
             this.form = this.$form.createForm(this);
         },
-        methods: {
-            handleSubmit (e) {
+      created() {
+        let state = "login"; //random store
+        if (this.$route.query.code && this.$route.query.state === state && this.$route.query.code) {
+          // 请求员工信息
+          const code = this.$route.query.code;
+          this.weworkUserAuth(code)
+          return;
+        }
+        if (navigator.userAgent.indexOf("wxwork") !== -1) {
+          let corpId = "ww10118e401ec5edcc";
+          let redirectUrl = location.href;
+          // 微信浏览器
+          let loginUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${corpId}&redirect_uri=${redirectUrl}&response_type=code&scope=snsapi_base&state=${state}#wechat_redirect`;
+          console.log(loginUrl);
+          location.href = loginUrl;
+        }
+      },
+      methods: {
+        handleSubmit (e) {
                 e.preventDefault();
                 this.form.validateFields((err, values) => {
                     if (!err) {
@@ -67,29 +91,51 @@
                             const token = res.data.token;
                             const expire = res.data.expire;
                             setToken(token, expire);
-
-                            API(LoginInfo).then(res2 => {
-                                sessionStorage.setItem('hcm_permission', res2.data.permissions.join(','))
-
-                                let location = this.$route.query.location || '';
-                                if (location) {
-                                    window.location.href = location;
-                                    return;
-                                }
-                                this.$router.replace({name: "main"});
-                            }).catch(() => {
-                                this.$message.error("登录失败");
-                            });
-
+                            this.setLoginInfo();
                         })
                     }
                 });
             },
+        weworkUserAuth(code) {
+          if (navigator.userAgent.indexOf("wxwork") !== -1) {
+            // message.warn(window.location.href, 1)
+            // return;
+          }
+          API(WeworkUser, {
+            data: {
+              code
+            }
+          }).then(res => {
+            console.log(res)
+            const token = res.data.token;
+            const expire = res.data.expire;
+            setToken(token, expire);
+            this.setLoginInfo();
+          });
         },
+        setLoginInfo() {
+          API(LoginInfo).then(res2 => {
+            sessionStorage.setItem('hcm_permission', res2.data.permissions.join(','))
+
+            let location = this.$route.query.location || '';
+            if (location) {
+              window.location.href = location;
+              return;
+            }
+            this.$router.push({name: "main"});
+          }).catch(() => {
+            this.$message.error("登录失败");
+          });
+        }
+      },
     }
 </script>
 
 <style scoped>
+    .loading-wrp {
+      text-align: center;
+      margin-top: 50px;
+    }
     .login-wrap{
         width:100%;
         height:100%;

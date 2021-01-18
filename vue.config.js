@@ -7,6 +7,7 @@ module.exports = {
         }
     },
     devServer: {
-        proxy: "http://192.168.0.102:8080"
+        proxy: "http://192.168.0.102:8080",
+        disableHostCheck: true,
     }
 };

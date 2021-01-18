@@ -298,7 +298,16 @@ router.beforeEach((to, from, next) => {
     if (!getToken()) {
       const url = window.location.href;
       // eslint-disable-next-line no-unused-vars
-      message.warning("登录失效，请重新登录", 1).then(_ => {
+      if (navigator.userAgent.indexOf("wxwork") !== -1) {
+        next({
+          name: 'login',
+          query: {
+            location: encodeURI(url)
+          }
+        });
+        return;
+      }
+      message.warning("登录失效，请重新登录", 1).then(() => {
         next({
           name: 'login',
           query: {
