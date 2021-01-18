@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isWeworkBrowser">
+    <div v-if="isWeworkBrowser && loginLoading">
       <div class="loading-wrp">
         <a-spin size="large" tip="正在登录企业微信" />
       </div>
@@ -61,6 +61,7 @@
                 checkNick: false,
                 form: this.$form.createForm(this),
                 isWeworkBrowser: navigator.userAgent.indexOf('wxwork') !== -1,
+                loginLoading: false,
                 wxScanLoginUrl: '',
             }
         },
@@ -102,11 +103,15 @@
                             const expire = res.data.expire;
                             setToken(token, expire);
                             this.setLoginInfo();
+                        }).catch(e => {
+                          console.log(e);
+                          this.loginLoading = false;
                         })
                     }
                 });
             },
         weworkUserAuth(code) {
+          this.loginLoading = true
           if (navigator.userAgent.indexOf("wxwork") !== -1) {
             // message.warn(window.location.href, 1)
             // return;
@@ -121,7 +126,9 @@
             const expire = res.data.expire;
             setToken(token, expire);
             this.setLoginInfo();
-          });
+          }).catch(() => {
+            this.loginLoading = false;
+          })
         },
         setLoginInfo() {
           API(LoginInfo).then(res2 => {
