@@ -50,16 +50,6 @@
         mounted() {
             this.routes = this.$router.options.routes.find(route => route.name === 'home').children;
         },
-        methods: {
-            handleClick(e) {
-                if (this.$route.name === e.key) {
-                    return;
-                }
-                this.$router.push({
-                    name: e.key
-                });
-            }
-        }
     }
 </script>
 
