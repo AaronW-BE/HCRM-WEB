@@ -25,6 +25,9 @@
                         <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)"/>
                     </a-input>
                 </a-form-item>
+              <a-form-item>
+                <a :href="wxScanLoginUrl" target="_parent" style="color: #ffffff"><a-icon type="qrcode" />企业微信扫码登录</a>
+              </a-form-item>
                 <a-form-item>
                     <a-checkbox
                             v-decorator="[
@@ -50,14 +53,15 @@
     import {Login, LoginInfo} from "../api/template";
     import {setToken} from "../utils/tokenUtils";
     import {WeworkUser} from "@/api/wework/user";
-
+    import config from '../config/config';
     export default {
         name: "Login",
         data() {
             return {
                 checkNick: false,
                 form: this.$form.createForm(this),
-                isWeworkBrowser: navigator.userAgent.indexOf('wxwork') !== -1
+                isWeworkBrowser: navigator.userAgent.indexOf('wxwork') !== -1,
+                wxScanLoginUrl: '',
             }
         },
         beforeCreate () {
@@ -69,16 +73,22 @@
           // 请求员工信息
           const code = this.$route.query.code;
           this.weworkUserAuth(code)
+          this.isWeworkBrowser = true;
           return;
         }
+        let corpId = config.wework.corpId;
+        let agentId = config.wework.agentId;
+        let redirectUrl = location.href;
+
         if (navigator.userAgent.indexOf("wxwork") !== -1) {
-          let corpId = "ww10118e401ec5edcc";
-          let redirectUrl = location.href;
           // 微信浏览器
           let loginUrl = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${corpId}&redirect_uri=${redirectUrl}&response_type=code&scope=snsapi_base&state=${state}#wechat_redirect`;
           console.log(loginUrl);
           location.href = loginUrl;
         }
+
+        this.wxScanLoginUrl = `https://open.work.weixin.qq.com/wwopen/sso/qrConnect?appid=${corpId}&agentid=${agentId}&redirect_uri=${redirectUrl}&state=${state}`;
+        console.log(this.wxScanLoginUrl);
       },
       methods: {
         handleSubmit (e) {
