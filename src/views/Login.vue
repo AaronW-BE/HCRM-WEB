@@ -106,6 +106,7 @@
                         }).catch(e => {
                           console.log(e);
                           this.loginLoading = false;
+                          this.$router.push({ query: {} });
                         })
                     }
                 });
@@ -128,6 +129,7 @@
             this.setLoginInfo();
           }).catch(() => {
             this.loginLoading = false;
+            this.$router.push({ query: {} });
           })
         },
         setLoginInfo() {
