@@ -4,9 +4,11 @@
         <template v-for="route in routes" >
             <template v-if="!route.children">
                 <template v-if="!route.meta.unShow">
-                    <a-menu-item :key="route.name" v-permission="route.meta.permission || []" @click="handleClick">
-                        <a-icon :type="route.meta.icon" />
-                        <span>{{route.meta.title}}</span>
+                    <a-menu-item :key="route.name" v-permission="route.meta.permission || []">
+                        <router-link :to="{name: route.name}">
+                          <a-icon :type="route.meta.icon" />
+                          {{route.meta.title}}
+                        </router-link>
                     </a-menu-item>
                 </template>
             </template>
@@ -16,9 +18,11 @@
                     <span slot="title"><a-icon :type="route.meta.icon" /><span>{{route.meta.title}}</span></span>
                     <template  v-for="r in route.children" >
                         <template v-if="!r.meta.unShow">
-                            <a-menu-item :key="r.name" v-permission="route.meta.permission || []" @click="handleClick">
-                                <a-icon :type="r.meta.icon" />
-                                <span>{{r.meta.title}}</span>
+                            <a-menu-item :key="r.name" v-permission="route.meta.permission || []">
+                              <router-link :to="{name: r.name}">
+                                <a-icon :type="route.meta.icon" />
+                                {{route.meta.title}}
+                              </router-link>
                             </a-menu-item>
                         </template>
                     </template>
