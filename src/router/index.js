@@ -137,7 +137,7 @@ const routes = [
         path: 'apps',
         name: 'appManage',
         meta: {
-          title: '个人应用',
+          title: '应用中心',
           icon: 'appstore'
         },
         component: BlackLayout,

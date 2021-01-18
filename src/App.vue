@@ -13,6 +13,10 @@
       return {
         locale: zhCN
       }
+    },
+    mounted() {
+      document.getElementById('app').style.display = "block";
+      document.getElementById("page-loading").style.display = "none";
     }
   }
 </script>
